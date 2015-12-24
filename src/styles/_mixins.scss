@@ -1,0 +1,109 @@
+// mobile mixin, first list is things to hide on mobile, second is things to hide on desktop
+@mixin mobile ($mhide:(''), $mshow:(''), $type:block) {
+    @for $i from 1 through length($mshow) {
+        #{nth($mshow,$i)} {
+            display: none;
+            @include device-mobile {
+                display: $type;
+            }
+        }
+    }
+    @include device-mobile {
+        @for $i from 1 through length($mhide) {
+            #{nth($mhide,$i)} {
+                display: none;
+            } 
+        }
+        @content;
+    }
+}
+
+// vertical align (relative)
+@mixin vert ($pct:50%) {
+    top: $pct;
+    @include transform(translateY(-50%));    
+}
+
+// horizontal align (absolute)
+@mixin horiz ($pct:50%) {
+    left: $pct;
+    @include transform(translateX(-50%));    
+}
+
+// align both (parent must be relative)
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// background image
+@mixin background ($img:file, $size:auto, $fade:0, $repeat:no-repeat, $x:0px, $y:0px) {
+    background-image: url(../img/#{$img}); // fallback
+    background-image: fader($fade), url(../img/#{$img});
+    background-size: $size;
+    background-repeat: $repeat;
+    background-position: #{$x} #{$y};
+}
+
+@function fader($fade) {
+    @return linear-gradient(rgba(0, 0, 0, $fade), rgba(0, 0, 0, $fade));
+}
+
+// Border radius shorthand
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+// transform shorthand
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow:inset $top $left $blur $color;
+        -moz-box-shadow:inset $top $left $blur $color;
+        box-shadow:inset $top $left $blur $color;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
+}
+
+// $val is a value from 0-F
+@mixin ie-bgfade-fallback ($val) {
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='##{$val}#{$val}000000', endColorstr='##{$val}#{$val}000000',GradientType=0 );
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='##{$val}#{$val}000000', endColorstr='##{$val}#{$val}000000',GradientType=0 );
+}
+
+// media queries
+@mixin device-large {
+    @media only screen and (min-width : 1200px) { @content; }
+}
+
+@mixin device-medium {
+    @media only screen and (min-width : 992px) { @content; }
+}
+
+@mixin device-small {
+    @media only screen and (min-width : 768px) { @content; }
+}
+
+@mixin device-mobile {
+    @media only screen and (max-width : 767px) { @content; }
+}
+
+@mixin device-mobile-tiny {
+    @media only screen and (max-width : 420px) { @content; }
+}

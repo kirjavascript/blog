@@ -1,0 +1,28 @@
+# Force LF line endings for text files
+* text=auto
+
+*.php filter=spabs
+*.scss filter=spabs
+*.css filter=spabs
+*.js filter=spabs
+*.json filter=spabs
+*.sass filter=spabs
+*.less filter=spabs
+*.styl filter=spabs
+*.js filter=spabs
+*.coffee filter=spabs
+*.json filter=spabs
+*.htm filter=spabs
+*.html filter=spabs
+*.xml filter=spabs
+*.svg filter=spabs
+*.txt filter=spabs
+*.ini filter=spabs
+*.inc filter=spabs
+*.pl filter=spabs
+*.rb filter=spabs
+*.py filter=spabs
+*.scm filter=spabs
+*.sql filter=spabs
+*.sh filter=spabs
+*.bat filter=spabs
