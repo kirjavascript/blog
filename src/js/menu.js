@@ -1,9 +1,21 @@
 function menu() {
 
     var items = [
-        {name:"blog"},
-        {name:"about"},
-        {name:"more"},
+        {
+            name:"blog",
+            click:() => {
+                window.fragment("json/stuff.json")
+            }
+        },
+        {
+            name:"about",
+            click:() => {
+                window.fragment("json/about.json")
+            }
+        },
+        {
+            name:"more"
+        },
     ];
 
     var m = svg.append('g');
@@ -36,6 +48,7 @@ function menu() {
         .append("tspan")
         .attr(itemAttr())
         .text(d => d.name)
+        .on('click' , d => {typeof d.click=="function"&&d.click()})
 
     // three visible circles gooey ?! social
 

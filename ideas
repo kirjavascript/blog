@@ -9,6 +9,8 @@ detect colour subdomain (hexeven!!!)
 https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
 permalinks just read addressbar /!
 
+use github api instead of node?!
+
 hamburgers?
 twitter / github / blocks.org
 sidebar?
@@ -30,7 +32,3 @@ logo particles on mouseover
 logo ajax change colour?! change paths?!
 settimeout100 reparticle
 logo re enter ajax
-.on('click' , d => {typeof d.click=="function"&&d.click()})
-
-social icons gooey + change colour
-gooey ball follows mouse when within some bounding box?

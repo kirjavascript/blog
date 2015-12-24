@@ -2,25 +2,27 @@ function social() {
 
     var items = [
         {
-            name:"blocks",
-            colour:'#FA0'
+            name:"youtube",
+            colour:'#b31217'
         },
         {
-            name:"github",
-            colour:'purple'
+            name:"blocks",
+            colour:'#FA0'
         },
         {
             name:"twitter",
             colour:'#00aced'
         },
         {
-            name:"youtube",
-            colour:'#b31217'
+            name:"github",
+            colour:'purple'
         },
     ];
 
     var s = svg.append("g")
         .attr({transform:"scale(0.5)"})
+
+    var goo = s.append("g");
 
     var social = s.append("g")
         .selectAll(".social")
@@ -30,70 +32,80 @@ function social() {
         .append("g")
         .attr("class", "social")
         .attr({
-            transform: (d,i) => (d.name=="blocks"?
-            'scale(0.2),translate('+[x(200),y(120)+(5*150)]+')':
-            'translate('+[x(1180*2)-((items.length-i)*127),y(800*2)-157]+')')
+            transform: (d,i) =>
+            'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')'
         })
-        .on("mouseover", function() {
-            circle = d3.selectAll(".gooCircle")
-                .attr("fill", d => d.colour)
-                alert("test")
-        })
+        // .on("mousemove", function(d,i) {
+        //     var circle = d3.selectAll(".gooCircle");
+        //
+        //     circle
+        //         .attr("cx", d3.mouse(this)[0]-(i*157))
+        //         .attr("cy", d3.mouse(this)[1])
+        // })
         .each(function(d) {
-            d3.xml("svg/"+d.name+".svg", (err,xml) => {
-                d3.select(this).append(d => xml.querySelector("path"))
-            })
+            // d.name!="blocks"&&
+            // d3.xml("svg/"+d.name+".svg", (err,xml) => {
+            //     d3.select(this).append(d => xml.querySelector("path"))
+            // })
         })
-
 
 
     // three visible circles gooey ?! social
+    // movement delay
 
     setInterval(() => {
         //line.transition().duration(sp)
     },sp)
 
-    var goo = s.append("g")
-    .attr({
+    goo.attr({
         transform: (d,i) =>
-        'translate('+[x(1180*2)-157,y(800*2)-157]+')'
+        'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')'
     })
     var filter = gooey(goo);
 
-    goo.on("mousemove", function() {
-        var circle = d3.selectAll(".gooCircle");
-
-        circle
-            .attr("cx", d3.mouse(this)[0])
-            .attr("cy", d3.mouse(this)[1])
-    })
-
-    // only in social bbox
-    // set colour to specific colour
+    goo.on("mousemove", function(){circleFollow(this)})
 
     goo.append("circle")
             .attr("class", "gooCircle")
-            .attr("r", 40)
+            .attr("r", 45)
+            .attr("cx", 157)
+            .attr("cy", -50)
             .style("fill", "#FFF")
 
-    goo.selectAll("socialCircle")
+    goo.selectAll(".socialCircle")
             .data(items)
             .enter()
             .append("circle")
             .attr("class", "socialCircle")
-            .attr("cx", (d,i) => -i*157)
-            .attr("cy", -50)
+            .attr("cx", (d,i) => -(i-0.3)*157)
+            .attr("cy", 50)
             .attr("r", 50)
             .style("fill", d => d.colour)
             .on("mouseover", d => {
                 d3.select(".gooCircle")
+                    .transition()
+                    .duration(sp/2)
                     .style("fill", d.colour)
             })
-
-
-
 };
-// github = purple
+
+
+function circleFollow(self) {
+        var circle = d3.selectAll(".gooCircle");
+
+        var x = d3.mouse(self)[0];
+        var y = d3.mouse(self)[1];
+
+        circle
+            .attr("cx", x)
+            .attr("cy", y)
+        if(y<-70||x<-560) {
+            circle
+                .transition()
+                .duration(sp)
+                .style("fill", "#FFF")
+        }
+}
 
 function gooey(container) {
     var defs = container.style("filter", "url(#gooey)").append('defs')
