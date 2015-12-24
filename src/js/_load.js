@@ -25,8 +25,10 @@ window.addEventListener("load", e => {
         g.append("rect")
         .attr({x:0,y:0,width:c.w,height:c.h,fill:"#EEE"})
 
+        // order defines order of containers
         menu();
         logo();
+        social();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 

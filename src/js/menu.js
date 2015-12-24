@@ -1,5 +1,11 @@
 function menu() {
 
+    var items = [
+        {name:"blog"},
+        {name:"about"},
+        {name:"more"},
+    ];
+
     var m = svg.append('g');
 
     // line
@@ -42,11 +48,4 @@ function menu() {
             .attr(itemAttr())
             .style("font-size", y(3)*x(5)+"px")
     },sp)
-
 };
-
-var items = [
-    {name:"blog"},
-    {name:"about"},
-    {name:"more"},
-];

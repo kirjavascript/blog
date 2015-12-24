@@ -52,7 +52,7 @@ function html() {
 gulp.task('build', ['styles', 'scripts', 'json'], function() {
 
     // uncomment this for copying static data
-    gulp.src('src/img/*').pipe(gulp.dest(build_dir + 'img'));
+    gulp.src('src/svg/*').pipe(gulp.dest(build_dir + 'svg'));
 
     return html();
 })

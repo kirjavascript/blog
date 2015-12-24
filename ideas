@@ -3,36 +3,34 @@ jsgolf.io
 run on new amazon instance
 minimal white? css pages?
 upload posts as json
-inkscape?
 tripcodes w/ that has thing from w/e it was#
-100% vector graphics [link]d3 framework
+isnt.blue/pleasant steelblue
+detect colour subdomain (hexeven!!!)
+https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
+permalinks just read addressbar /!
 
 hamburgers?
 twitter / github / blocks.org
 sidebar?
 tags?wordcloud
 
-get svg icon pack to use
-
+first post about the site what it's made in - commence blagging
 use gooey fx on links then grow to articles?
-
 apis for github etc
-
-svg ultimate responsive!!!
+twitter api: get posts and reply popup as foreignobject :)
+link to blog source (github)
 null vector bbox (!)
+write post about electron, bl.ocks
 
 scrolljack -> d3 transition interrupt?
 pan & zoom on posts
 HAVE THEM COMING FROM TOP LEFT OUT
 
-preload json
-first post about the site what it's made in
-
 logo particles on mouseover
 logo ajax change colour?! change paths?!
-permalinks just read addressbar /!
+settimeout100 reparticle
+logo re enter ajax
+.on('click' , d => {typeof d.click=="function"&&d.click()})
 
-isnt.blue
-social icons
-
-CNAME
+social icons gooey + change colour
+gooey ball follows mouse when within some bounding box?

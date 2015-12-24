@@ -1,14 +1,14 @@
 {
-  "name": "bootsass",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "Bootstrap-SASS-ES6",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatherdigitaluk/bootstrap-workflow.git"
+    "url": "https://github.com/snkenjoi/blog.git"
   },
   "keywords": [],
   "author": "",

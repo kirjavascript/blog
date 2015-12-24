@@ -4,16 +4,14 @@ function logo() {
     var r=1,g=1,b=1,seq=1;
     var hex="00 14 28 3C 50 64 78 8C A0 B4 C8 DC F0".split(" ");
 
-    d3.json("json/mesh.json", function(err,data) {
+    // reverse and save bbox
+    // fix responsive?
+
+    d3.json("json/mesh.json", (err,data) => {
 
         // get final position bounding box
 
-        var tmp = svg.append("g").attr("transform","scale(2)")
-            tmp.selectAll("tmp").data(data).enter().append("path")
-                    .attr("class", "tmp")
-                    .attr("d", d => d)
-        var bbox = tmp.node().getBBox();
-            tmp.remove();
+        var bbox = bboxHack(data);
 
         var p = l
             .selectAll("logo")
@@ -52,6 +50,12 @@ function logo() {
         l.attr(logoAttr(bbox))
     })
 
+    function particle() {
+        var tx = x((Math.random()*120)|0);
+        var ty = y((Math.random()*80)|0);
+        return 'scale(1),translate('+[-tx/2,ty/2]+')';
+    }
+
     function logoAttr(bbox) {
         return {
             transform: "scale(2),translate("+[
@@ -61,9 +65,16 @@ function logo() {
         }
     }
 
-    function particle() {
-        var tx = x((Math.random()*120)|0);
-        var ty = y((Math.random()*80)|0);
-        return 'scale(1),translate('+[-tx/2,ty/2]+')';
+    function bboxHack(data) {
+        var tmp = svg.append("g").attr("transform","scale(2)")
+            tmp.selectAll("tmp").data(data).enter().append("path")
+                    .attr("class", "tmp")
+                    .attr("d", d => d)
+        var bbox = tmp.node().getBBox();
+            tmp.remove();
+
+        return bbox;
     }
+
+
 };
