@@ -8,6 +8,7 @@ isnt.blue/pleasant steelblue
 detect colour subdomain (hexeven!!!)
 https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
 permalinks just read addressbar /!
+redirect snk.digibase.ca
 
 use github api instead of node?!
 
@@ -24,11 +25,6 @@ link to blog source (github)
 null vector bbox (!)
 write post about electron, bl.ocks
 
-scrolljack -> d3 transition interrupt?
-pan & zoom on posts
 HAVE THEM COMING FROM TOP LEFT OUT
 
-logo particles on mouseover
-logo ajax change colour?! change paths?!
-settimeout100 reparticle
-logo re enter ajax
+go to latest post link?

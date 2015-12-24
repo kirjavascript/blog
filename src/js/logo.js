@@ -4,11 +4,9 @@ function logo() {
     var r=1,g=1,b=1,seq=1;
     var hex="00 14 28 3C 50 64 78 8C A0 B4 C8 DC F0".split(" ");
 
-
-
     // reset bbox ?
 
-    d3.json("json/stuff.json", (err,data) => {
+    d3.json("json/logos/stuff.json", (err,data) => {
 
         var bbox = bboxHack(data);
 
@@ -20,11 +18,18 @@ function logo() {
             .enter()
             .append("path")
             .attr("class", "logo")
+            .attr("d", d => d)
+            .attr("transform",particle)
+            .style("fill",rndC)
+            .style("stroke-width", 0)
+        pGroup.transition()
+            .duration(sp)
+            .delay((d,i) => ((i)*3))
             .attr("transform","translate(0,0)")
             .style("fill", '#111')
             .style("stroke", '#111')
             .style("stroke-width", .6)
-            .attr("d", d => d)
+
 
         l.attr(logoAttr(bbox))
 
@@ -72,7 +77,8 @@ function logo() {
                             i==data.length-1&&
                             l.selectAll(".logo")
                             .transition()
-                            .duration(sp)
+                            .duration(sp/2)
+                            //.delay((d,i) => ((i)*3))
                             .attr("transform","translate(0,0)")
                             .style("fill", '#111')
                             .style("stroke", '#111')
@@ -89,6 +95,10 @@ function logo() {
         },sp*2)
 
     })
+
+    function rndC() {
+        6==seq&&(b--,0==b&&(seq=1));5==seq&&(r++,12==r&&(seq=6));4==seq&&(g--,0==g&&(seq=5));3==seq&&(b++,12==b&&(seq=4));2==seq&&(r--,0==r&&(seq=3));1==seq&&(g++,12==g&&(seq=2));return"#"+hex[r]+hex[g]+hex[b]
+    }
 
     function particle() {
         var tx = x((Math.random()*120)|0);
@@ -116,8 +126,6 @@ function logo() {
         return bbox;
     }
 
-    function rndC() {
-        6==seq&&(b--,0==b&&(seq=1));5==seq&&(r++,12==r&&(seq=6));4==seq&&(g--,0==g&&(seq=5));3==seq&&(b++,12==b&&(seq=4));2==seq&&(r--,0==r&&(seq=3));1==seq&&(g++,12==g&&(seq=2));return"#"+hex[r]+hex[g]+hex[b]
-    }
+
 
 };

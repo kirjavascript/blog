@@ -61,7 +61,7 @@ gulp.task('build', ['styles', 'scripts', 'json'], function() {
 gulp.task('json', function() {
 
     // uncomment this for copying static data
-    gulp.src('src/json/*').pipe(gulp.dest(build_dir + 'json'));
+    gulp.src('src/json/**/*').pipe(gulp.dest(build_dir + 'json'));
 
     return html();
 })

@@ -10,6 +10,9 @@ var y = d3.scale.linear()
     .domain([0, 800])
     .range([0,c.h])
 
+var interrupt = false;
+
+var vp, viewer;
 
 window.addEventListener("load", e => {
 
@@ -20,15 +23,19 @@ window.addEventListener("load", e => {
             .attr("width",c.w).attr("height",c.h)
             .attr("viewBox",[0,0,c.w,c.h].join(" "));
 
-        g = svg.append("g");
+        g = svg.append("g")
 
         g.append("rect")
         .attr({x:0,y:0,width:c.w,height:c.h,fill:"#EEE"})
+
+        // main content container
+        viewer = svg.append("svg")
 
         // order defines order of containers
         menu();
         logo();
         social();
+        posts();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 

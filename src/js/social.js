@@ -63,7 +63,7 @@ function social() {
     })
     var filter = gooey(goo);
 
-    goo.on("mousemove", function(){circleFollow(this)})
+    goo.on("mousemove", function(){circleFollow(this,items)})
 
     goo.append("circle")
             .attr("class", "gooCircle")
@@ -81,16 +81,16 @@ function social() {
             .attr("cy", 50)
             .attr("r", 50)
             .style("fill", d => d.colour)
-            .on("mouseover", d => {
-                d3.select(".gooCircle")
-                    .transition()
-                    .duration(sp/2)
-                    .style("fill", d.colour)
-            })
+            // .on("mouseover", d => {
+            //     d3.select(".gooCircle")
+            //         .transition()
+            //         .duration(sp/2)
+            //         .style("fill", d.colour)
+            // })
 };
 
 
-function circleFollow(self) {
+function circleFollow(self,items) {
         var circle = d3.selectAll(".gooCircle");
 
         var x = d3.mouse(self)[0];
@@ -99,11 +99,14 @@ function circleFollow(self) {
         circle
             .attr("cx", x)
             .attr("cy", y)
+
         if(y<-70||x<-560) {
-            circle
-                .transition()
-                .duration(sp)
-                .style("fill", "#FFF")
+            circle.transition().duration(0)
+            .style("fill", "#FFF")
+        }
+        else {
+            circle.transition().duration(100)
+                .style("fill", items[(x>-30?0:x>-190?1:x>-344?2:3)].colour)
         }
 }
 

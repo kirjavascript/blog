@@ -3,18 +3,24 @@ function menu() {
     var items = [
         {
             name:"blog",
+            colour:"#B44642",
             click:() => {
-                window.fragment("json/stuff.json")
+                window.fragment("json/logos/stuff.json")
             }
         },
         {
             name:"about",
+            colour:"#46B482",
             click:() => {
-                window.fragment("json/about.json")
+                window.fragment("json/logos/about.json")
             }
         },
         {
-            name:"more"
+            name:"more",
+            colour:"#4682B4",
+            click:() => {
+                window.fragment("json/logos/more.json")
+            }
         },
     ];
 
@@ -49,16 +55,43 @@ function menu() {
         .attr(itemAttr())
         .text(d => d.name)
         .on('click' , d => {typeof d.click=="function"&&d.click()})
+        .on("mouseover", mmouseover)
+        .on("mouseout", mmouseout)
 
-    // three visible circles gooey ?! social
+    function mmouseover(d) {
+        interrupt = true;
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .style("font-size", fontSize(0,0,1.5))
+            .style("fill", d.colour)
+            .ease("elastic")
+    }
+
+    function mmouseout(d) {
+        interrupt = false;
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .style("font-size", fontSize)
+            .style("fill", '#7A7A7A')
+            .ease("elastic")
+    }
 
     setInterval(() => {
-        line.transition().duration(sp)
-            .attr(lineAttr())
+        if(!interrupt) {
+            line.transition().duration(sp)
+                .attr(lineAttr())
 
-        navGroup.transition().duration(sp)
-            .delay((d,i)=>i*100)
-            .attr(itemAttr())
-            .style("font-size", y(3)*x(5)+"px")
+            navGroup.transition().duration(sp)
+                .delay((d,i)=>i*100)
+                .attr(itemAttr())
+                .style("font-size", fontSize)
+        }
     },sp)
+
+    function fontSize(d,i,s) {
+        s = s || 1;
+        return s*(y(3)*x(5))+"px";
+    }
 };
