@@ -33,8 +33,8 @@ window.addEventListener("load", e => {
 
         // order defines order of containers
         menu();
-        logo();
-        social();
+        //logo();
+        //social();
         posts();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
@@ -55,6 +55,8 @@ window.addEventListener("resize", e => {
         .attr({width:c.w,height:c.h})
     },sp)
 })
+
+var rnd = qty => qty*Math.random()|0;
 
 var clone = data => JSON.parse(JSON.stringify(data));
 

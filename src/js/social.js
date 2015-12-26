@@ -35,13 +35,6 @@ function social() {
             transform: (d,i) =>
             'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')'
         })
-        // .on("mousemove", function(d,i) {
-        //     var circle = d3.selectAll(".gooCircle");
-        //
-        //     circle
-        //         .attr("cx", d3.mouse(this)[0]-(i*157))
-        //         .attr("cy", d3.mouse(this)[1])
-        // })
         .each(function(d) {
             // d.name!="blocks"&&
             // d3.xml("svg/"+d.name+".svg", (err,xml) => {
@@ -70,7 +63,7 @@ function social() {
             .attr("r", 45)
             .attr("cx", 157)
             .attr("cy", -50)
-            .style("fill", "#FFF")
+            .style("fill", "#EEE")
 
     goo.selectAll(".socialCircle")
             .data(items)
@@ -81,12 +74,6 @@ function social() {
             .attr("cy", 50)
             .attr("r", 50)
             .style("fill", d => d.colour)
-            // .on("mouseover", d => {
-            //     d3.select(".gooCircle")
-            //         .transition()
-            //         .duration(sp/2)
-            //         .style("fill", d.colour)
-            // })
 };
 
 
@@ -102,11 +89,12 @@ function circleFollow(self,items) {
 
         if(y<-70||x<-560) {
             circle.transition().duration(0)
-            .style("fill", "#FFF")
+            .style("opacity", 0)
         }
         else {
             circle.transition().duration(100)
                 .style("fill", items[(x>-30?0:x>-190?1:x>-344?2:3)].colour)
+                .style("opacity", 1)
         }
 }
 

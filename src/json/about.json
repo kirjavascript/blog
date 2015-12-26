@@ -1,4 +1,32 @@
-{
-    "title":"some stuff about me",
-    "data":"cv et al"
-}
+[
+    {
+        "shape":"rect",
+        "size":[100,100],
+        "style":{
+            "fill":"red"
+        }
+    },
+    {
+        "shape":"circle",
+        "size":50,
+        "style":{
+            "fill":"blue"
+        }
+    },
+    {
+        "shape":"text",
+        "text":"this is a test"
+    },
+    {
+        "shape":"g",
+        "children":[
+            {"shape":"text","text":"one"},
+            {"shape":"text","text":"two"}
+        ]
+    },
+    {
+        "shape":"foreignObject",
+        "size":[100,100],
+        "html":"<button>asd</button>"
+    }
+]

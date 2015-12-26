@@ -1,6 +1,6 @@
 function posts() {
 
-    //viewer.selectAll("*").transition().duration(sp).style("opacity", 0).remove();
+    
 
     // setup container for mouse events
     viewer
@@ -19,14 +19,14 @@ function posts() {
     d3.json("json/posts.json", (e,data) => {
         var posts = vp.selectAll(".post")
             .data(data)
-
+    
             // bbox snap
             // use native js scroll
-
+    
         var postGroup = posts.enter()
             .append("g")
             .attr("class","post")
-
+    
         postGroup.append("foreignObject")
             .attr("x", x(25))
             .attr("y", (d,i) => x(25) + i* y(475))
@@ -35,7 +35,7 @@ function posts() {
             .append("xhtml:body")
             .style("background-color","#DDD")
             .html(d => d.title);
-
+    
     })
 
 }
