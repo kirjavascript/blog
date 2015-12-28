@@ -15,7 +15,7 @@ function menu() {
             colour:"#46B482",
             click:() => {
                 window.fragment("json/logos/about.json");
-                d3on("json/about.json");
+                d3on("about.json");
             }
         },
         {

@@ -1,5 +1,5 @@
 function logo() {
-    var l = svg.append("g")
+    var logo = svg.append("g")
 
     var r=1,g=1,b=1,seq=1;
     var hex="00 14 28 3C 50 64 78 8C A0 B4 C8 DC F0".split(" ");
@@ -10,7 +10,7 @@ function logo() {
 
         var bbox = bboxHack(data);
 
-        var p = l
+        var p = logo
             .selectAll("logo")
             .data(data)
 
@@ -31,7 +31,7 @@ function logo() {
             .style("stroke-width", .6)
 
 
-        l.attr(logoAttr(bbox))
+        logo.attr(logoAttr(bbox))
 
         window.fragment = function(mesh) {
             if(interrupt==true) return;
@@ -52,7 +52,7 @@ function logo() {
                     d3.json(mesh, (err,data) => {
 
                         // remove old particles
-                        l.selectAll(".logo")
+                        logo.selectAll(".logo")
                         .transition()
                         .duration(sp)
                         .attr("transform",particle)
@@ -60,7 +60,7 @@ function logo() {
                         .remove()
 
                         // draw new particles
-                        l.selectAll(".logo_buf")
+                        logo.selectAll(".logo_buf")
                         .data(data)
                         .enter()
                         .append("path")
@@ -76,7 +76,7 @@ function logo() {
                         .attr("d", d => d)
                         .each("end", (d,i) => {
                             i==data.length-1&&
-                            l.selectAll(".logo")
+                            logo.selectAll(".logo")
                             .transition()
                             .duration(sp/2)
                             //.delay((d,i) => ((i)*3))
@@ -91,9 +91,9 @@ function logo() {
                 })
         }
 
-        setInterval(() => {
-            l.attr(logoAttr(bbox))
-        },sp*2)
+        window.logo = function() {
+            logo.attr(logoAttr(bbox))
+        }
 
     })
 

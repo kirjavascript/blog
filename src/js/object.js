@@ -1,19 +1,20 @@
-function d3on(src,datamod=d=>d) {
+function d3on(src,remove=null,datamod=d=>d) {
     if(interrupt==true) return;
 
-    viewer.selectAll(".d3on")
-        .transition()
-        .duration(sp/2)
-        .attr({transform:d=>
-            "scale("+(d.scale?d.scale:1)+"),translate("+
-            [x(rnd(1280)),y(rnd(800))]
-            +")"
-        })
+    if(remove==null) {
+        viewer.selectAll(".d3on")
+            .transition()
+            .duration(sp/2)
+            .attr({transform:d=>
+                "scale("+(d.scale?d.scale:1)+"),translate("+
+                [x(rnd(1280)),y(rnd(800))]
+                +")"
+            })
+            .style("opacity",0.5)
+            .remove();
+    }
 
-        .style("opacity",0.5)
-        .remove();
-
-    var ajax = d3.json(src, (e,data) => {
+    var ajax = d3.json("json/" + src, (e,data) => {
         interrupt = true;
         data = datamod(data);
         var cont = vp.append("g");
@@ -57,13 +58,16 @@ function d3on(src,datamod=d=>d) {
                     .text(d.text);
                 if(d.children)
                     render(d.children,self)
-                if(d.html) self
-                    .html(d.html)
+                if(d.html) {
+                    self.html(typeof d.html=="object"?d.html.join(""):d.html)
+                }
                 if(d.path) self
                     .attr("d",d=>d.path)
 
                 var bbox = self.node().getBBox()
                 data[i].bbox = bbox;
+
+                self.attr("transform","scale(0)")
             })
             // .call(force.drag)
 
@@ -79,7 +83,10 @@ function d3on(src,datamod=d=>d) {
                     if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
                 d3.selectAll('.d3on')
                     .attr({
-                        transform:d=>"scale("+(d.scale?d.scale:1)+"),translate("+[d.x,d.y]+")"
+                        transform:d=>
+                        "scale("+(d.scale?d.scale:1)+"),"+
+                        "rotate("+(d.rotate?d.rotate:0)+"),"+
+                        "translate("+[d.x,d.y]+")"
                     })
             });
     }

@@ -14,7 +14,7 @@ function viewport() {
     vp = viewer.append("g")
 
 
-    d3on("json/posts/0.json")
+    d3on("posts/0.json")
 }
 
 function post(d) {
