@@ -19,5 +19,8 @@ function viewport() {
 
 function post(d) {
     // add nav, tags, comments, etc
+    // comments -> allow not clearing
+    // d3 code in json?
+    //<iframe src=\"http://bl.ocks.org/snkenjoi/raw/a8555a26b14f4088bf51/\"></iframe>
     return d;
 }

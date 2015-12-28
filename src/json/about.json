@@ -4,8 +4,8 @@
 		"text": "weblog about stuff",
 		"size": "40",
 		"foci": {
-			"x": 0,
-			"y": 0
+			"x": -200,
+			"y": -100
 		}
 	},
 	{
@@ -13,8 +13,8 @@
 		"text": "email: purple@isnt.blue",
 		"size": "20",
 		"foci": {
-			"x": 0,
-			"y": 50
+			"x": -120,
+			"y": 0
 		}
 	},
 	{
@@ -22,8 +22,8 @@
 		"text": "created with d3.js",
 		"size": "20",
 		"foci": {
-			"x": 0,
-			"y": 100
+			"x": -40,
+			"y": 75
 		}
 	},
 	{
@@ -34,8 +34,8 @@
 		],
 		"html": "<a href=\"https://github.com/snkenjoi/blog\" target=\"_blank\">source code</a>",
 		"foci": {
-			"x": 0,
-			"y": 150
+			"x": -50,
+			"y": 110
 		}
 	},
 	{

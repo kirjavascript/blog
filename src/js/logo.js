@@ -34,11 +34,12 @@ function logo() {
         l.attr(logoAttr(bbox))
 
         window.fragment = function(mesh) {
+            if(interrupt==true) return;
 
             pGroup
                 .transition()
                 // .delay(d => (((Math.random()*data.length)|0)*3))
-                .delay((d,i) => ((i)*3)+1000)
+                .delay((d,i) => ((i)*3))
                 .duration(sp)
                 .attr("transform",particle)
                 .style("fill",rndC)

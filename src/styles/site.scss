@@ -32,8 +32,22 @@ svg {
         fill-opacity:1;stroke:none;
     }
 
-    a {
-        font-size: 20px;
+
+
+    .post {
+        background-color: #DDD;
+        padding: 20px;
+    }
+
+    iframe {
+        width:1000px;
+        height:550px;
+        border: none;
+        margin: 0;
+        padding: 0;
+        background-color:transparent;
+        transform:scale(0.5);
+        overflow:hidden;
     }
 }
 

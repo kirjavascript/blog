@@ -12,7 +12,7 @@ var y = d3.scale.linear()
 
 var vp, viewer;
 
-var force = getForce(); // responvie params?
+var force = getForce(); // responsive params?
 
 var interrupt = false;
 

@@ -1,10 +1,5 @@
 about/skills, post about old things, golf
-jsgolf.io
-run on new amazon instance
-minimal white? css pages?
-upload posts as json
-tripcodes w/ that has thing from w/e it was#
-isnt.blue/pleasant steelblue
+tripcodes w/ that has thing from w/e it was
 detect colour subdomain (hexeven!!!)
 https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
 permalinks just read addressbar /!
@@ -41,6 +36,11 @@ comments open to the side
 
 // 100% vector gfx -> about
 
+github api,
+twitter api,
+bl.ocks api?
+youtube api
+
 --> http://tympanus.net/Development/ButtonComponentMorph/index.html comments!
 
 http://tympanus.net/Development/SimpleDropDownEffects/index2.html choose colour?
@@ -49,3 +49,4 @@ http://tympanus.net/Tutorials/MotionBlurEffect/
 http://tympanus.net/Development/TextInputEffects/
 http://tympanus.net/Development/ElasticSVGElements/button.html
 http://tympanus.net/Development/MorphingSearch/
+https://github.com/larsenwork/social.svg.min

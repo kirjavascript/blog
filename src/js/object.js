@@ -4,7 +4,12 @@ function d3on(src,datamod=d=>d) {
     viewer.selectAll(".d3on")
         .transition()
         .duration(sp/2)
-        .attr({x:d=>x(rnd(1280)),y:d=>y(rnd(800))})
+        .attr({transform:d=>
+            "scale("+(d.scale?d.scale:1)+"),translate("+
+            [x(rnd(1280)),y(rnd(800))]
+            +")"
+        })
+
         .style("opacity",0.5)
         .remove();
 
@@ -54,27 +59,16 @@ function d3on(src,datamod=d=>d) {
                     render(d.children,self)
                 if(d.html) self
                     .html(d.html)
+                if(d.path) self
+                    .attr("d",d=>d.path)
 
                 var bbox = self.node().getBBox()
                 data[i].bbox = bbox;
-
-                self.attr({
-                    transform:"translate("+[-bbox.width/2,-bbox.height/2]+")"
-                })
             })
             // .call(force.drag)
 
             force
                 .nodes(data)
-                // .charge(d=>
-                //     {
-                //         var r= Math.sqrt(
-                //             Math.pow(d.bbox.width/2,2) +
-                //             Math.pow(d.bbox.height/2,2)
-                //         );
-                //         return (-r*r)*2;
-                //     },-600
-                //     )
                 .charge(-4600)
                 //.links(data.hierarchy)
                 .start();
@@ -85,9 +79,7 @@ function d3on(src,datamod=d=>d) {
                     if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
                 d3.selectAll('.d3on')
                     .attr({
-                        x:d=>d.x,cx:d=>d.x,
-                        y:d=>d.y,cy:d=>d.y,
-
+                        transform:d=>"scale("+(d.scale?d.scale:1)+"),translate("+[d.x,d.y]+")"
                     })
             });
     }
