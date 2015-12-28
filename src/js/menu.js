@@ -1,5 +1,7 @@
 function menu() {
 
+    var interrupt = false;
+
     var items = [
         {
             name:"blog",
@@ -12,7 +14,8 @@ function menu() {
             name:"about",
             colour:"#46B482",
             click:() => {
-                window.fragment("json/logos/about.json")
+                window.fragment("json/logos/about.json");
+                d3on("json/about.json");
             }
         },
         {

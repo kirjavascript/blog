@@ -1,33 +1,31 @@
-function d3on(src) {
+function d3on(src,datamod=d=>d) {
+    if(interrupt==true) return;
 
-    // viewer.selectAll("*")
-    //     .transition()
-    //     .duration(sp)
-    //     .attr({width:0,height:0,x:c.w/2,y:c.h/2})
-    //     .remove();
-    // put this in a seperate function and add a callback
+    viewer.selectAll(".d3on")
+        .transition()
+        .duration(sp/2)
+        .attr({x:d=>x(rnd(1280)),y:d=>y(rnd(800))})
+        .style("opacity",0.5)
+        .remove();
 
-    var foci = [
-        {x: 0, y: 0},
-        {x: 800, y: -100},
-        {x: 800, y: -150}
-    ];
-
-    var ajax = d3.json("json/about.json", (e,data) => {
-        render(data,vp.append("g"));
+    var ajax = d3.json(src, (e,data) => {
+        interrupt = true;
+        data = datamod(data);
+        var cont = vp.append("g");
+        var nodes = [];
+        ~function stagger() {
+            nodes.push(data.shift());
+            render(nodes,cont);
+            if(data.length)setTimeout(stagger,30);
+            else interrupt = false;
+        }()
     })
-
-    // 100% vector gfx
-    // stagger in/out setinterval call thingy
 
     function render(data,parent) {
         var obj = parent.selectAll(".d3on")
             .data(data)
 
         var objGroup = obj.enter();
-
-        var f = forces.push(force());
-            f = forces[--f];
 
         objGroup.append(d=>document.createElementNS("http://www.w3.org/2000/svg", d.shape))
             .classed("d3on", true)
@@ -64,9 +62,9 @@ function d3on(src) {
                     transform:"translate("+[-bbox.width/2,-bbox.height/2]+")"
                 })
             })
-            //.call(f.drag)
+            // .call(force.drag)
 
-            f
+            force
                 .nodes(data)
                 // .charge(d=>
                 //     {
@@ -81,7 +79,7 @@ function d3on(src) {
                 //.links(data.hierarchy)
                 .start();
 
-            f.on("tick", e => {
+            force.on("tick", e => {
                 var k = .5 * e.alpha;
                 data.forEach(o=>{
                     if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
@@ -92,11 +90,10 @@ function d3on(src) {
 
                     })
             });
-
     }
 }
 
-function force() {
+function getForce() {
     return d3.layout.force()
         .friction(0.4) // 0.7
         .linkDistance(200)

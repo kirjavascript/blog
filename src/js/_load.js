@@ -10,12 +10,14 @@ var y = d3.scale.linear()
     .domain([0, 800])
     .range([0,c.h])
 
-var interrupt = false;
-
 var vp, viewer;
 
+var force = getForce(); // responvie params?
+
+var interrupt = false;
+
 // force container objects (flush this)
-var forces = [];
+// var forces = [];
 
 window.addEventListener("load", e => {
 
@@ -38,8 +40,7 @@ window.addEventListener("load", e => {
         menu();
         logo();
         social();
-        posts();
-        d3on();
+        viewport();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 
