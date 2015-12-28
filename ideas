@@ -6,6 +6,7 @@ permalinks just read addressbar /!
 redirect snk.digibase.ca
 
 use github api instead of node?!
+http://patrick-mckinley.com/tech/github-api-commit.html
 
 hamburgers?
 twitter / github / blocks.org
@@ -13,8 +14,6 @@ sidebar?
 tags?wordcloud
 
 comments-> posts have colour - cat20
-
-blog posts have colour?
 
 first post about the site what it's made in - commence blagging
 use gooey fx on links then grow to articles?
@@ -26,31 +25,25 @@ write post about electron, bl.ocks
 
 .ext bar
 
+location.source
+navigator
+moveTo()
+
 https://moqups.com/#!/edit/kirjava/elbRcdZb
 
-change timers to resize event and set transition time to 0
-
 true multithreading w/ workers
+html: json load
 
 comments open to the side
 
-// 100% vector gfx svgs
+more -> links my stuff, dev stuff (group)
+blog link goes to article list?
+tags links
 
-adding to force
+. look into saving data
+. use rems for responsiveness
+. page builder!!
+. comments
 
-more -> links
-blog link
-github api,
-twitter api,
-bl.ocks api?
-youtube api
 
---> http://tympanus.net/Development/ButtonComponentMorph/index.html comments!
-
-http://tympanus.net/Development/SimpleDropDownEffects/index2.html choose colour?
-http://tympanus.net/Development/InteractiveColoringConcept/
-http://tympanus.net/Tutorials/MotionBlurEffect/
-http://tympanus.net/Development/TextInputEffects/
-http://tympanus.net/Development/ElasticSVGElements/button.html
-http://tympanus.net/Development/MorphingSearch/
-https://github.com/larsenwork/social.svg.min
+http://www.cs.umd.edu/~bederson/papers/index.html
