@@ -20,12 +20,20 @@ svg {
         @extend .hand;
     }
 
+    .socialCircle, .socialIcon {
+        @extend .hand;
+    }
+
     .logo {
         fill: #111;
         //shape-rendering: geometricPrecision;
         //stroke: #111;
         //filter: blur(.1px);
         fill-opacity:1;stroke:none;
+    }
+
+    a {
+        font-size: 20px;
     }
 }
 

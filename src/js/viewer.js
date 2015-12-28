@@ -1,14 +1,14 @@
 function posts() {
 
-    
+
 
     // setup container for mouse events
     viewer
         .attr({
-            x:x(120),y:y(120),
-            width:c.w-x(120),
-            height: c.h-y(240),
-            //viewBox: [x(120), y(120), c.w - x(120), c.h - y(240)].join(" ")
+            x:0,y:y(120),
+            width:c.w,
+            height: c.h,
+            viewBox: [0, y(120), c.w, c.h - y(240)].join(" ")
         })
         //.style("cursor","move")
         //.call(zoom);
@@ -16,27 +16,27 @@ function posts() {
     // setup viewport
     vp = viewer.append("g")
 
-    d3.json("json/posts.json", (e,data) => {
-        var posts = vp.selectAll(".post")
-            .data(data)
-    
-            // bbox snap
-            // use native js scroll
-    
-        var postGroup = posts.enter()
-            .append("g")
-            .attr("class","post")
-    
-        postGroup.append("foreignObject")
-            .attr("x", x(25))
-            .attr("y", (d,i) => x(25) + i* y(475))
-            .attr("width",x(700))
-            .attr("height",y(400))
-            .append("xhtml:body")
-            .style("background-color","#DDD")
-            .html(d => d.title);
-    
-    })
+    // d3.json("json/posts.json", (e,data) => {
+    //     var posts = vp.selectAll(".post")
+    //         .data(data)
+    //
+    //         // bbox snap
+    //         // use native js scroll
+    //
+    //     var postGroup = posts.enter()
+    //         .append("g")
+    //         .attr("class","post")
+    //
+    //     postGroup.append("foreignObject")
+    //         .attr("x", x(25))
+    //         .attr("y", (d,i) => x(25) + i* y(475))
+    //         .attr("width",x(700))
+    //         .attr("height",y(400))
+    //         .append("xhtml:body")
+    //         .style("background-color","#DDD")
+    //         .html(d => d.title);
+    //
+    // })
 
 }
 

@@ -1,32 +1,230 @@
 [
-    {
-        "shape":"rect",
-        "size":[100,100],
-        "style":{
-            "fill":"red"
-        }
-    },
-    {
-        "shape":"circle",
-        "size":50,
-        "style":{
-            "fill":"blue"
-        }
-    },
-    {
-        "shape":"text",
-        "text":"this is a test"
-    },
-    {
-        "shape":"g",
-        "children":[
-            {"shape":"text","text":"one"},
-            {"shape":"text","text":"two"}
-        ]
-    },
-    {
-        "shape":"foreignObject",
-        "size":[100,100],
-        "html":"<button>asd</button>"
-    }
+	{
+		"shape": "text",
+		"text": "weblog about stuff",
+		"size": "40",
+		"foci": {
+			"x": 0,
+			"y": 0
+		}
+	},
+	{
+		"shape": "text",
+		"text": "email: purple@isnt.blue",
+		"size": "20",
+		"foci": {
+			"x": 0,
+			"y": 50
+		}
+	},
+	{
+		"shape": "text",
+		"text": "created with d3.js",
+		"size": "20",
+		"foci": {
+			"x": 0,
+			"y": 100
+		}
+	},
+	{
+		"shape": "foreignObject",
+		"size": [
+			95,
+			20
+		],
+		"html": "<a href=\"https://github.com/snkenjoi/blog\" target=\"_blank\">source code</a>",
+		"foci": {
+			"x": 0,
+			"y": 150
+		}
+	},
+	{
+		"shape": "text",
+		"text": "stuff I like",
+		"size": "40",
+		"foci": {
+			"x": 800,
+			"y": 200
+		}
+	},
+	{
+		"shape": "text",
+		"text": "javascript",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 10
+		}
+	},
+	{
+		"shape": "text",
+		"text": "d3.js",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 20
+		}
+	},
+	{
+		"shape": "text",
+		"text": "node",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 30
+		}
+	},
+	{
+		"shape": "text",
+		"text": "SVG",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 40
+		}
+	},
+	{
+		"shape": "text",
+		"text": "m68k Assembler",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 50
+		}
+	},
+	{
+		"shape": "text",
+		"text": "gulp",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 60
+		}
+	},
+	{
+		"shape": "text",
+		"text": "velocity.js",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 70
+		}
+	},
+	{
+		"shape": "text",
+		"text": "Snap.svg.js",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 80
+		}
+	},
+	{
+		"shape": "text",
+		"text": "SASS",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 90
+		}
+	},
+	{
+		"shape": "text",
+		"text": "canvas",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 100
+		}
+	},
+	{
+		"shape": "text",
+		"text": "pimcore",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 110
+		}
+	},
+	{
+		"shape": "text",
+		"text": "reverse engineering",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 120
+		}
+	},
+	{
+		"shape": "text",
+		"text": "data visualisation",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 130
+		}
+	},
+	{
+		"shape": "text",
+		"text": "lingustics",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 140
+		}
+	},
+	{
+		"shape": "text",
+		"text": "linux",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 150
+		}
+	},
+	{
+		"shape": "text",
+		"text": "electron",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 160
+		}
+	},
+	{
+		"shape": "text",
+		"text": "speedsolving",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 170
+		}
+	},
+	{
+		"shape": "text",
+		"text": "math",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 180
+		}
+	},
+	{
+		"shape": "text",
+		"text": "megadrive",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 190
+		}
+	},
+	{
+		"shape": "text",
+		"text": "code golf",
+		"size": "20",
+		"foci": {
+			"x": 800,
+			"y": 200
+		}
+	}
 ]

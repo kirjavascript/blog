@@ -14,6 +14,9 @@ var interrupt = false;
 
 var vp, viewer;
 
+// force container objects (flush this)
+var forces = [];
+
 window.addEventListener("load", e => {
 
     ~function($) {
@@ -33,9 +36,10 @@ window.addEventListener("load", e => {
 
         // order defines order of containers
         menu();
-        //logo();
-        //social();
+        logo();
+        social();
         posts();
+        d3on();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 

@@ -24,7 +24,7 @@ function logo() {
             .style("stroke-width", 0)
         pGroup.transition()
             .duration(sp)
-            .delay((d,i) => ((i)*3))
+            .delay((d,i) => ((i)*3)+1000)
             .attr("transform","translate(0,0)")
             .style("fill", '#111')
             .style("stroke", '#111')
