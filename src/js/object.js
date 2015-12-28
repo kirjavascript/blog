@@ -1,4 +1,4 @@
-function d3on(src,remove=null,datamod=d=>d) {
+function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
     if(interrupt==true) return;
 
     if(remove==null) {
@@ -14,7 +14,7 @@ function d3on(src,remove=null,datamod=d=>d) {
             .remove();
     }
 
-    var ajax = d3.json("json/" + src, (e,data) => {
+    function load(data) {
         interrupt = true;
         data = datamod(data);
         var cont = vp.append("g");
@@ -25,7 +25,16 @@ function d3on(src,remove=null,datamod=d=>d) {
             if(data.length)setTimeout(stagger,30);
             else interrupt = false;
         }()
-    })
+    }
+
+    if(typeof src == "object") {
+        load(src);
+    }
+    else {
+        d3.json("json/" + src, (e,data) => {
+            load(data);
+        })
+    }
 
     function render(data,parent) {
         var obj = parent.selectAll(".d3on")
@@ -69,11 +78,11 @@ function d3on(src,remove=null,datamod=d=>d) {
 
                 self.attr("transform","scale(0)")
             })
-            // .call(force.drag)
+            //.call(force.drag)
 
             force
                 .nodes(data)
-                .charge(-4600)
+                .charge(charge)
                 //.links(data.hierarchy)
                 .start();
 
@@ -89,6 +98,14 @@ function d3on(src,remove=null,datamod=d=>d) {
                         "translate("+[d.x,d.y]+")"
                     })
             });
+
+            // window.jostle = () => {
+            //     data.forEach(a=>{
+            //         a.x=200*(Math.random()-.5);
+            //         a.y=200*(Math.random()-.5);
+            //     })
+            //     force.resume();
+            // }
     }
 }
 

@@ -7,7 +7,8 @@ function menu() {
             name:"blog",
             colour:"#B44642",
             click:() => {
-                window.fragment("json/logos/stuff.json")
+                window.fragment("json/logos/stuff.json");
+                getLatestPost();
             }
         },
         {
@@ -23,6 +24,7 @@ function menu() {
             colour:"#4682B4",
             click:() => {
                 window.fragment("json/logos/more.json")
+                d3on("more.json");
             }
         },
     ];

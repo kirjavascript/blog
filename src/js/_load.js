@@ -56,9 +56,15 @@ window.addEventListener("resize", e => {
         .attr("width",c.w).attr("height",c.h)
         .attr("viewBox", [0,0,c.w,c.h].join(" "));
 
+        viewer.attr(viewAttr());
+
         force.size([c.w,c.h-y(120)]);
 
-        logo();
+        rGoo(sp);
+
+        force.resume();
+
+        logo(); // redefined function (see logo.js)
 
         g.select('rect').transition().duration(sp)
         .attr({width:c.w,height:c.h})

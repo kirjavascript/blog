@@ -1,21 +1,30 @@
 [
     {
+        "shape": "text",
+        "text": "data driven blogging",
+        "size": "80",
+        "attr" : {
+            "stroke":"#000",
+            "stroke-width":"4px"
+        },
+        "foci": {
+            "x": 400,
+            "y": -150
+        }
+    },
+    {
         "shape": "foreignObject",
         "size": [
             500,
             500
         ],
-        "style": {
-            "background": "#7A7A7A"
-        },
         "html": [
             "<div class=\"post\">",
-            "<p>Recently I've gotten a lot more into software development.</p>",
-            "<br />",
-            "<p>I decided I need a place to dump all the random stuff I've been making and chucked this blog together over Xmas.</p>",
-            "<br />",
-            "<p>These pages are rendered entirely in vector graphics as <a target=\"_blank\" href=\"https://github.com/snkenjoi/blog/blob/master/src/json/posts/0.json\">data driven documents</a>. This is probably a terrible idea as far as SEO is concerned, but who gives a shit about SEO when you have insane <a target=\"_blank\" href=\"http://d3js.org\">DOM manipulation</a>?</p>",
-            "<a href=\"javascript:;\" onClick=\"d3on('posts/0res.json',true)\">asd</a>",
+                "<p>Recently, I've been a lot more into software development.</p>",
+                "<br />",
+                "<p>I decided I need a place to dump all the random stuff I've been making and chucked this blog together over Xmas.</p>",
+                "<br />",
+                "<p>These pages are rendered entirely in vector graphics as <span class=\"link\" onClick=\"d3on('posts/0res.json',true)\">data driven documents</span>. This is probably a terrible idea as far as SEO is concerned, but who gives a shit about SEO when you have insane <a target=\"_blank\" href=\"http://d3js.org\">DOM manipulation</a>?</p>",
             "</div>"
         ],
         "foci": {
@@ -33,19 +42,6 @@
         "foci": {
             "x": 500,
             "y": -100
-        }
-    },
-    {
-        "shape": "text",
-        "text": "hi there",
-        "rotate": 1,
-        "size": "80",
-        "style": {
-            "font-weight": "900"
-        },
-        "foci": {
-            "x": 500,
-            "y": -150
         }
     },
     {

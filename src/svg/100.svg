@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="744.094" height="1052.362">
+    <defs>
+        <pattern xlink:href="#a" id="d" patternTransform="matrix(10 0 0 10 -25.71 -82.55)" />
+        <pattern id="a" patternTransform="scale(10)" height="1" width="2" patternUnits="userSpaceOnUse">
+            <path d="M0-.5h1v2H0z" />
+        </pattern>
+        <pattern id="b" patternTransform="scale(10)" height="1" width="2" patternUnits="userSpaceOnUse">
+            <path fill="#fff" d="M0-.5h1v2H0z" />
+        </pattern>
+        <filter color-interpolation-filters="sRGB" id="c">
+            <feGaussianBlur stdDeviation="1.057" />
+        </filter>
+    </defs>
+    <g font-size="36.038" letter-spacing="0" word-spacing="0" stroke-width=".901" stroke-opacity=".975" font-family="Sans">
+        <text style="line-height:125%" x="39.728" y="127.579" transform="matrix(1.05212 0 0 .95046 -27.765 -78.46)" fill="#807f7c" stroke="url(#b)" filter="url(#c)">
+            <tspan x="39.728" y="127.579" style="-inkscape-font-specification:Sans Bold" font-weight="bold" stroke-width="3.604">SVG</tspan>
+        </text>
+        <text style="line-height:125%" x="5.195" y="37.752" transform="scale(1.05212 .95046)" fill="#2c2e2b" stroke="url(#d)">
+            <tspan x="5.195" y="37.752" style="-inkscape-font-specification:Sans Bold" font-weight="bold" stroke-width="3.604">SVG</tspan>
+        </text>
+    </g>
+</svg>

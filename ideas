@@ -28,22 +28,20 @@ write post about electron, bl.ocks
 
 https://moqups.com/#!/edit/kirjava/elbRcdZb
 
-change timers to resize event and set transition time to 0
-
 true multithreading w/ workers
 
 comments open to the side
 
-// 100% vector gfx svgs
-
-adding to force
-
-more -> links
-blog link
-github api,
 twitter api,
 bl.ocks api?
 youtube api
+
+more -> links my stuff, dev stuff (group)
+blog link goes to article list?
+tags links
+
+use rems for text for responsiveness
+
 
 --> http://tympanus.net/Development/ButtonComponentMorph/index.html comments!
 

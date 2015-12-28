@@ -92,7 +92,7 @@ function logo() {
         }
 
         window.logo = function() {
-            logo.attr(logoAttr(bbox))
+            logo.transition().attr(logoAttr(bbox))
         }
 
     })
