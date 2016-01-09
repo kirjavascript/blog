@@ -2,7 +2,7 @@ svg:first-of-type {
 
     #{$a} {
         @extend .hand;
-        text-decoration: none;
+        //text-decoration: none;
     }
 
     .hand {
@@ -71,35 +71,6 @@ svg:first-of-type {
         background-color:transparent;
         //transform:scale(1);
         //overflow:hidden;
-<<<<<<< HEAD
-=======
-    }
-
-    .socialBox {
-        background-color: purple;
-        padding:20px;
-        color: #FFF;
-        span {
-            font-size: 30px;
-        }
-        div {
-            float:right;
-            color:#BBB;
-        }
-    }
-
-    .tShapes {
-        background-color: #00aced;
-        p {
-            font-size: 20px;
-        }
-    }
-
-    .blox {
-        background-color:#FA0;
-        color:#222;
-        font-size: 30px;
->>>>>>> b4dc9b79d06af619568c59e49042fcf40ca7d434
     }
 
     .socialBox {

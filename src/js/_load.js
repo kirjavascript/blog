@@ -27,9 +27,6 @@ window.addEventListener("load", e => {
 
         g = svg.append("g")
 
-        //g.append("rect")
-        //.attr({x:0,y:0,width:c.w,height:c.h,fill:"#EEE"})
-
         // main content container
         viewer = svg.append("svg")
 
@@ -37,7 +34,6 @@ window.addEventListener("load", e => {
         thom();
         menu();
         
-        //logo();
         social();
         getLatestPost();
 
@@ -55,8 +51,6 @@ window.addEventListener("resize", e => {
         .attr("width",c.w).attr("height",c.h)
         .attr("viewBox", [0,0,c.w,c.h].join(" "));
 
-        //viewer.attr(viewAttr());
-
         force.size([c.w,c.h-y(120)]);
 
         rGoo(sp);
@@ -64,9 +58,6 @@ window.addEventListener("resize", e => {
         force.resume();
 
         //logo(); // redefined function (see logo.js)
-
-        //g.select('rect').transition().duration(sp)
-        //.attr({width:c.w,height:c.h})
     },sp)
 })
 

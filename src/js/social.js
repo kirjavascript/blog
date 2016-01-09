@@ -80,6 +80,8 @@ function social() {
         .on('click' , d => {typeof d.click=="function"&&d.click()})
 };
 
+var checkStationary = null;
+
 function circleFollow(self,items) {
         var circle = d3.selectAll(".gooCircle");
 
@@ -106,7 +108,7 @@ function circleFollow(self,items) {
 
         if(near>90) {
             // check distance
-            circle.transition().duration(100)
+            circle.transition().duration(70)
             .attr("r", 0)
         }
         else {
@@ -116,6 +118,13 @@ function circleFollow(self,items) {
             // set colour
             circle.transition().duration(100)
                 .style("fill", items[hypz.indexOf(near)].colour)
+
+            // force circle to shrink if not moved for {{time}}
+            clearInterval(checkStationary);
+            checkStationary = setTimeout(() => {
+                circle.transition().duration(500)
+                    .attr("r", 0)
+            },500);
         }
 }
 
