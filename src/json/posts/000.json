@@ -18,7 +18,7 @@
             500,
             500
         ],
-        "ajax": "json/posts/0.html",
+        "ajax": "json/posts/000/main.html",
         "foci": {
             "x": -500,
             "y": 150
@@ -34,15 +34,6 @@
         "foci": {
             "x": 3000,
             "y": 800
-        }
-    },
-    {
-        "shape": "text",
-        "text": "2015/12/28",
-        "size": "40",
-        "foci": {
-            "x": -200,
-            "y": 0
         }
     }
 ]

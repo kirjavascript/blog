@@ -72,7 +72,7 @@ gulp.task('watch', ['build'], function() {
     gulp.watch(['src/**/*.js'], ['scripts']);
     gulp.watch(['src/**/*.{html,php}'], ['build']);
     gulp.watch(['src/**/*.svg'], ['build']);
-    gulp.watch(['src/**/*.json'], ['json']);
+    gulp.watch(['src/json/**/*'], ['json']);
 });
 
 gulp.task('default', ['watch']);

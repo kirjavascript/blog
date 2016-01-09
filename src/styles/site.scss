@@ -40,7 +40,7 @@ svg:first-of-type {
         //shape-rendering: geometricPrecision;
         //stroke: #111;
         //filter: blur(.1px);
-        fill-opacity:1;stroke:none;
+        fill-opacity:1;
     }
 
 
@@ -55,6 +55,32 @@ svg:first-of-type {
         p {
             padding:0px;
             margin: 0px;
+        }
+    }
+
+    .archive {
+        @extend .hand;
+        //@include rotate(-45);
+
+        .wrap {
+            height:90px;
+            display: inline-block;
+            // padding: 40px;
+            padding-right: 20px;
+        }
+
+        .title {
+            padding: 40px;
+            font-size: 40px;
+            line-height:90px;
+        }
+
+        .date {
+            font-size:30px;
+            display: inline-block;
+            @include rotate(15);
+            margin-left: 20px;
+            margin-top: 30px;
         }
     }
 

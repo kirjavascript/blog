@@ -33,9 +33,8 @@ window.addEventListener("load", e => {
         // order defines order of containers
         thom();
         menu();
-        
         social();
-        getLatestPost();
+        getPost();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 

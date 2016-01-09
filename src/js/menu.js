@@ -8,6 +8,7 @@ function menu() {
             colour:"#B44642",
             click:() => {
                 //window.fragment("json/logos/stuff.json");
+                document.title = "about";
                 d3on("about.json");
             }
         },
@@ -15,8 +16,8 @@ function menu() {
             name:"archive",
             colour:"#46B482",
             click:() => {
-                //window.fragment("json/logos/about.json");
-                
+                document.title = "archive";
+                archive();
             }
         },
         {

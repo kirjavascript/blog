@@ -8,7 +8,7 @@
             "stroke-width":"4px"
         },
         "foci": {
-            "x": 1600,
+            "x": 1500,
             "y": -150
         }
     },
@@ -126,7 +126,7 @@
 	},
 	{
 		"shape": "text",
-		"text": "Snap.svg.js",
+		"text": "Snap.svg",
 		"foci": {
 			"x": 1100,
 			"y": 460

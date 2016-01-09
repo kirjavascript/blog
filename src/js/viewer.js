@@ -1,7 +1,7 @@
-function getLatestPost() {
+function getPost(num=0) {
     d3.json("json/posts.json", (e,d) => {
         //grab latest post
-        post(d[0]);
+        post(d[num]);
     })
 }
 
@@ -21,6 +21,19 @@ function post(data) {
             "foci": {
                 "x": -600,
                 "y": 1200
+            }
+        })
+
+        console.log(data)
+
+        // add date
+        d.push({
+            "shape": "text",
+            "text": data.date,
+            "size": "40",
+            "foci": {
+                "x": -200,
+                "y": 0
             }
         })
 

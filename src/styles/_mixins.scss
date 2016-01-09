@@ -17,6 +17,18 @@
     }
 }
 
+@mixin transform($transforms) {
+       -moz-transform: $transforms;
+         -o-transform: $transforms;
+        -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
 @mixin device-large {
     @media only screen and (min-width : 1200px) { @content; }
 }

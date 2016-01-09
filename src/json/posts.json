@@ -1,7 +1,14 @@
 [
     {
+        "title":"SVG tools I use",
+        "json":"posts/001.json",
+        "tags":"SVG tools d3",
+        "date":"2016/01/09"
+    },
+    {
         "title":"data driven blogging",
-        "json":"posts/0.json",
-        "tags":"javascript d3 blog SVG purple blue"
+        "json":"posts/000.json",
+        "tags":"javascript d3 blog SVG purple blue",
+        "date":"2015/12/28"
     }
 ]

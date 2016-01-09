@@ -1,0 +1,16 @@
+[
+    {
+        "shape": "foreignObject",
+        "size": [
+            250,
+            220
+        ],
+        "style": {
+        },
+        "ajax" : "json/posts/001/popup.html",
+        "foci": {
+            "x": -500,
+            "y": 200
+        }
+    }
+]

@@ -1,0 +1,21 @@
+[
+    {
+        "shape": "foreignObject",
+        "size": [
+            500,
+            500
+        ],
+        "style": {
+        },
+        "html": [
+            "<div class=\"post\">",
+            "<p><iframe src=\"json/posts/000.json\"></iframe></p>",
+            "<span class=\"link\" onClick=\"d3.select(this.parentNode.parentNode).transition().style('opacity', 0).remove()\">close</span>",
+            "</div>"
+        ],
+        "foci": {
+            "x": 850,
+            "y": 0
+        }
+    }
+]

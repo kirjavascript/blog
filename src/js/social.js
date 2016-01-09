@@ -47,7 +47,7 @@ function social() {
 
     goo.append("circle")
             .attr("class", "gooCircle")
-            .attr("r", 45)
+            .attr("r", 0)
             .attr("cx", 157)
             .attr("cy", -50)
             .style("fill", "#EEE")

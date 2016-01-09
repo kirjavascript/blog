@@ -1,0 +1,41 @@
+[
+    {
+        "shape": "text",
+        "text": "SVG tools I use",
+        "size": "80",
+        "attr" : {
+            "stroke":"#000",
+            "stroke-width":"4px"
+        },
+        "foci": {
+            "x": 850,
+            "y": -230
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            600,
+            600
+        ],
+        "ajax": "json/posts/001/main.html",
+        "foci": {
+            "x": 300,
+            "y": 50
+        }
+    },
+    {
+        "shape": "image",
+        "size": [
+            300,
+            300
+        ],
+        "attr": {
+            "xlink:href":"svg/d3.svg"
+        },
+        "foci": {
+            "x": -800,
+            "y": 280
+        }
+    }
+]
