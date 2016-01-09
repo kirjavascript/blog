@@ -90,14 +90,32 @@ function circleFollow(self,items) {
             .attr("cx", x)
             .attr("cy", y)
 
-        if(y<-70||x<-560) {
-            circle.transition().duration(0)
-            .style("opacity", 0)
+        // get distances for all icons
+        var hypz = [];
+        d3.selectAll(".socialCircle")
+            .each(function(d,i) {
+                var self = d3.select(this);
+                var x1 = self.attr("cx");
+                var y1 = self.attr("cy");
+
+                hypz.push(Math.calcHype(x,x1,y,y1));
+            })
+
+        // get nearest icon
+        var near = hypz.reduce((a,b) => Math.min(a,b))
+
+        if(near>90) {
+            // check distance
+            circle.transition().duration(100)
+            .attr("r", 0)
         }
         else {
+            // set radius :3
+            circle.attr("r", 50 - (near<1?1:near)/4)
+
+            // set colour
             circle.transition().duration(100)
-                .style("fill", items[(x>-30?0:x>-190?1:x>-344?2:3)].colour)
-                .style("opacity", 1)
+                .style("fill", items[hypz.indexOf(near)].colour)
         }
 }
 
@@ -106,7 +124,7 @@ function gooey(container) {
 	var filter =  defs.append('filter').attr('id','gooey');
 	filter.append('feGaussianBlur')
 		.attr('in','SourceGraphic')
-		.attr('stdDeviation','15')
+		.attr('stdDeviation','10')
 		.attr('result','blur');
 	filter.append('feColorMatrix')
 		.attr('in','blur')

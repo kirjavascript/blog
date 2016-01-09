@@ -27,8 +27,8 @@ window.addEventListener("load", e => {
 
         g = svg.append("g")
 
-        g.append("rect")
-        .attr({x:0,y:0,width:c.w,height:c.h,fill:"#EEE"})
+        //g.append("rect")
+        //.attr({x:0,y:0,width:c.w,height:c.h,fill:"#EEE"})
 
         // main content container
         viewer = svg.append("svg")
@@ -65,8 +65,8 @@ window.addEventListener("resize", e => {
 
         //logo(); // redefined function (see logo.js)
 
-        g.select('rect').transition().duration(sp)
-        .attr({width:c.w,height:c.h})
+        //g.select('rect').transition().duration(sp)
+        //.attr({width:c.w,height:c.h})
     },sp)
 })
 
@@ -85,3 +85,8 @@ function getH(a=document,b="documentElement") {
   if (a[b] && a[b].clientHeight) return a[b].clientHeight;
   if (a.body) return a.body.clientHeight;
 }
+
+// ES5 pythag polyfill
+
+Math.hypot = Math.hypot || ((x,y) => Math.sqrt(x*x + y*y));
+Math.calcHype = ((x1,x2,y1,y2) => Math.hypot(x1-x2,y1-y2));
