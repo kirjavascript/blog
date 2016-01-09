@@ -29,13 +29,6 @@ location.source
 navigator
 moveTo()
 
-https://moqups.com/#!/edit/kirjava/elbRcdZb
-
-true multithreading w/ workers
-html: json load
-
-comments open to the side
-
 more -> links my stuff, dev stuff (group)
 blog link goes to article list?
 tags links
@@ -63,6 +56,16 @@ load posts first
 show d3 graphs frameless
 mouseover lgo particlecircle ...
 http://www.cs.umd.edu/~bederson/papers/index.html
+=======
+twitter api,
+bl.ocks api?
+youtube api
+
+more -> links my stuff, dev stuff (group)
+blog link goes to article list?
+tags links
+
+use rems for text for responsiveness
 
 blog -> fix contrast on gooey effect
 jsperf...

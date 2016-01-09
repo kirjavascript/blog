@@ -7,7 +7,6 @@ function getLatestPost() {
 
 function post(data) {
     d3on(data.json,null, d => {
-
         document.title = data.title;
 
         // add tags
