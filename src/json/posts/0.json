@@ -18,15 +18,7 @@
             500,
             500
         ],
-        "html": [
-            "<div class=\"post\">",
-                "<p>Recently, I've been a lot more into software development.</p>",
-                "<br />",
-                "<p>I decided I need a place to dump all the random stuff I've been making and chucked this blog together over Xmas.</p>",
-                "<br />",
-                "<p>These pages are rendered entirely in vector graphics as <span class=\"link\" onMouseOver=\"d3on('posts/0res.json',true)\">data driven documents</span>. This is probably a terrible idea as far as SEO is concerned, but who gives a shit about SEO when you have insane <a target=\"_blank\" href=\"http://d3js.org\">DOM manipulation</a>?</p>",
-            "</div>"
-        ],
+        "ajax": "json/posts/0.html",
         "foci": {
             "x": -500,
             "y": 150

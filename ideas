@@ -15,10 +15,6 @@ tags?wordcloud
 
 comments-> posts have colour - cat20
 
-first post about the site what it's made in - commence blagging
-use gooey fx on links then grow to articles?
-apis for github etc
-twitter api: get posts and reply popup as foreignobject :)
 link to blog source (github)
 null vector bbox (!)
 write post about electron, bl.ocks
@@ -50,6 +46,8 @@ write about old stuff
 
 LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
 (NO UNDERLINE, UNDERLINE ON FULL LINKS)
+
+blog mouseover set charge
 
 archive
 fix social

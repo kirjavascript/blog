@@ -70,6 +70,12 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                 if(d.html) {
                     self.html(typeof d.html=="object"?d.html.join(""):d.html)
                 }
+                if(d.ajax) {
+                    d3.text(d.ajax, (e,d) => {
+                        self.html(d);
+                    })
+                    
+                }
                 if(d.path) self
                     .attr("d",d=>d.path)
 
