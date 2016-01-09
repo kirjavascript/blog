@@ -55,7 +55,7 @@ window.addEventListener("resize", e => {
         .attr("width",c.w).attr("height",c.h)
         .attr("viewBox", [0,0,c.w,c.h].join(" "));
 
-        viewer.attr(viewAttr());
+        //viewer.attr(viewAttr());
 
         force.size([c.w,c.h-y(120)]);
 

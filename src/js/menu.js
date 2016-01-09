@@ -7,23 +7,23 @@ function menu() {
             name:"about",
             colour:"#B44642",
             click:() => {
-                window.fragment("json/logos/stuff.json");
-                getLatestPost();
+                //window.fragment("json/logos/stuff.json");
+                d3on("about.json");
             }
         },
         {
             name:"archive",
             colour:"#46B482",
             click:() => {
-                window.fragment("json/logos/about.json");
-                d3on("about.json");
+                //window.fragment("json/logos/about.json");
+                
             }
         },
         {
             name:"stuff",
             colour:"#4682B4",
             click:() => {
-                window.fragment("json/logos/more.json")
+                //window.fragment("json/logos/more.json")
                 d3on("more.json");
             }
         },

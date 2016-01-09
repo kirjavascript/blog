@@ -1,11 +1,11 @@
 [
 	{
 		"shape": "text",
-		"text": "put \"more stuff\" stuff here",
+		"text": "dunno what to do with this section yet",
 		"size": "40",
 		"foci": {
 			"x": -200,
-			"y": -100
+			"y": 400
 		}
 	}
 ]
