@@ -8,7 +8,7 @@ redirect snk.digibase.ca
 use github api instead of node?!
 http://patrick-mckinley.com/tech/github-api-commit.html
 
-hamburgers?
+
 twitter / github / blocks.org
 sidebar?
 tags?wordcloud
@@ -45,5 +45,41 @@ tags links
 . page builder!!
 . comments
 
+threejs logo
 
+posts = notes/book
+hunt for a good text ediotor
+js tools i use
+svg tools I use
+hamburgers? - rainbow -> show source
+(rotate single line around a plane per frame then move)
+write about old stuff
+
+LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
+(NO UNDERLINE, UNDERLINE ON FULL LINKS)
+
+load posts first
+
+show d3 graphs frameless
+mouseover lgo particlecircle ...
 http://www.cs.umd.edu/~bederson/papers/index.html
+
+blog -> fix contrast on gooey effect
+jsperf...
+blog => multiple posts -
+hover zoom content
+basics of javascript code golf
+this.toSource
+i===i&&
+isNaN()
+loop examples
+JavaScript value plugin
+actual examples
+amateur code golf enth
+ioccc, teachest you interesting things about the language
+write table vs for code golf
+golf snippets
+es6 group
+us jsfiddle history
+semicolons are your enemy, reorder to remove
+no var, g=c=[] instead of 0

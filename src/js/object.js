@@ -17,7 +17,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
     function load(data) {
         interrupt = true;
         data = datamod(data);
-        var cont = vp.append("g");
+        var cont = viewer.append("g");
         var nodes = [];
         ~function stagger() {
             nodes.push(data.shift());
@@ -114,5 +114,5 @@ function getForce() {
         .friction(0.4) // 0.7
         .linkDistance(200)
         .gravity(0.5)
-        .size([c.w,c.h-y(120)]);
+        .size([c.w,c.h]);
 }

@@ -5,28 +5,7 @@ $a: 'a, a:active, a:hover, a:visited';
 $a-hover: 'a:active, a:hover';
 
 // root styles
-html, body {
-    height: 100%;
-    font-size: 20px;
-    margin:0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow: hidden;
-    background: #EEE;
-}
-
-h1,h2 {
-    display:none;
-}
-
-#{$a} {
-    @extend .hand;
-    text-decoration: none;
-}
-
-.hand {
-    cursor: pointer;
-    cursor: hand;
-}
+html, body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;overflow: hidden;font-size: 20px;}
 
 // inject:scss
 // endinject

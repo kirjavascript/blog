@@ -10,14 +10,11 @@ var y = d3.scale.linear()
     .domain([0, 800])
     .range([0,c.h])
 
-var vp, viewer;
+var viewer;
 
 var force = getForce(); // responsive params?
 
 var interrupt = false;
-
-// force container objects (flush this)
-// var forces = [];
 
 window.addEventListener("load", e => {
 
@@ -37,10 +34,12 @@ window.addEventListener("load", e => {
         viewer = svg.append("svg")
 
         // order defines order of containers
+        thom();
         menu();
-        logo();
+        
+        //logo();
         social();
-        viewport();
+        getLatestPost();
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 
@@ -64,7 +63,7 @@ window.addEventListener("resize", e => {
 
         force.resume();
 
-        logo(); // redefined function (see logo.js)
+        //logo(); // redefined function (see logo.js)
 
         g.select('rect').transition().duration(sp)
         .attr({width:c.w,height:c.h})

@@ -4,7 +4,7 @@ function menu() {
 
     var items = [
         {
-            name:"blog",
+            name:"about",
             colour:"#B44642",
             click:() => {
                 window.fragment("json/logos/stuff.json");
@@ -12,7 +12,7 @@ function menu() {
             }
         },
         {
-            name:"about",
+            name:"archive",
             colour:"#46B482",
             click:() => {
                 window.fragment("json/logos/about.json");
@@ -20,7 +20,7 @@ function menu() {
             }
         },
         {
-            name:"more",
+            name:"stuff",
             colour:"#4682B4",
             click:() => {
                 window.fragment("json/logos/more.json")
@@ -31,23 +31,12 @@ function menu() {
 
     var m = svg.append('g');
 
-    // line
-
-    var lineAttr = $ => ({
-        x1:x(120),
-        x2:x(1200),
-        y1:y(120),
-        y2:y(120),
-        class:"line"
-    });
-
-    var line = m.append("line").attr(lineAttr(1))
-
     // items
 
     var itemAttr = $ => ({
-        x: (d,i) => x(140) + i*x(80),
-        y: y(100),
+        x: (d,i) => x(650) + i*x(200),
+        y: y(160),
+        "font-size":fontSize(0,0,1.6),
         class: "menu"
     });
 
@@ -68,7 +57,7 @@ function menu() {
         d3.select(this)
             .transition()
             .duration(200)
-            .style("font-size", fontSize(0,0,1.5))
+            .style("font-size", fontSize(0,0,2))
             .style("fill", d.colour)
             .ease("elastic")
     }
@@ -78,25 +67,13 @@ function menu() {
         d3.select(this)
             .transition()
             .duration(200)
-            .style("font-size", fontSize)
+            .style("font-size", fontSize(0,0,1.6))
             .style("fill", '#7A7A7A')
             .ease("elastic")
     }
 
-    setInterval(() => {
-        if(!interrupt) {
-            line.transition().duration(sp)
-                .attr(lineAttr())
-
-            navGroup.transition().duration(sp)
-                .delay((d,i)=>i*100)
-                .attr(itemAttr())
-                .style("font-size", fontSize)
-        }
-    },sp)
-
     function fontSize(d,i,s) {
         s = s || 1;
-        return s*(y(3)*x(5))+"px";
+        return s*(x(20))+"px";
     }
 };
