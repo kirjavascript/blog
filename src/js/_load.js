@@ -34,7 +34,7 @@ window.addEventListener("load", e => {
         thom();
         menu();
         social();
-        getPost();
+        getPost(0,true);
 
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 

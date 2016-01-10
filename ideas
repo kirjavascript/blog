@@ -49,6 +49,9 @@ LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
 
 blog mouseover set charge
 
+caching
+
+permalinks
 fix social
 stuff
 responsive
@@ -62,7 +65,7 @@ tags links
 use rems for text for responsiveness
 
 blog -> fix contrast on gooey effect
-jsperf...
+jsperf... alternatives
 blog => multiple posts -
 hover zoom content
 basics of javascript code golf

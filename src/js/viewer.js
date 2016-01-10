@@ -1,7 +1,30 @@
-function getPost(num=0) {
+//String.prototype.shift = Array.prototype.shift;
+
+function getPost(num=0,init=false) {
     d3.json("json/posts.json", (e,d) => {
         //grab latest post
-        post(d[num]);
+
+        if(init&&location.search.indexOf("?")!=~0) {
+            var loc = location.search.replace(/( |-|_|\.|\,|%20)/g, " ").toLowerCase();
+            let hit = false;
+
+            for(let i=0;i<d.length;i++) {
+
+                // lowercase
+                if("?" + d[i].title.toLowerCase()==loc) {
+                    post(d[i]);
+                    hit = !hit;
+                    break;
+                }
+            }
+            if(!hit) {
+                archive();
+            }
+                
+        }
+        else {
+            post(d[num]);
+        }
     })
 }
 
@@ -15,7 +38,7 @@ function post(data) {
             "size": [600,100],
             "html": [
                 "<p class=\"tags\">",
-                "<a href=\"?"+encodeURIComponent(data.title).replace(/\ /g,'+')+"\">permalink</a>",
+                "<a href=\"?"+encodeURIComponent(data.title.toLowerCase().replace(/ /g,'-'))+"\">permalink</a>",
                 "&emsp;tags: "+data.tags+"</p>"
             ],
             "foci": {
@@ -23,8 +46,6 @@ function post(data) {
                 "y": 1200
             }
         })
-
-        console.log(data)
 
         // add date
         d.push({
