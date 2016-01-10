@@ -150,7 +150,7 @@ function gooey(container) {
 
 function github() {
     d3.json('https://api.github.com/users/snkenjoi/repos', (e,data) => {
-        var gitShapes = [];
+        var gitShapes = [titleObject("github repos",1250,-200)];
         data.forEach((o,i) => {
             gitShapes.push({
                     "shape": "foreignObject",
@@ -160,20 +160,20 @@ function github() {
                     ],
                     "scale":0.7,
                     "style": {
-                        "background-color": "purple",
+                        //"background-color": "purple",
                     },
                     "html": [
                         "<a target=\"_blank\" href="+o.html_url+">",
                             "<div class=\"socialBox\">",
                                 "<span>"+o.name+"</span>",
-                                "<div>"+o.language+"</div>",
-                                "<p>"+o.description+"</p>",
+                                "&emsp;"+o.description+"&emsp;",
+                                "<div>("+o.language+")</div>",
                             "</div>",
                         "</a>"
                     ],
                     "foci": {
-                        "x": i%2==0?-200:1500,
-                        "y": 175*(i-1.5)
+                        "x": 600,
+                        "y": 400 + (120*i)
                     }
                 })
         })
@@ -183,8 +183,7 @@ function github() {
 
 function blocks() {
     d3.json('https://api.github.com/users/snkenjoi/gists', (e,data) => {
-        console.log(data)
-        var blox = [];
+        var blox = [titleObject("bl.ocks",1550,-200)];
         data.forEach((o,i) => {
             blox.push({
                     "shape": "foreignObject",
@@ -194,15 +193,15 @@ function blocks() {
                     ],
                     "scale":0.7,
                     "html": [
-                        "<a target=\"_blank\" href=\"http://bl.ocks.org/"+o.id+"\">",
+                        "<a target=\"_blank\" style=\"text-decoration:none\" href=\"http://bl.ocks.org/"+o.id+"\">",
                             "<div class=\"socialBox blox\">",
-                                "<p>"+o.description+"</p>",
+                                ""+o.description+"",
                             "</div>",
                         "</a>"
                     ],
                     "foci": {
-                        "x": i%2==0?-200:1500,
-                        "y": 175*(i-1.5)
+                        "x": 600,
+                        "y": 400 + (120*i)
                     }
                 })
         })
@@ -219,7 +218,7 @@ function twitter() {
 }
 
 function twitterCallback(data) {
-    var tShapes = [];
+    var tShapes = [titleObject("tweets",1500,-200)];
     var c = document.createElement("div");
                 c.innerHTML = data.body;
 
@@ -246,7 +245,7 @@ function twitterCallback(data) {
                 ],
                 "scale":0.7,
                 "html": [
-                    "<a target=\"_blank\" href="+o.url+">",
+                    "<a target=\"_blank\" style=\"text-decoration:none\" href="+o.url+">",
                         "<div class=\"socialBox tShapes\">",
                             ""+o.tweet+"",
                             "<div>"+o.date+"</div>",
@@ -254,8 +253,8 @@ function twitterCallback(data) {
                     "</a>"
                 ],
                 "foci": {
-                    "x": i%2==0?-200:1500,
-                    "y": 125*(i-2)
+                    "x": 600,
+                    "y": 400 + (160*i)
                 }
             })
     })
@@ -264,7 +263,7 @@ function twitterCallback(data) {
 
 function youtube() {
     d3.json("https://www.googleapis.com/youtube/v3/search?key=AIzaSyBadqgPm8xQrJHJGh7LL5BOzoV1LYwc6cY&channelId=UCnmMB5r3-dXMx0cX3vdb2aQ&part=snippet,id&order=date&maxResults=11", (e,data) => {
-        var yShapes = [];
+        var yShapes = [titleObject("youtube",1500,-200)];
         data.items.forEach((o,i) => {
             yShapes.push({
                     "shape": "foreignObject",
@@ -278,8 +277,8 @@ function youtube() {
                         "</a>"
                     ],
                     "foci": {
-                        "x": -500+(600*(i/2)),
-                        "y": -200+(i%2==0?460:0)
+                        "x": -600+(600*(i/2)),
+                        "y": 100+(i%2==0?460:0)
                     }
                 })
         })

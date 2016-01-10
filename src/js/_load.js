@@ -65,18 +65,40 @@ var rnd = qty => qty*Math.random()|0;
 var clone = data => JSON.parse(JSON.stringify(data));
 
 function getW(d=document,e='documentElement') {
-  if (self.innerHeight) return self.innerWidth;
-  if (d[e] && d[e].clientHeight) return d[e].clientWidth;
-  if (d.body) return d.body.clientWidth;
+    if (self.innerHeight) return self.innerWidth;
+    if (d[e] && d[e].clientHeight) return d[e].clientWidth;
+    if (d.body) return d.body.clientWidth;
 }
 
 function getH(a=document,b="documentElement") {
-  if (self.innerHeight) return self.innerHeight;
-  if (a[b] && a[b].clientHeight) return a[b].clientHeight;
-  if (a.body) return a.body.clientHeight;
+    if (self.innerHeight) return self.innerHeight;
+    if (a[b] && a[b].clientHeight) return a[b].clientHeight;
+    if (a.body) return a.body.clientHeight;
 }
 
 // ES5 pythag polyfill
 
 Math.hypot = Math.hypot || ((x,y) => Math.sqrt(x*x + y*y));
 Math.calcHype = ((x1,x2,y1,y2) => Math.hypot(x1-x2,y1-y2));
+
+// random string
+
+function noCache() {
+    return "?" + Math.random().toString(36).substring(5);
+}
+
+function titleObject(txt,x,y) {
+    return {
+        "shape": "text",
+        "text": txt,
+        "size": "80",
+        "attr" : {
+            "stroke":"#000",
+            "stroke-width":"4px"
+        },
+        "foci": {
+            "x": x,
+            "y": y
+        }
+    }
+}

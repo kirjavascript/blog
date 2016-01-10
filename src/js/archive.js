@@ -5,20 +5,8 @@ function archive() {
     var c20b = d3.scale.category20b();
     var c20c = d3.scale.category20c();
 
-    d3.json("json/posts.json", (e,d) => {
-        var shapes = [{
-            "shape": "text",
-            "text": "archive",
-            "size": "80",
-            "attr" : {
-                "stroke":"#000",
-                "stroke-width":"4px"
-            },
-            "foci": {
-                "x": 1550,
-                "y": -230
-            }
-        }];
+    d3.json("json/posts.json"+noCache(), (e,d) => {
+        var shapes = [titleObject("archive",1550,-230)];
 
         d.forEach((o,i) => {
 

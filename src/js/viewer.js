@@ -1,7 +1,7 @@
 //String.prototype.shift = Array.prototype.shift;
 
 function getPost(num=0,init=false) {
-    d3.json("json/posts.json", (e,d) => {
+    d3.json("json/posts.json"+noCache(), (e,d) => {
         //grab latest post
 
         if(init&&location.search.indexOf("?")!=~0) {
@@ -9,18 +9,13 @@ function getPost(num=0,init=false) {
             let hit = false;
 
             for(let i=0;i<d.length;i++) {
-
-                // lowercase
                 if("?" + d[i].title.toLowerCase()==loc) {
                     post(d[i]);
                     hit = !hit;
                     break;
                 }
             }
-            if(!hit) {
-                archive();
-            }
-                
+            if(!hit) archive();
         }
         else {
             post(d[num]);

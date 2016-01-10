@@ -54,6 +54,9 @@ gulp.task('build', ['styles', 'scripts', 'json'], function() {
     // uncomment this for copying static data
     gulp.src('src/svg/*').pipe(gulp.dest(build_dir + 'svg'));
 
+    //copy d3 to js folder
+    gulp.src('src/d3.js').pipe(gulp.dest(build_dir + 'js'));
+
     return html();
 })
 
@@ -69,7 +72,7 @@ gulp.task('json', function() {
 // watch files for edits and rebuild if so
 gulp.task('watch', ['build'], function() {
     gulp.watch(['src/**/*.scss'], ['styles']);
-    gulp.watch(['src/**/*.js'], ['scripts']);
+    gulp.watch(['src/js/*.js'], ['scripts']);
     gulp.watch(['src/**/*.{html,php}'], ['build']);
     gulp.watch(['src/**/*.svg'], ['build']);
     gulp.watch(['src/json/**/*'], ['json']);
