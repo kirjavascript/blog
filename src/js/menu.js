@@ -30,10 +30,10 @@ function menu() {
         },
     ];
 
-    var m = svg.append('g');
+    var m = svg.append('g')
 
     // items
-
+//func
     var itemAttr = $ => ({
         x: (d,i) => x(650) + i*x(200),
         y: y(160),
@@ -41,7 +41,7 @@ function menu() {
         class: "menu"
     });
 
-    var nav = m.append("text")
+    var nav = m.append("text")//.classed("menu",1);
         .selectAll(".menu")
         .data(items)
 

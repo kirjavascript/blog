@@ -6,7 +6,7 @@ function archive() {
     var c20c = d3.scale.category20c();
 
     d3.json("json/posts.json"+noCache(), (e,d) => {
-        var shapes = [titleObject("archive",1550,-230)];
+        var shapes = [titleObject("archive",1050,-200)];
 
         d.forEach((o,i) => {
 

@@ -49,17 +49,25 @@ LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
 
 blog mouseover set charge
 
-fix social
-stuff
 responsive
+
+menu
+social
+px=>rm
+logo height for date
+d3 scale the root font size changer
+move date elsewhere if too much trouble
+
+make posts fixed on mobile
+use hide classes for responsive
+drytk
+
 
 show d3 graphs frameless
 
 more -> links my stuff, dev stuff (group)
-blog link goes to article list?
-tags links
 
-use rems for text for responsiveness
+use rems for text for responsiveness (?)
 
 blog -> fix contrast on gooey effect
 jsperf... alternatives

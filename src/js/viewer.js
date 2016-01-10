@@ -37,8 +37,8 @@ function post(data) {
                 "&emsp;tags: "+data.tags+"</p>"
             ],
             "foci": {
-                "x": -600,
-                "y": 1200
+                "x": -500,
+                "y": 1050
             }
         })
 
@@ -46,10 +46,13 @@ function post(data) {
         d.push({
             "shape": "text",
             "text": data.date,
-            "size": "40",
+            "attr": {
+                id:"post-date"
+            },
+            "size": "2",
             "foci": {
-                "x": -200,
-                "y": 0
+                "x": -150,
+                "y": 100
             }
         })
 

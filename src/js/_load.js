@@ -12,9 +12,28 @@ var y = d3.scale.linear()
 
 var viewer;
 
-var force = getForce(); // responsive params?
+var force = getForce();
 
 var interrupt = false;
+
+function responder(sp=0) {
+    // set root font size for rems
+    d3.select("html")
+        .transition()
+        .duration(sp)
+        .style('font-size',x(12.4)+"px")
+
+    // snap y pos on post date to logo
+    // var pDate = d3.select("#post-date");
+    // if(pDate.node()) {
+    //     pDate
+    //         .transition()
+    //         .duration(sp)
+    //         .attr({
+    //             y:(-pDate.data()[0].y) + (x(350)/2)
+    //         })
+    // }
+}
 
 window.addEventListener("load", e => {
 
@@ -36,6 +55,9 @@ window.addEventListener("load", e => {
         social();
         getPost(0,true);
 
+        // called in object.js instead
+        //responder();
+
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 
 })
@@ -45,19 +67,37 @@ window.addEventListener("resize", e => {
     y.range([0,c.h])
     x.range([0,c.w])
 
-    setTimeout(() => {
-        svg.transition().duration(sp)
+    // logo
+    d3.select("#thom")
+    .transition()
+    .duration(sp)
+    .attr({
+        width:x(350)})
+    d3.selectAll("tspan")
+        .attr("x", (d,i) => x(650) + i*x(200))
+
+    viewer.selectAll(".d3on")
+        .transition()
+        .duration(sp)
+        .attr({transform:d=>
+                "scale("+(d.scale?d.scale:1)+"),translate("+
+                [x(d.x),y(d.y)]
+                +"),rotate("+(d.rotate?d.rotate:0)+")"
+            })
+        .attr({
+                width: d => x(d.size?d.size[0]:0),
+                height: d => y(d.size?d.size[1]:0),
+                r: d => d.size?d.size:0
+            })
+
+
+    responder(sp);
+
+    svg
         .attr("width",c.w).attr("height",c.h)
         .attr("viewBox", [0,0,c.w,c.h].join(" "));
 
-        force.size([c.w,c.h-y(120)]);
-
-        rGoo(sp);
-
-        force.resume();
-
-        //logo(); // redefined function (see logo.js)
-    },sp)
+    rGoo(sp);
 })
 
 var rnd = qty => qty*Math.random()|0;
@@ -91,7 +131,7 @@ function titleObject(txt,x,y) {
     return {
         "shape": "text",
         "text": txt,
-        "size": "80",
+        "size": "4",
         "attr" : {
             "stroke":"#000",
             "stroke-width":"4px"

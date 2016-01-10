@@ -2,14 +2,14 @@
     {
         "shape": "text",
         "text": "SVG tools I use",
-        "size": "80",
+        "size": "4",
         "attr" : {
             "stroke":"#000",
             "stroke-width":"4px"
         },
         "foci": {
             "x": 850,
-            "y": -230
+            "y": -200
         }
     },
     {
@@ -34,7 +34,7 @@
             "xlink:href":"svg/d3.svg"
         },
         "foci": {
-            "x": -800,
+            "x": -500,
             "y": 280
         }
     }

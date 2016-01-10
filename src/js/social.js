@@ -32,14 +32,17 @@ function social() {
 
     var goo = s.append("g");
 
-    window.rGoo = d => {
-        goo.attr({
+    window.rGoo = sp => {
+        goo
+            .transition()
+            .duration(sp)
+            .attr({
             transform: (d,i) =>
             'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')',
         })
     };
 
-    rGoo();
+    rGoo(0);
 
     var filter = gooey(goo);
 

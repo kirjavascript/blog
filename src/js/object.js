@@ -8,7 +8,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
             .attr({transform:d=>
                 "scale("+(d.scale?d.scale:1)+"),translate("+
                 [x(rnd(1280)),y(rnd(800))]
-                +")"
+                +"),rotate("+(d.rotate?d.rotate:0)+")"
             })
             .style("opacity",0.5)
             .remove();
@@ -63,7 +63,8 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                     self.attr(p,d.attr[p])
                 };
                 if(d.text) self
-                    .attr('font-size',d.size)
+                    .attr('font-size',d.size+"rem")
+                    //.attr('font-size',d.size)
                     .text(d.text);
                 if(d.children)
                     render(d.children,self)
@@ -96,23 +97,17 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                 var k = .5 * e.alpha;
                 data.forEach(o=>{
                     if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
+
                 d3.selectAll('.d3on')
                     .attr({
                         transform:d=>
                         "scale("+(d.scale?d.scale:1)+"),"+
                         "rotate("+(d.rotate?d.rotate:0)+"),"+
-                        "translate("+[d.x,d.y]+")"
+                        "translate("+[x(d.x),y(d.y)]+")"
                     })
             });
-
-            // window.jostle = () => {
-            //     data.forEach(a=>{
-            //         a.x=200*(Math.random()-.5);
-            //         a.y=200*(Math.random()-.5);
-            //     })
-            //     force.resume();
-            // }
     }
+    responder(0);
 }
 
 function getForce() {
@@ -120,5 +115,5 @@ function getForce() {
         .friction(0.4) // 0.7
         .linkDistance(200)
         .gravity(0.5)
-        .size([c.w,c.h]);
+        .size([1200,800]);
 }
