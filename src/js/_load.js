@@ -23,6 +23,13 @@ function responder(sp=0) {
         .duration(sp)
         .style('font-size',x(12.4)+"px")
 
+    // fix menu
+    // d3.selectAll(".menu")
+    //     //.data().enter()
+    //     .transition()
+    //     .duration(sp)
+    //     .attr("x", x(200))
+
     // snap y pos on post date to logo
     // var pDate = d3.select("#post-date");
     // if(pDate.node()) {
@@ -72,9 +79,15 @@ window.addEventListener("resize", e => {
     .transition()
     .duration(sp)
     .attr({
-        width:x(350)})
+        width:x(350)});
+
+    // menu
     d3.selectAll("tspan")
+        .transition()
+        .duration(sp)
         .attr("x", (d,i) => x(650) + i*x(200))
+        .attr("y", y(160))
+        .style("font-size", x(24.8)+"px")
 
     viewer.selectAll(".d3on")
         .transition()

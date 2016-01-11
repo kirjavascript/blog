@@ -7,7 +7,6 @@ function menu() {
             name:"about",
             colour:"#B44642",
             click:() => {
-                //window.fragment("json/logos/stuff.json");
                 document.title = "about";
                 d3on("about.json");
             }
@@ -33,15 +32,15 @@ function menu() {
     var m = svg.append('g')
 
     // items
-//func
+
     var itemAttr = $ => ({
         x: (d,i) => x(650) + i*x(200),
         y: y(160),
-        "font-size":fontSize(0,0,1.6),
+        "font-size":"2rem",
         class: "menu"
     });
 
-    var nav = m.append("text")//.classed("menu",1);
+    var nav = m.append("text")
         .selectAll(".menu")
         .data(items)
 
@@ -58,7 +57,7 @@ function menu() {
         d3.select(this)
             .transition()
             .duration(200)
-            .style("font-size", fontSize(0,0,2))
+            .style("font-size", x(36)+"px")
             .style("fill", d.colour)
             .ease("elastic")
     }
@@ -68,13 +67,8 @@ function menu() {
         d3.select(this)
             .transition()
             .duration(200)
-            .style("font-size", fontSize(0,0,1.6))
+            .style("font-size", x(24)+"px")
             .style("fill", '#7A7A7A')
             .ease("elastic")
-    }
-
-    function fontSize(d,i,s) {
-        s = s || 1;
-        return s*(x(20))+"px";
     }
 };

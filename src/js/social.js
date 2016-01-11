@@ -153,7 +153,7 @@ function gooey(container) {
 
 function github() {
     d3.json('https://api.github.com/users/snkenjoi/repos', (e,data) => {
-        var gitShapes = [titleObject("github repos",1250,-200)];
+        var gitShapes = [titleObject("github repos",1050,-160)];
         data.forEach((o,i) => {
             gitShapes.push({
                     "shape": "foreignObject",
@@ -186,7 +186,7 @@ function github() {
 
 function blocks() {
     d3.json('https://api.github.com/users/snkenjoi/gists', (e,data) => {
-        var blox = [titleObject("bl.ocks",1550,-200)];
+        var blox = [titleObject("bl.ocks",1250,-160)];
         data.forEach((o,i) => {
             blox.push({
                     "shape": "foreignObject",
@@ -221,7 +221,7 @@ function twitter() {
 }
 
 function twitterCallback(data) {
-    var tShapes = [titleObject("tweets",1500,-200)];
+    var tShapes = [titleObject("tweets",1200,-160)];
     var c = document.createElement("div");
                 c.innerHTML = data.body;
 
@@ -266,7 +266,7 @@ function twitterCallback(data) {
 
 function youtube() {
     d3.json("https://www.googleapis.com/youtube/v3/search?key=AIzaSyBadqgPm8xQrJHJGh7LL5BOzoV1LYwc6cY&channelId=UCnmMB5r3-dXMx0cX3vdb2aQ&part=snippet,id&order=date&maxResults=11", (e,data) => {
-        var yShapes = [titleObject("youtube",1500,-200)];
+        var yShapes = [titleObject("youtube",1200,-160)];
         data.items.forEach((o,i) => {
             yShapes.push({
                     "shape": "foreignObject",
