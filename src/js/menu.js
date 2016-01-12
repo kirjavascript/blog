@@ -20,11 +20,11 @@ function menu() {
             }
         },
         {
-            name:"stuff",
+            name:"controls",
             colour:"#4682B4",
             click:() => {
-                //window.fragment("json/logos/more.json")
-                d3on("more.json");
+                document.title = "controls";
+                d3on("controls.json");
             }
         },
     ];

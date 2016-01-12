@@ -47,9 +47,18 @@ write about old stuff
 LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
 (NO UNDERLINE, UNDERLINE ON FULL LINKS)
 
-blog mouseover set charge
-
 responsive
+
+newpost.js
+up/down = get popups (make popup system)
+space = jostle
+type letters = add comment msg box?
+?controls
+
+touch?
+nodate = hidden pages?
+
+because every blog needs keyboard shortcuts
 
 force tricks
 
@@ -73,13 +82,18 @@ navigation
 webscript
 webthread.js
 
-controls left/right (text goes in that direction)
+
 
 show d3 graphs frameless
 
 more -> links my stuff, dev stuff (group)
 
 use rems for text for responsiveness (?)
+
+
+
+code golf part 1 sonic
+part 2 tricks
 
 post about v1
 blog -> fix contrast on gooey effect

@@ -12,6 +12,10 @@ var y = d3.scale.linear()
 
 var viewer;
 
+var posts;
+
+var postNum = 0;
+
 var force = getForce();
 
 var interrupt = false;
@@ -26,7 +30,9 @@ function respond(sp=0) {
 
 window.addEventListener("load", e => {
 
-    ~function($) {
+    loadPosts((e,d) => {
+
+        posts = d;
 
         // setup svg and set viewbox based on w/h/margins
         svg = d3.select("body").append("svg")
@@ -44,7 +50,7 @@ window.addEventListener("load", e => {
         social();
         getPost(0,true);
 
-    }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
+    })
 
 })
 
@@ -85,7 +91,7 @@ window.addEventListener("resize", e => {
                 height: d => y(d.size?d.size[1]:0),
                 r: d => d.size?d.size:0
             })
-            
+
     respond(sp);
 
     svg

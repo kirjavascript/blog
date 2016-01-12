@@ -1,29 +1,33 @@
 //String.prototype.shift = Array.prototype.shift;
 
-function getPost(num=0,init=false) {
-    d3.json("json/posts.json"+noCache(), (e,d) => {
-        //grab latest post
-
-        if(init&&location.search.indexOf("?")!=~0) {
-            var loc = location.search.replace(/( |-|_|\.|\,|%20)/g, " ").toLowerCase();
-            let hit = false;
-
-            for(let i=0;i<d.length;i++) {
-                if("?" + d[i].title.toLowerCase()==loc) {
-                    post(d[i]);
-                    hit = !hit;
-                    break;
-                }
-            }
-            if(!hit) archive();
-        }
-        else {
-            post(d[num]);
-        }
-    })
+function loadPosts(callback) {
+    d3.json("json/posts.json"+noCache(), callback);
 }
 
-function post(data) {
+function getPost(num=0,init=false) {
+
+    if(init&&location.search.indexOf("?")!=~0) {
+        var loc = location.search.replace(/( |-|_|\.|\,|%20)/g, " ").toLowerCase();
+        let hit = false;
+
+        for(let i=0;i<posts.length;i++) {
+            if("?" + posts[i].title.toLowerCase()==loc) {
+                post(i);
+                hit = !hit;
+                break;
+            }
+        }
+        if(!hit) archive();
+    }
+    else {
+        post(num);
+    }
+}
+
+function post(num) {
+    postNum = num;
+    var data = posts[num];
+
     d3on(data.json,null, d => {
         document.title = data.title;
 
