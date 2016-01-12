@@ -45,6 +45,7 @@ function post(data) {
         // add date
         d.push({
             "shape": "text",
+            "type": "date",
             "text": data.date,
             "attr": {
                 id:"post-date"

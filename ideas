@@ -51,6 +51,12 @@ blog mouseover set charge
 
 responsive
 
+force tricks
+
+crackme.js
+javascript->newscript->webassembly
+make tiny
+
 social
 px=>rm
 logo height for date
@@ -61,6 +67,13 @@ make posts fixed on mobile
 use hide classes for responsive
 drytk
 
+ajax spinner from digibase fade
+chasing social thingys -> icons expand from click
+navigation
+webscript
+webthread.js
+
+controls left/right (text goes in that direction)
 
 show d3 graphs frameless
 
@@ -68,6 +81,7 @@ more -> links my stuff, dev stuff (group)
 
 use rems for text for responsiveness (?)
 
+post about v1
 blog -> fix contrast on gooey effect
 jsperf... alternatives
 blog => multiple posts -

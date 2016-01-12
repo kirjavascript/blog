@@ -16,30 +16,12 @@ var force = getForce();
 
 var interrupt = false;
 
-function responder(sp=0) {
+function respond(sp=0) {
     // set root font size for rems
     d3.select("html")
         .transition()
         .duration(sp)
         .style('font-size',x(12.4)+"px")
-
-    // fix menu
-    // d3.selectAll(".menu")
-    //     //.data().enter()
-    //     .transition()
-    //     .duration(sp)
-    //     .attr("x", x(200))
-
-    // snap y pos on post date to logo
-    // var pDate = d3.select("#post-date");
-    // if(pDate.node()) {
-    //     pDate
-    //         .transition()
-    //         .duration(sp)
-    //         .attr({
-    //             y:(-pDate.data()[0].y) + (x(350)/2)
-    //         })
-    // }
 }
 
 window.addEventListener("load", e => {
@@ -62,9 +44,6 @@ window.addEventListener("load", e => {
         social();
         getPost(0,true);
 
-        // called in object.js instead
-        //responder();
-
     }((a,d=document)=>1==d[q='querySelector'](a).length?d[q](a)[0]:d[q](a));
 
 })
@@ -73,6 +52,9 @@ window.addEventListener("resize", e => {
     c = {w:getW(),h:getH()};
     y.range([0,c.h])
     x.range([0,c.w])
+
+    // used to fix the date text, may break stuff
+    force.stop();
 
     // logo
     d3.select("#thom")
@@ -94,17 +76,17 @@ window.addEventListener("resize", e => {
         .duration(sp)
         .attr({transform:d=>
                 "scale("+(d.scale?d.scale:1)+"),translate("+
-                [x(d.x),y(d.y)]
-                +"),rotate("+(d.rotate?d.rotate:0)+")"
+                [x(d.x),y(d.type=="date"?0:d.y)]
+                +"),rotate("+(d.rotate?d.rotate:0)+")",
+                "y":d=>d.type=="date"?x(350)/2:0
             })
         .attr({
                 width: d => x(d.size?d.size[0]:0),
                 height: d => y(d.size?d.size[1]:0),
                 r: d => d.size?d.size:0
             })
-
-
-    responder(sp);
+            
+    respond(sp);
 
     svg
         .attr("width",c.w).attr("height",c.h)

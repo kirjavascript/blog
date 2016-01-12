@@ -52,19 +52,22 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
             .each(function(d,i) {
                 var self = d3.select(this);
 
-                if(d.style) for(var p in d.style) {
+                if(d.style) for(var p in d.style)
+
                     d.style.hasOwnProperty(p)
                     &&
-                    self.style(p,d.style[p])
-                };
-                if(d.attr) for(var p in d.attr) {
+                    self.style(p,d.style[p]);
+
+
+                if(d.attr) for(var p in d.attr)
+
                     d.attr.hasOwnProperty(p)
                     &&
-                    self.attr(p,d.attr[p])
-                };
+                    self.attr(p,d.attr[p]);
+
+
                 if(d.text) self
                     .attr('font-size',d.size+"rem")
-                    //.attr('font-size',d.size)
                     .text(d.text);
                 if(d.children)
                     render(d.children,self)
@@ -103,11 +106,14 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                         transform:d=>
                         "scale("+(d.scale?d.scale:1)+"),"+
                         "rotate("+(d.rotate?d.rotate:0)+"),"+
-                        "translate("+[x(d.x),y(d.y)]+")"
+                        "translate("+[x(d.x),y(d.type=="date"?0:d.y)]+")",
+                        "y":d=>d.type=="date"?x(350)/2:0
                     })
+
+
             });
     }
-    responder(0);
+    respond(0);
 }
 
 function getForce() {
