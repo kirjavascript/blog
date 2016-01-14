@@ -55,6 +55,11 @@ space = jostle
 type letters = add comment msg box?
 ?controls
 
+make node text writer
+
+TO FIX THE 16:9 responsive problem rotate instead
+OR force a height under a certain width
+
 touch?
 nodate = hidden pages?
 
@@ -74,7 +79,7 @@ move date elsewhere if too much trouble
 
 make posts fixed on mobile
 use hide classes for responsive
-drytk
+drytk 
 
 ajax spinner from digibase fade
 chasing social thingys -> icons expand from click

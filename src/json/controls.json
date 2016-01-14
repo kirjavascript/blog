@@ -1,11 +1,68 @@
 [
-	{
-		"shape": "text",
-		"text": "dunno what to do with this section yet",
-		"size": "2",
-		"foci": {
-			"x": -200,
-			"y": 400
-		}
-	}
+    {
+        "shape": "text",
+        "text": "controlz",
+        "size": "4",
+        "attr" : {
+            "stroke":"#000",
+            "stroke-width":"4px"
+        },
+        "foci": {
+            "x": 1200,
+            "y": -200
+        }
+    },
+    {
+        "shape": "text",
+        "text": "you can navigate forward and backward through posts",
+        "size": "2",
+        "attr" : {
+            "stroke":"#000"
+        },
+        "foci": {
+            "x": 0,
+            "y": 200
+        }
+    },
+    {
+        "shape": "text",
+        "text": "with the left and right keys",
+        "size": "2",
+        "attr" : {
+            "stroke":"#000"
+        },
+        "foci": {
+            "x": 700,
+            "y": 400
+        }
+    },
+    {
+        "shape": "image",
+        "size": [
+            120,
+            120
+        ],
+        "attr": {
+            "xlink:href":"svg/key.svg"
+        },
+        "foci": {
+            "x": 200,
+            "y": 280
+        }
+    },
+    {
+        "shape": "image",
+        "size": [
+            120,
+            120
+        ],
+        "rotate":"180,10,60",
+        "attr": {
+            "xlink:href":"svg/key.svg"
+        },
+        "foci": {
+            "x": -2200,
+            "y": -1380
+        }
+    }
 ]

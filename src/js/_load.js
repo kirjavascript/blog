@@ -1,5 +1,5 @@
 var c = {w:getW(),h:getH()};
-var svg, g;
+var svg;
 var sp = 500;
 
 var x = d3.scale.linear()
@@ -9,8 +9,6 @@ var x = d3.scale.linear()
 var y = d3.scale.linear()
     .domain([0, 800])
     .range([0,c.h])
-
-var viewer;
 
 var posts;
 
@@ -39,10 +37,9 @@ window.addEventListener("load", e => {
             .attr("width",c.w).attr("height",c.h)
             .attr("viewBox",[0,0,c.w,c.h].join(" "));
 
-        g = svg.append("g")
+            //svg.attr("transform", "rotate(-90,"+[c.w/2,c.h/2]+")")
 
-        // main content container
-        viewer = svg.append("svg")
+            //svg = svg.append("g");
 
         // order defines order of containers
         thom();
@@ -77,7 +74,7 @@ window.addEventListener("resize", e => {
         .attr("y", y(160))
         .style("font-size", x(24.8)+"px")
 
-    viewer.selectAll(".d3on")
+    svg.selectAll(".d3on")
         .transition()
         .duration(sp)
         .attr({transform:d=>
@@ -142,4 +139,23 @@ function titleObject(txt,x,y) {
             "y": y
         }
     }
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }

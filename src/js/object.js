@@ -2,7 +2,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
     if(interrupt==true) return;
 
     if(remove==null) {
-        viewer.selectAll(".d3on")
+        svg.selectAll(".d3on")
             .transition()
             .duration(sp/2)
             .attr({transform:d=>
@@ -16,8 +16,8 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
 
     function load(data) {
         interrupt = true;
-        data = datamod(data);
-        var cont = viewer.append("g");
+        data = datamod(shuffle(data));
+        var cont = svg.append("g");
         var nodes = [];
         ~function stagger() {
             nodes.push(data.shift());
