@@ -52,8 +52,8 @@
 	{
 		"shape": "image",
 		"size": [
-			800,
-			800
+			120,
+			60
 		],
 		"attr": {
 			"xlink:href":"svg/100.svg"

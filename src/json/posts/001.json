@@ -16,7 +16,7 @@
         "shape": "foreignObject",
         "size": [
             600,
-            600
+            450
         ],
         "ajax": "json/posts/001/main.html",
         "foci": {

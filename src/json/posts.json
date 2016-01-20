@@ -1,5 +1,11 @@
 [
     {
+        "title": "drawing pixels on the web",
+        "json": "posts/002.json",
+        "tags": "pixels CSS SVG canvas",
+        "date": "2016/01/19"
+    },
+    {
         "title": "SVG tools I use",
         "json": "posts/001.json",
         "tags": "SVG tools d3",

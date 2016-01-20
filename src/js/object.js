@@ -42,7 +42,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
 
         var objGroup = obj.enter();
 
-        objGroup.append(d=>document.createElementNS("http://www.w3.org/2000/svg", d.shape))
+        objGroup.append(d=>document.createElementNS(d3.ns.prefix.svg, d.shape))
             .classed("d3on", true)
             .attr({
                 width: d => x(d.size?d.size[0]:0),
@@ -72,11 +72,14 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                 if(d.children)
                     render(d.children,self)
                 if(d.html) {
-                    self.html(typeof d.html=="object"?d.html.join(""):d.html)
+                    var html = typeof d.html=="object"?d.html.join(""):d.html;
+                    self.html(html);
+                    parseJS(html);
                 }
                 if(d.ajax) {
                     d3.text(d.ajax, (e,d) => {
                         self.html(d);
+                        parseJS(d);
                     })
                     
                 }
@@ -114,6 +117,12 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
             });
     }
     respond(0);
+
+    function parseJS(html) {
+        var rx = /<script>([\s\S]*?)<\/script>/i;
+        var js = rx.exec(html);
+        js && eval(js.pop());
+    }
 }
 
 function getForce() {

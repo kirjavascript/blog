@@ -28,6 +28,22 @@ svg:first-of-type {
     right:0;
     bottom:0;
 
+    .one3 {
+        float:left;
+        width: 29%;
+        margin: 2% 2%;
+    }
+
+    .two3 {
+        float:left;
+        width: 62%;
+        margin: 2% 2%;
+    }
+
+    .clear {
+        clear:both;
+    }
+
     .line {
         stroke:#444444;
         stroke-width:2;
@@ -46,9 +62,6 @@ svg:first-of-type {
 
     .logo {
         fill: #111;
-        //shape-rendering: geometricPrecision;
-        //stroke: #111;
-        //filter: blur(.1px);
         fill-opacity:1;
     }
 

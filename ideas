@@ -1,40 +1,21 @@
-about/skills, post about old things, golf
-tripcodes w/ that has thing from w/e it was
-detect colour subdomain (hexeven!!!)
+tripcode
+detect colour subdomain (hexeve)
 https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
-permalinks just read addressbar /!
 redirect snk.digibase.ca
 
 use github api instead of node?!
 http://patrick-mckinley.com/tech/github-api-commit.html
 
 
-twitter / github / blocks.org
-sidebar?
-tags?wordcloud
-
 comments-> posts have colour - cat20
 
-link to blog source (github)
-null vector bbox (!)
-write post about electron, bl.ocks
+electron post
 
 .ext bar
-
-location.source
-navigator
-moveTo()
-
-more -> links my stuff, dev stuff (group)
-blog link goes to article list?
 tags links
 
-. look into saving data
-. use rems for responsiveness
 . page builder!!
 . comments
-
-threejs logo
 
 posts = notes/book
 hunt for a good text ediotor
@@ -45,7 +26,6 @@ hamburgers? - rainbow -> show source
 write about old stuff
 
 LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
-(NO UNDERLINE, UNDERLINE ON FULL LINKS)
 
 responsive
 
@@ -63,13 +43,15 @@ OR force a height under a certain width
 touch?
 nodate = hidden pages?
 
-because every blog needs keyboard shortcuts
-
 force tricks
 
 crackme.js
 javascript->newscript->webassembly
 make tiny
+
+move to a different github account to hide blog repo
+
+add profile link to social
 
 social
 px=>rm

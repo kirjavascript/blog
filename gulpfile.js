@@ -42,8 +42,6 @@ gulp.task('scripts', function() {
 function html() {
     var ipaths = ['src', build_dir]; // paths to ignore when injecting
     return gulp.src('src/index.{html,php}')
-        .pipe(inject(gulp.src([build_dir + 'css/main.css']), {addRootSlash: false, ignorePath: ipaths}))
-        .pipe(inject(gulp.src([build_dir + 'js/main.js']), {addRootSlash: false, ignorePath: ipaths}))
         .pipe(removeHtmlComments())
         .pipe(gulp.dest(build_dir))
 }
@@ -55,7 +53,9 @@ gulp.task('build', ['styles', 'scripts', 'json'], function() {
     gulp.src('src/svg/*').pipe(gulp.dest(build_dir + 'svg'));
 
     //copy d3 to js folder
-    gulp.src('src/d3.js').pipe(gulp.dest(build_dir + 'js'));
+    gulp.src('node_modules/d3/d3.min.js').pipe(gulp.dest(build_dir + 'js'));
+    gulp.src('src/cm.js').pipe(gulp.dest(build_dir + 'js'));
+    gulp.src('src/cm.css').pipe(gulp.dest(build_dir + 'css'));
 
     return html();
 })

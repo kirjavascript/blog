@@ -1,0 +1,82 @@
+<div class="post">
+    <p>
+        I started a rewrite of <a>an old project</a> recently. When a user loads a binary art file I need a method of drawing the tile data to the screen. 
+
+        Originally, I had been drawing each 8x8 tile as a canvas element. Canvas is great for this kind of thing as it allows you to paint each of the pixels to a single element. However, each tile was drawn to a seperate DOM element because canvas doesn't let you easily manipulate data once it's drawn to the screen. This got really slow when manipulating many tiles at once.
+    </p>
+    <br />
+    <p>
+        <div class="one3">
+            Here it is in canvas.
+            <br />
+            <br />Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.
+            <br />
+            <br />
+            In this example, a reference to the tile is stored so that when the tile is duplicated the image can simply be copied.
+        </div>
+        <div id="canvas" class="two3"></div>
+    
+</p>
+
+gradient fase scroll
+
+
+            example pic - 
+            canvas + cache
+            cache png?
+            just use png!
+    canvas-> PNG
+
+    bow shadow is dark magic
+
+    explain data conversion
+
+draw pixels w/ SVG gradient?
+box shadow
+PNG - browser prefixes
+canvas
+divs
+full screen container
+svg gradient
+
+example in svg
+inkscape
+
+
+
+    <script>
+    var cm = CodeMirror(document.querySelector("#canvas"), {
+      value: `function tile(num,line=0,scale=4) {
+    // create object
+    var c = document.createElement('canvas');
+    c.width = 8*scale;
+    c.height = 8*scale;
+    var ctx = c.getContext("2d");
+
+    if(cache.tiles[line][num]) {
+        ctx.drawImage(cache.tiles[line][num], 0, 0);
+        return c;
+    }
+    else {
+        ctx.scale(scale,scale);
+
+        state.tiles[num].forEach((d,i) => {
+            ctx.fillStyle = '#' + state.palettes[line][d];
+            let x = 
+            ctx.fillRect(i%8,(i/8)|0,1,1)
+        })
+
+        cache.tiles[line][num]=c;
+
+        document.body.appendChild(c);
+        return c;
+    }
+}`,
+      mode:  "javascript",
+      lineNumbers: "true",
+      fixedGutter: false
+    });
+
+// setTimeout(e => {cm.refresh()},100)
+    </script>
+</div>
