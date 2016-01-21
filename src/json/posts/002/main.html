@@ -1,6 +1,6 @@
-<div class="post">
+<div class="post pScroll">
     <p>
-        I started a rewrite of <a>an old project</a> recently. When a user loads a binary art file I need a method of drawing the tile data to the screen. 
+        I started a rewrite of <a href="http://snk.digibase.ca/flex" target="_blank">an old project</a> recently. When a user loads a binary art file I need a method of drawing the tile data to the screen. 
 
         Originally, I had been drawing each 8x8 tile as a canvas element. Canvas is great for this kind of thing as it allows you to paint each of the pixels to a single element. However, each tile was drawn to a seperate DOM element because canvas doesn't let you easily manipulate data once it's drawn to the screen. This got really slow when manipulating many tiles at once.
     </p>
@@ -9,17 +9,22 @@
         <div class="one3">
             Here it is in canvas.
             <br />
-            <br />Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.
+            <br /><span class="link">Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.</span>
             <br />
             <br />
             In this example, a reference to the tile is stored so that when the tile is duplicated the image can simply be copied.
         </div>
         <div id="canvas" class="two3"></div>
-    
-</p>
+    </p>
+    <p class="clear">
+        With canvas, you can use the toDataURL() method to dump a PNG of the container. I wondered if you could use canvas to generate PNG elements of the tiles to use instead to potentially decrease the memory footprint.
+        Scratch that, why not just render directly to PNG? 
+    </p>
+    write post first ->
+        gradient fase scroll
+        gradient goes beyond the end of the container
 
-gradient fase scroll
-
+js fiddle links for these
 
             example pic - 
             canvas + cache
@@ -44,10 +49,9 @@ inkscape
 
 
 
-    <script>
-    var cm = CodeMirror(document.querySelector("#canvas"), {
-      value: `function tile(num,line=0,scale=4) {
-    // create object
+<script>
+    CodeMirror(document.querySelector("#canvas"), {
+        value: `function tile(num,line=0,scale=4) {
     var c = document.createElement('canvas');
     c.width = 8*scale;
     c.height = 8*scale;
@@ -74,9 +78,10 @@ inkscape
 }`,
       mode:  "javascript",
       lineNumbers: "true",
-      fixedGutter: false
+      fixedGutter: false,
+      lineNumberFormatter: i => i.toString(16).toUpperCase(),
     });
 
 // setTimeout(e => {cm.refresh()},100)
-    </script>
+</script>
 </div>

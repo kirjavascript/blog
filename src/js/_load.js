@@ -24,6 +24,11 @@ function respond(sp=0) {
         .transition()
         .duration(sp)
         .style('font-size',x(12.4)+"px")
+
+    // snap div to container
+    d3.selectAll('foreignObject').each(function(){
+        d3.select(this.children[0]).style("height",this.getBBox().height+"px")
+    })
 }
 
 window.addEventListener("load", e => {

@@ -113,10 +113,10 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                         "y":d=>d.type=="date"?x(350)/2:0
                     })
 
-
             });
+            respond();
     }
-    respond(0);
+
 
     function parseJS(html) {
         var rx = /<script>([\s\S]*?)<\/script>/i;
