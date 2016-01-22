@@ -1,0 +1,16 @@
+[
+    {
+        "shape": "foreignObject",
+        "size": [
+            700,
+            220
+        ],
+        "style": {
+        },
+        "ajax" : "json/posts/002/browsers.html",
+        "foci": {
+            "x": 0,
+            "y": 200
+        }
+    }
+]

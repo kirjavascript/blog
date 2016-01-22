@@ -1,37 +1,85 @@
-<div class="post pScroll">
+<div class="post">
     <p>
         I started a rewrite of <a href="http://snk.digibase.ca/flex" target="_blank">an old project</a> recently. When a user loads a binary art file I need a method of drawing the tile data to the screen. 
 
         Originally, I had been drawing each 8x8 tile as a canvas element. Canvas is great for this kind of thing as it allows you to paint each of the pixels to a single element. However, each tile was drawn to a seperate DOM element because canvas doesn't let you easily manipulate data once it's drawn to the screen. This got really slow when manipulating many tiles at once.
     </p>
-    <br />
     <p>
         <div class="one3">
-            Here it is in canvas.
+            <p>
+                <div id="ctile"></div>
+                Here it is in canvas;
+            </p>
+            <div class="link clear">
+            <br />Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.</div>
             <br />
-            <br /><span class="link">Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.</span>
+            To improve this, you could save a reference to each tile to copy from when duplicate tiles are drawn instead of reading from the array again. 
             <br />
             <br />
-            In this example, a reference to the tile is stored so that when the tile is duplicated the image can simply be copied.
+            Another idea I had was to use the toDataURL() method to dump a PNG of the rendered canvas and cache it, and only use a single canvas element to render everything.
         </div>
-        <div id="canvas" class="two3"></div>
+        <div id="canvasCode" class="two3"></div>
     </p>
     <p class="clear">
-        With canvas, you can use the toDataURL() method to dump a PNG of the container. I wondered if you could use canvas to generate PNG elements of the tiles to use instead to potentially decrease the memory footprint.
-        Scratch that, why not just render directly to PNG? 
+        <div class="one3">
+            However, we don't need to use canvas at all. If we write PNGs from scratch we can just have each tile be image elements. I'd already done this a few years ago and never thought it'd come in useful. I was kinda right, lol.
+            <br />
+            <br />
+            This code produces this image: <img class="pngsrc" />
+            <br />
+            <br />
+            Now, I thought using PNG was a good move as far as browser support goes, but when attempting to scale we run into a problem;
+            <br />
+            <br />
+            <img class="pngsrc" style="width:48px;height:48px;" />
+            <br />
+            <br />
+            You're probably seeing a blurred version of the image.
+            <br />
+            <br />
+            Most modern browsers will apply a blur effect when a PNG is scaled. <span class="link clear" onClick="d3on('posts/002/browsers.json',true)">You can turn this off</span>, but it really isn't pretty.
+            <br />
+            <br />
+            Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 
+        </div>
+        <div id="pngCode" class="two3 pngCode"></div>
+        <br /><br />
     </p>
-    write post first ->
+    <p class="clear">
+        <br />
+        CSS's box-shadow has an interesting property. It allows you to chain multiple shadows on a single element.
+        <br />
+        <br />
+        <div id="boxCode" class=""></div>
+        <br />
+        Surprisingly, this was the most straightforward solution to implement. You'll end up with something like this;
+        <br />
+        <br />
+        <div id="boxTile"></div>
+        <br />
+        Cool huh? It even supports scaling with no problem. Now we're just using a single div (or any element, really) to render our pixel data.
+        <br />
+        <br />
+        You may be able to see gaps between the pixels. This can be solved by making each pixel larger than the space it is supposed to fit into. This may cause minor visual bleeding of colours or other inaccuracies.
+    </p>
+    <br />
+    <br />
+    <p class="clear">
+        So far I've avoided using SVG. Drawing each pixel as a rect element would put a huge strain on the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
+        <br />
+        <br />
+        Now we're getting into some real dark magic. I had several ideas of how to make this possible and they were all pretty outlandish.
+
+    </p>
+
+
+In conclusion, never use any of these methods.
+
         gradient fase scroll
         gradient goes beyond the end of the container
-
-js fiddle links for these
-
-            example pic - 
-            canvas + cache
-            cache png?
-            just use png!
-    canvas-> PNG
-
+FEIMAGE
+FEFLOOD THEN REMOVE FROM DOM
+https://www.w3.org/TR/SVG/filters.html#AccessingBackgroundImage
     bow shadow is dark magic
 
     explain data conversion
@@ -48,40 +96,172 @@ example in svg
 inkscape
 
 
-
+    <p class="clear">
+         <br /><br />
+    </p>
 <script>
-    CodeMirror(document.querySelector("#canvas"), {
-        value: `function tile(num,line=0,scale=4) {
-    var c = document.createElement('canvas');
-    c.width = 8*scale;
-    c.height = 8*scale;
-    var ctx = c.getContext("2d");
+// canvas
+    CodeMirror(document.querySelector("#canvasCode"), {
+        value: `let c = document.createElement('canvas');
+c.width = 8;
+c.height = 8;
+let ctx = c.getContext("2d");
 
-    if(cache.tiles[line][num]) {
-        ctx.drawImage(cache.tiles[line][num], 0, 0);
-        return c;
-    }
-    else {
-        ctx.scale(scale,scale);
+state.tiles[num].forEach((d,i) => {
+    ctx.fillStyle = '#' + state.palettes[line][d];
+    ctx.fillRect(i%8,(i/8)|0,1,1)
+})
 
-        state.tiles[num].forEach((d,i) => {
-            ctx.fillStyle = '#' + state.palettes[line][d];
-            let x = 
-            ctx.fillRect(i%8,(i/8)|0,1,1)
-        })
-
-        cache.tiles[line][num]=c;
-
-        document.body.appendChild(c);
-        return c;
-    }
-}`,
+document.body.appendChild(c);`,
       mode:  "javascript",
       lineNumbers: "true",
       fixedGutter: false,
       lineNumberFormatter: i => i.toString(16).toUpperCase(),
     });
+// png
+    CodeMirror(document.querySelector("#pngCode"), {
+        value: `var pixels = [];
 
-// setTimeout(e => {cm.refresh()},100)
+tile.forEach(d => {
+    pixels
+        .push(palette[d]
+        .match(/../g)
+        .map(d=\x3eparseInt(d, 16)))
+});
+
+document.getElementById("tile").src = output();
+
+function byte_data(dec,bytes) {
+    for (var out='';bytes\x3e0;bytes--) out+=String.fromCharCode((dec\x3e\x3e((bytes-1)*8)) \x26 255);
+    return out;
+}
+
+function crc32(str) {
+    var crc_table = [];
+    var c,n,k;
+    for (n = 0; n \x3c 256; n++) {
+        c = n;
+        for (k = 0; k \x3c 8; k++) {
+            if ((c \x26 1) == 1) c = 0xedb88320 ^ (c \x3e\x3e\x3e 1);
+            else c = c \x3e\x3e\x3e 1;
+        }
+        crc_table[n] = c;
+    }
+    var c = 0xFFFFFFFF;
+    for (var i = 0; i \x3c str.length; i++) {
+        c = crc_table[(c ^ str.charCodeAt(i)) \x26 255] ^ (c \x3e\x3e\x3e 8);
+    }
+    return byte_data(c ^ 0xFFFFFFFF,4);
+}
+
+function adler32(str) {
+    var base = 65521;
+    var a = 1;
+    var b = 0;
+    for (i = 0;i \x3c str.length;i++) {
+        a = (a + str.charCodeAt(i)) % base;
+        b = (b + a) % base;
+    }
+    return byte_data((b \x3c\x3c 16) | a,4);
+}
+
+function data_header(a) {
+    var out = byte_data(0x081D01,3); // ???
+    b = ~a \x26 0xffff;
+    out += byte_data(a \x26 0xff,1);
+    out += byte_data((a \x26 0xff00) \x3e\x3e 8,1);
+    out += byte_data(b \x26 0xff,1);
+    out += byte_data((b \x26 0xff00) \x3e\x3e 8,1);
+    return out;
+}
+
+function IHDR(w,h,depth,colour,comp,filter,iface) {
+    var out = "IHDR"; // chunk type
+    out += byte_data(w,4)+byte_data(h,4)+byte_data(depth,1)+byte_data(colour,1)+byte_data(comp,1)+byte_data(filter,1)+byte_data(iface,1); // data
+    out += crc32(out);
+    out = byte_data(13,4) + out; // length of data bytes
+    return out;
+}
+
+function IDAT(data) {
+    var name = "IDAT";
+    return byte_data(data.length,4)+name+data+crc32(name+data);
+}
+
+function IEND() {
+    return byte_data(0,4)+"IEND"+crc32("IEND");
+}
+
+
+function output() {
+    var out = "\\x89PNG\\x0d\\x0a\\x1a\\x0a"+IHDR(8,8,8,2,0,0,0);
+    var data = '';
+    for (i=0;i\x3cpixels.length;i++) {
+        if(!(i%8)) { data += byte_data(0x00,1); } // filter
+        data += byte_data(pixels[i][0],1); // r
+        data += byte_data(pixels[i][1],1); // g
+        data += byte_data(pixels[i][2],1); // b
+    }
+    
+    var head = data_header(data.length);
+    var adler = adler32(data);
+    data = head + data + adler;
+    
+    out += IDAT(data); 
+    out += IEND();
+    return "data:image/png;base64,"+btoa(out);
+}`,
+      mode:  "javascript",
+      lineNumbers: "true",
+      lineWrapping: "true",
+      fixedGutter: false,
+      lineNumberFormatter: i => i.toString(16).toUpperCase(),
+    });
+    CodeMirror(document.querySelector("#boxCode"), {
+        value: `var s = [];
+
+tile.forEach((d,i) => {
+    s.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
+})
+
+document.querySelector("div").style.boxShadow = s.join(",");`,
+      mode:  "javascript",
+      lineNumbers: "true",
+      fixedGutter: false,
+      lineNumberFormatter: i => i.toString(16).toUpperCase(),
+    });
+var tile = [3, 2, 2, 3, 4, 4, 3, 3, 2, 6, 6, 2, 4, 3, 3, 3, 7, 6, 6, 6, 2, 3, 3, 3, 7, 6, 6, 6, 7, 2, 2, 2, 7, 6, 6, 6, 5, 9, 6, 9, 4, 6, 6, 6, 5, 9, 7, 9, 10, 7, 6, 6, 15, 15, 11, 15, 10, 10, 10, 6, 6, 10, 10, 9];
+
+var palette = ["000000", "000000", "2222aa", "2244cc", "4444ee", "6666ee", "eeeeee", "aaaaaa", "888888", "444444", "eeaa88", "aa6644", "ee0000", "880000", "eeaa00", "ee8800"];
+
+// canvas rendering
+var c = document.createElement('canvas');
+c.width = 8*6;
+c.height = 8*6;
+c.style.float = "right";
+var ctx = c.getContext("2d");
+ctx.scale(6,6);
+tile.forEach((d,i) => {
+    ctx.fillStyle = '#' + palette[d];
+    ctx.fillRect(i%8,(i/8)|0,1,1)
+})
+document.querySelector("#ctile").appendChild(c)
+
+// png rendering
+Array.prototype.forEach.call(document.querySelectorAll('.pngsrc'), d => {
+  d.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAA00lEQVQIHQHIADf/ACJEzCIiqiIiqiJEzERE7kRE7iJEzCJEzAAiIqru7u7u7u4iIqpERO4iRMwiRMwiRMwAqqqq7u7u7u7u7u7uIiKqIkTMIkTMIkTMAKqqqu7u7u7u7u7u7qqqqiIiqiIiqiIiqgCqqqru7u7u7u7u7u5mZu5ERETu7u5EREQARETu7u7u7u7u7u7uZmbuREREqqqqREREAO6qiKqqqu7u7u7u7u6IAO6IAKpmRO6IAADuqojuqojuqoju7u7u7u7uqojuqohERESSQHQVlFscsgAAAABJRU5ErkJggg=="
+});
+
+// box shadow
+var s = [];
+tile.forEach((d,i) => {
+    s.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
+})
+var boxTile = document.querySelector("#boxTile")
+boxTile.style.width = "8px";
+boxTile.style.height = "8px";
+boxTile.style.marginBottom = "64px";
+boxTile.style.boxShadow = s.join(",");
+
 </script>
 </div>

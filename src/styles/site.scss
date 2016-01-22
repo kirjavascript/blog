@@ -32,18 +32,22 @@ svg:first-of-type {
 
     .one3 {
         float:left;
-        width: 29%;
-        margin: 2% 2%;
+        width: 33%;
+        margin: 2% 0%;
     }
 
     .two3 {
         float:left;
-        width: 62%;
-        margin: 2% 2%;
+        width: 58%;
+        margin: 2% 4%;
     }
 
     .clear {
         clear:both;
+    }
+
+    .pngCode div {
+        max-height: 32rem;
     }
 
     // posts
@@ -61,10 +65,6 @@ svg:first-of-type {
         
         overflow-y: auto;
     }
-
-    .pScroll {
-    }
-
         
     iframe {
         width:100%;
