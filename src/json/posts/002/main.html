@@ -57,7 +57,7 @@
         <br />
         <div id="boxTile"></div>
         <br />
-        Cool huh? It even supports scaling with no problem. Now we're just using a single div (or any element, really) to render our pixel data.
+        Cool huh? It even supports scaling with no problem. Now we're just using a single <span class="element">div</span> (or any element, really) to render our pixel data.
         <br />
         <br />
         You may be able to see gaps between the pixels. This can be solved by making each pixel larger than the space it is supposed to fit into. This may cause minor visual bleeding of colours or other inaccuracies.
@@ -65,37 +65,39 @@
     <br />
     <br />
     <p class="clear">
-        So far I've avoided using SVG. Drawing each pixel as a rect element would put a huge strain on the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
+        So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
         <br />
         <br />
-        Now we're getting into some real dark magic. I had several ideas of how to make this possible and they were all pretty outlandish.
+        <div id="svgCode" class="one3 svgCode"></div>
+        <div class="three5">
+            SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
+            <br />
+            With this technique, we can get away with just using a single <span class="element">image</span> to display the tile. Many <span class="element">feFlood</span> elements are created but aren't rendered visually, so the lag bottleneck in this scenario will come from your browser's ability to apply filters.
+            <br />
+            <br />
+            Now we're using SVG, we can just use the <span class="element">use</span> element when rendering duplicates. Furthermore, we now have the ability to modify individual pixel attribues easily. So, if we decide to render all tiles to just a single image element we could provide functions for moving individual tiles around on a single element without redrawing the screen every time!
+        </div>
+    </p>
+    <p class="clear">
+        <br />
+        <br />
+        aasd
 
     </p>
-
-
-In conclusion, never use any of these methods.
+<br />
+<br />
+<br />
+<br />
 
         gradient fase scroll
         gradient goes beyond the end of the container
-FEIMAGE
-FEFLOOD THEN REMOVE FROM DOM
-https://www.w3.org/TR/SVG/filters.html#AccessingBackgroundImage
-    bow shadow is dark magic
 
-    explain data conversion
+http://learningwebgl.com/blog/?p=28
 
-draw pixels w/ SVG gradient?
-box shadow
-PNG - browser prefixes
-canvas
-divs
-full screen container
-svg gradient
-
-example in svg
-inkscape
-
-
+explain data conversion
+draw pixels w/ SVG radial gradient?
+webGL + SVG gradient
+iframe
     <p class="clear">
          <br /><br />
     </p>
@@ -107,7 +109,7 @@ c.width = 8;
 c.height = 8;
 let ctx = c.getContext("2d");
 
-state.tiles[num].forEach((d,i) => {
+tile.forEach((d,i) => {
     ctx.fillStyle = '#' + state.palettes[line][d];
     ctx.fillRect(i%8,(i/8)|0,1,1)
 })
@@ -218,13 +220,52 @@ function output() {
       lineNumberFormatter: i => i.toString(16).toUpperCase(),
     });
     CodeMirror(document.querySelector("#boxCode"), {
-        value: `var s = [];
+        value: `var pixels = [];
 
 tile.forEach((d,i) => {
-    s.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
+    pixels.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
 })
 
-document.querySelector("div").style.boxShadow = s.join(",");`,
+document.querySelector("div").style.boxShadow = pixels.join(",");`,
+      mode:  "javascript",
+      lineNumbers: "true",
+      fixedGutter: false,
+      lineNumberFormatter: i => i.toString(16).toUpperCase(),
+    });
+    CodeMirror(document.querySelector("#svgCode"), {
+        value: `var filter = d3.select("svg")
+    .attr({width:"48px",height:"48px"})
+    .append("defs")
+    .append("filter")
+    .attr("id", "tilefilter")
+
+filter.selectAll("feFlood")
+    .data(tile)
+    .enter()
+    .append("feFlood")
+    .attr({
+        "flood-color":d=>'#'+palette[d],
+        x:(d,i)=>(i%8)*6 + "px",
+        y:(d,i)=>((i/8)|0)*6 + "px",
+        width:"6px",
+        height:"6px",
+        result:(d,i)=>"tilefilter"+i
+    })
+
+filter.append("feMerge")
+    .selectAll("feMergeNode")
+    .data(tile)
+    .enter()
+    .append("feMergeNode")
+    .attr("in",(d,i)=>"tilefilter"+i)
+
+d3.select("svg")
+    .append("image")
+    .attr({
+        filter:"url(#tilefilter)",
+        width:"48px",
+        height:"48px"
+    })`,
       mode:  "javascript",
       lineNumbers: "true",
       fixedGutter: false,
@@ -262,6 +303,5 @@ boxTile.style.width = "8px";
 boxTile.style.height = "8px";
 boxTile.style.marginBottom = "64px";
 boxTile.style.boxShadow = s.join(",");
-
 </script>
 </div>

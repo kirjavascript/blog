@@ -27,5 +27,8 @@
     "gulp-sass": "^2.1.0",
     "gulp-uglify": "^1.4.2",
     "svg-mesh-3d": "^1.0.1"
+  },
+  "dependencies": {
+    "ace-editor-builds": "^1.2.0"
   }
 }
