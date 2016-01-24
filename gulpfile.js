@@ -54,8 +54,7 @@ gulp.task('build', ['styles', 'scripts', 'json'], function() {
 
     //copy d3 to js folder
     gulp.src('node_modules/d3/d3.min.js').pipe(gulp.dest(build_dir + 'js'));
-    gulp.src('src/cm.js').pipe(gulp.dest(build_dir + 'js'));
-    gulp.src('src/cm.css').pipe(gulp.dest(build_dir + 'css'));
+    gulp.src('node_modules/ace-editor-builds/src-min/**/*').pipe(gulp.dest(build_dir + 'js/ace'));
 
     return html();
 })

@@ -68,15 +68,25 @@ svg:first-of-type {
 
     // etc
 
+    .ace_editor {
+        font-size: 1.25rem;
+        // .ace_content,
+        // .ace_gutter {
+        //     padding: 1rem;
+        // }
+        // padding-top: 1rem;
+        // padding-bottom: 1rem;
+    }
+
     .pngCode div {
-        max-height: 32rem;
+        // max-height: 32rem;
     }
 
     .svgCode {
         margin: 0px;
         width:40%;
         div {
-            max-height: 20rem;
+            // max-height: 20rem;
         }
     }
 
