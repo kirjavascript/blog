@@ -3,13 +3,13 @@
         "shape": "foreignObject",
         "size": [
             450,
-            220
+            180
         ],
         "style": {
         },
         "ajax" : "json/posts/002/format.html",
         "foci": {
-            "x": -200,
+            "x": -500,
             "y": 200
         }
     }

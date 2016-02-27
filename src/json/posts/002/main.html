@@ -1,4 +1,4 @@
-<div class="post">
+<div class="post pixels">
     <p>
         I started a rewrite of <a href="http://snk.digibase.ca/flex" target="_blank">an old project</a> recently. When a user loads a binary art file I need a method of drawing the tile data to the screen. 
 
@@ -18,9 +18,11 @@
             <br />
             Another idea I had was to use the toDataURL() method to dump a PNG of the rendered canvas and cache it, and only use a single canvas element to render everything.
         </div>
-        <object class="two3" data="json/posts/002/canvas.html">
-            <embed src="json/posts/002/canvas.html"></embed>
-        </object>
+        <div class="two3">
+            <object class="editorObj" data="json/posts/002/canvas.html">
+                <embed src="json/posts/002/canvas.html"></embed>
+            </object>
+        </div>
     </p>
     <p class="clear">
         <div class="one3">
@@ -44,9 +46,11 @@
             <br />
             Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 
         </div>
-        <object class="two3" data="json/posts/002/png.html">
-            <embed src="json/posts/002/png.html"></embed>
-        </object>
+        <div class="two3">
+            <object class="editorObj" data="json/posts/002/png.html">
+                <embed src="json/posts/002/png.html"></embed>
+            </object>
+        </div>
         <br /><br />
     </p>
     <p class="clear">
@@ -54,9 +58,10 @@
         CSS's box-shadow has an interesting property. It allows you to chain multiple shadows on a single element.
         <br />
         <br />
-        <object data="json/posts/002/box.html">
+        <object class="editorObj" data="json/posts/002/box.html">
             <embed src="json/posts/002/box.html"></embed>
         </object>
+        <br />
         <br />
         Surprisingly, this was the most straightforward solution to implement. You'll end up with something like this;
         <br />
@@ -74,9 +79,11 @@
         So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
         <br />
         <br />
-        <object class="one3" data="json/posts/002/svg.html">
-            <embed src="json/posts/002/svg.html"></embed>
-        </object>
+        <div class="one3">
+            <object class="editorObj" data="json/posts/002/svg.html">
+                <embed src="json/posts/002/svg.html"></embed>
+            </object>
+        </div>
         <div class="three5">
             SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
             <br />
@@ -89,15 +96,7 @@
             The box-shadow trick can be used with other CSS attributes (say, radial gradients) but is a bit cumbersome, and is probably useless outside of code golf. Most of the time, canvas is the most sensible choice for this type of work, but SVG offers a powerful alternative which may lead to a simpler implementation depending on what you're trying to do. 
         </div>
     </p>
-    <br />
-    <br />
-    <br />
-    <br />
-    <p class="clear">
-        
-    </p>
-    <br />
-    <br />
+    <p class="clear"><br /></p>
 <script>
 // page elements
 
@@ -133,5 +132,7 @@ boxTile.style.width = "8px";
 boxTile.style.height = "8px";
 boxTile.style.marginBottom = "64px";
 boxTile.style.boxShadow = s.join(",");
+
+respond();
 </script>
 </div>

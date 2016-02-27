@@ -2,14 +2,14 @@
     {
         "shape": "foreignObject",
         "size": [
-            700,
+            400,
             220
         ],
         "style": {
         },
         "ajax" : "json/posts/002/browsers.html",
         "foci": {
-            "x": 0,
+            "x": -500,
             "y": 200
         }
     }

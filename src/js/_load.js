@@ -18,7 +18,17 @@ var force = getForce();
 
 var interrupt = false;
 
+var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
 function respond(sp=0) {
+
+    if(isChrome) {
+        // fuck chrome's shitty SVG support
+
+        d3.selectAll('object')
+            .style('transform', `translate(${x(120)}px,270px)`)
+    }
+
     // set root font size for rems
     d3.select("html")
         .transition()
@@ -28,8 +38,8 @@ function respond(sp=0) {
     // snap div to container
     d3.selectAll('foreignObject').each(function(){
         d3.select(this.children[0]).style("height",this.getBBox().height+"px")
-    })
 
+    })
 }
 
 window.addEventListener("load", e => {
