@@ -1,0 +1,85 @@
+svg:first-of-type {
+
+    .post {
+        background-color: #DDD;
+        font-size:1rem;
+        //font-size:15px;
+
+        padding: 20px;
+        p {
+            padding:0px;
+            margin: 0px;
+        }
+        
+        overflow-y: auto;
+    }
+
+    // columns
+
+    .one3 {
+        float:left;
+        width: 33%;
+        margin: 2% 0%;
+    }
+
+    .two3 {
+        float:left;
+        width: 58%;
+        margin: 2% 4%;
+    }
+
+    .three5 {
+        float:left;
+        width:56%;
+        margin: 0% 2%;
+    }
+
+    .clear {
+        clear:both;
+    }
+
+    // etc
+
+    .ace_editor {
+        font-size: 1.25rem;
+        // .ace_content,
+        // .ace_gutter {
+        //     padding: 1rem;
+        // }
+        // padding-top: 1rem;
+        // padding-bottom: 1rem;
+    }
+
+    .pngCode div {
+        // max-height: 32rem;
+    }
+
+    .svgCode {
+        margin: 0px;
+        width:40%;
+        height: 5rem;
+    }
+
+    .element {
+        &:before {
+            content: '<';
+            color:#000;
+        }
+        &:after {
+            content: '>';
+            color:#000;
+        }
+        color: #A00;
+        font-weight: 700;
+    }
+        
+    iframe {
+        width:100%;
+        height:500px;
+        border: none;
+        margin: 0;
+        padding: 0;
+        background-color:transparent;
+    }
+
+}

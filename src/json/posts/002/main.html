@@ -7,10 +7,10 @@
     <p>
         <div class="one3">
             <p>
-                <div id="ctile"></div>
+                <div id="ctile" ></div>
                 Here it is in canvas;
             </p>
-            <div class="link clear">
+            <div class="link clear" onClick="d3on('posts/002/format.json',true)">
             <br />Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.</div>
             <br />
             To improve this, you could save a reference to each tile to copy from when duplicate tiles are drawn instead of reading from the array again. 
@@ -214,30 +214,20 @@ d3.select("svg")
             <br />
             <br />
             Now we're using SVG, we can just use the <span class="element">use</span> element when rendering duplicates. Furthermore, we now have the ability to modify individual pixel attribues easily. So, if we decide to render all tiles to just a single image element we could provide functions for moving individual tiles around on a single element without redrawing the screen every time!
+            <br />
+            <br />
+            The box-shadow trick can be used with other CSS attributes (say, radial gradients) but is a bit cumbersome, and is probably useless outside of code golf. Most of the time, canvas is the most sensible choice for this type of work, but SVG offers a powerful alternative which may lead to a simpler implementation depending on what you're trying to do. 
         </div>
     </p>
+    <br />&nbsp;
+    <br />
+    <br />
+    <br />
     <p class="clear">
-        <br />
-        <br />
-        aasd
-
+        
     </p>
-<br />
-<br />
-<br />
-<br />
-
-        gradient fase scroll
-        gradient goes beyond the end of the container
-
-http://learningwebgl.com/blog/?p=28
-
-explain data conversion
-draw pixels w/ SVG radial gradient?
-webGL + SVG gradient
-    <p class="clear">
-         <br /><br />
-    </p>
+    <br />
+    <br />
 <script>
 
 var edit = {

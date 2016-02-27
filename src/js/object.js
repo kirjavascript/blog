@@ -110,7 +110,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                         "scale("+(d.scale?d.scale:1)+"),"+
                         "rotate("+(d.rotate?d.rotate:0)+"),"+
                         "translate("+[x(d.x),y(d.type=="date"?0:d.y)]+")",
-                        "y":d=>d.type=="date"?x(350)/2:0
+                        "y":d=>d.type=="date"?x(310)/2:0
                     })
 
             });

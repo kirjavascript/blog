@@ -57,14 +57,10 @@ function post(num) {
             "size": "2",
             "foci": {
                 "x": -150,
-                "y": 100
+                "y": 40
             }
         })
 
-        // tags, comments, etc
-        // comments -> allow not clearing
-        // d3 code in json?
-        //<iframe src=\"http://bl.ocks.org/snkenjoi/raw/a8555a26b14f4088bf51/\"></iframe>
         return d;
     })
 }

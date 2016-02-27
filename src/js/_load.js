@@ -86,7 +86,7 @@ window.addEventListener("resize", e => {
                 "scale("+(d.scale?d.scale:1)+"),translate("+
                 [x(d.x),y(d.type=="date"?0:d.y)]
                 +"),rotate("+(d.rotate?d.rotate:0)+")",
-                "y":d=>d.type=="date"?x(350)/2:0
+                "y":d=>d.type=="date"?x(310)/2:0
             })
         .attr({
                 width: d => x(d.size?d.size[0]:0),

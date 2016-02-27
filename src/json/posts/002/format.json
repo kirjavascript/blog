@@ -1,0 +1,16 @@
+[
+    {
+        "shape": "foreignObject",
+        "size": [
+            450,
+            220
+        ],
+        "style": {
+        },
+        "ajax" : "json/posts/002/format.html",
+        "foci": {
+            "x": -200,
+            "y": 200
+        }
+    }
+]
