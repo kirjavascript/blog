@@ -1,0 +1,59 @@
+svg:first-of-type {
+
+    .post {
+        background-color: #DDD;
+        font-size:1rem;
+        //font-size:15px;
+
+        padding: 20px;
+        p {
+            padding:0px;
+            margin: 0px;
+        }
+        
+        overflow-y: auto;
+    }
+
+    // columns
+
+    .one3 {
+        float:left;
+        width: 33%;
+        margin: 2% 0%;
+    }
+
+    .two3 {
+        float:left;
+        width: 58%;
+        margin: 2% 4%;
+    }
+
+    .three5 {
+        float:left;
+        width:56%;
+        margin: 0% 2%;
+    }
+
+    .clear {
+        clear:both;
+    }
+
+    .element {
+        &:before {
+            content: '<';
+            color:#000;
+        }
+        &:after {
+            content: '>';
+            color:#000;
+        }
+        color: #A00;
+        font-weight: 700;
+    }
+
+    object {
+        background-color:transparent;
+        width: 100%;
+    }
+
+}

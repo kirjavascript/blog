@@ -18,7 +18,7 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
         interrupt = true;
         data = datamod(shuffle(data));
         var cont = svg.append("g");
-        var nodes = [];
+        var nodes = []; 
         ~function stagger() {
             nodes.push(data.shift());
             render(nodes,cont);

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="../../../js/ace/ace.js"></script>
+    <style>
+    body {margin:0px}
+    #code {
+        margin: 0px;
+        height: 5rem;
+    }
+    </style>
+</head>
+<body>
+<div id="code">var filter = d3.select("svg")
+    .attr({width:"48px",height:"48px"})
+    .append("defs")
+    .append("filter")
+    .attr("id", "tilefilter")
+
+filter.selectAll("feFlood")
+    .data(tile)
+    .enter()
+    .append("feFlood")
+    .attr({
+        "flood-color":d=>'#'+palette[d],
+        x:(d,i)=>(i%8)*6 + "px",
+        y:(d,i)=>((i/8)|0)*6 + "px",
+        width:"6px",
+        height:"6px",
+        result:(d,i)=>"tilefilter"+i
+    })
+
+filter.append("feMerge")
+    .selectAll("feMergeNode")
+    .data(tile)
+    .enter()
+    .append("feMergeNode")
+    .attr("in",(d,i)=>"tilefilter"+i)
+
+d3.select("svg")
+    .append("image")
+    .attr({
+        filter:"url(#tilefilter)",
+        width:"48px",
+        height:"48px"
+    })</div>
+
+<script>
+    var edit = {
+        theme: "ace/theme/tomorrow_night_eighties",
+        mode: "ace/mode/javascript"
+    }
+
+    var editor = ace.edit("code");
+    editor.setTheme(edit.theme);
+    editor.session.setMode(edit.mode);
+    editor.setAutoScrollEditorIntoView(true);
+    editor.setOption("maxLines", 30);
+    editor.renderer.setScrollMargin(20,20)
+
+    setSize();
+
+    window.parent.addEventListener("resize", setSize);
+
+    function setSize() {
+        editor.setOption("fontSize", window.parent.x(12.4)*1.25+"px");
+        window.frameElement.height = editor.container.scrollHeight + 'px';
+    }
+</script>
+</body>
+</html>

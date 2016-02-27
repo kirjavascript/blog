@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="../../../js/ace/ace.js"></script>
+    <style>
+    body {margin:0px;}
+    </style>
+</head>
+<body>
+<div id="code">var pixels = [];
+
+tile.forEach((d,i) => {
+    pixels.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
+})
+
+document.querySelector("div").style.boxShadow = pixels.join(",");</div>
+
+<script>
+    var edit = {
+        theme: "ace/theme/tomorrow_night_eighties",
+        mode: "ace/mode/javascript"
+    }
+
+    var editor = ace.edit("code");
+    editor.setTheme(edit.theme);
+    editor.session.setMode(edit.mode);
+    editor.setAutoScrollEditorIntoView(true);
+    editor.setOption("maxLines", 30);
+    editor.renderer.setScrollMargin(20,20)
+
+    setSize();
+
+    window.parent.addEventListener("resize", setSize);
+
+    function setSize() {
+        editor.setOption("fontSize", window.parent.x(12.4)*1.25+"px");
+        window.frameElement.height = editor.container.scrollHeight + 'px';
+    }
+</script>
+</body>
+</html>

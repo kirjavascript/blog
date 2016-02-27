@@ -18,17 +18,9 @@
             <br />
             Another idea I had was to use the toDataURL() method to dump a PNG of the rendered canvas and cache it, and only use a single canvas element to render everything.
         </div>
-        <div id="canvasCode" class="two3">let c = document.createElement('canvas');
-c.width = 8;
-c.height = 8;
-let ctx = c.getContext("2d");
-
-tile.forEach((d,i) => {
-    ctx.fillStyle = '#' + state.palettes[line][d];
-    ctx.fillRect(i%8,(i/8)|0,1,1);
-});
-
-document.body.appendChild(c);</div>
+        <object class="two3" data="json/posts/002/canvas.html">
+            <embed src="json/posts/002/canvas.html"></embed>
+        </object>
     </p>
     <p class="clear">
         <div class="one3">
@@ -52,97 +44,9 @@ document.body.appendChild(c);</div>
             <br />
             Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 
         </div>
-        <div id="pngCode" class="two3 pngCode">var pixels = [];
-
-tile.forEach(d => {
-    pixels
-        .push(palette[d]
-        .match(/../g)
-        .map(d=>parseInt(d, 16)));
-});
-
-document.getElementById("tile").src = output();
-
-function byte_data(dec,bytes) {
-    for (var out='';bytes>0;bytes--) out+=String.fromCharCode((dec>>((bytes-1)*8)) &amp; 255);
-    return out;
-}
-
-function crc32(str) {
-    var crc_table = [];
-    var c,n,k;
-    for (n = 0; n &lt; 256; n++) {
-        c = n;
-        for (k = 0; k &lt; 8; k++) {
-            if ((c &amp;1) == 1) c = 0xedb88320 ^ (c >>> 1);
-            else c = c >>> 1;
-        }
-        crc_table[n] = c;
-    }
-    c = 0xFFFFFFFF;
-    for (var i = 0; i &lt; str.length; i++) {
-        c = crc_table[(c ^ str.charCodeAt(i)) &amp; 255] ^ (c >>> 8);
-    }
-    return byte_data(c ^ 0xFFFFFFFF,4);
-}
-
-function adler32(str) {
-    var base = 65521;
-    var a = 1;
-    var b = 0;
-    for (i = 0;i &lt; str.length;i++) {
-        a = (a + str.charCodeAt(i)) % base;
-        b = (b + a) % base;
-    }
-    return byte_data((b &lt;&lt; 16) | a,4);
-}
-
-function data_header(a) {
-    var out = byte_data(0x081D01,3); // ???
-    b = ~a &amp; 0xffff;
-    out += byte_data(a &amp; 0xff,1);
-    out += byte_data((a &amp; 0xff00) >> 8,1);
-    out += byte_data(b &amp; 0xff,1);
-    out += byte_data((b &amp; 0xff00) >> 8,1);
-    return out;
-}
-
-function IHDR(w,h,depth,colour,comp,filter,iface) {
-    var out = "IHDR"; // chunk type
-    out += byte_data(w,4)+byte_data(h,4)+byte_data(depth,1)+byte_data(colour,1)+byte_data(comp,1)+byte_data(filter,1)+byte_data(iface,1); // data
-    out += crc32(out);
-    out = byte_data(13,4) + out; // length of data bytes
-    return out;
-}
-
-function IDAT(data) {
-    var name = "IDAT";
-    return byte_data(data.length,4)+name+data+crc32(name+data);
-}
-
-function IEND() {
-    return byte_data(0,4)+"IEND"+crc32("IEND");
-}
-
-
-function output() {
-    var out = "\x89PNG\x0d\x0a\x1a\x0a"+IHDR(8,8,8,2,0,0,0);
-    var data = '';
-    for (i=0;i&lt;pixels.length;i++) {
-        if(!(i%8)) { data += byte_data(0x00,1); } // filter
-        data += byte_data(pixels[i][0],1); // r
-        data += byte_data(pixels[i][1],1); // g
-        data += byte_data(pixels[i][2],1); // b
-    }
-    
-    var head = data_header(data.length);
-    var adler = adler32(data);
-    data = head + data + adler;
-    
-    out += IDAT(data); 
-    out += IEND();
-    return "data:image/png;base64,"+btoa(out);
-}</div>
+        <object class="two3" data="json/posts/002/png.html">
+            <embed src="json/posts/002/png.html"></embed>
+        </object>
         <br /><br />
     </p>
     <p class="clear">
@@ -150,13 +54,9 @@ function output() {
         CSS's box-shadow has an interesting property. It allows you to chain multiple shadows on a single element.
         <br />
         <br />
-        <div id="boxCode" class="">var pixels = [];
-
-tile.forEach((d,i) => {
-    pixels.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
-})
-
-document.querySelector("div").style.boxShadow = pixels.join(",");</div>
+        <object data="json/posts/002/box.html">
+            <embed src="json/posts/002/box.html"></embed>
+        </object>
         <br />
         Surprisingly, this was the most straightforward solution to implement. You'll end up with something like this;
         <br />
@@ -174,39 +74,9 @@ document.querySelector("div").style.boxShadow = pixels.join(",");</div>
         So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
         <br />
         <br />
-        <div id="svgCode" class="one3 svgCode">var filter = d3.select("svg")
-    .attr({width:"48px",height:"48px"})
-    .append("defs")
-    .append("filter")
-    .attr("id", "tilefilter")
-
-filter.selectAll("feFlood")
-    .data(tile)
-    .enter()
-    .append("feFlood")
-    .attr({
-        "flood-color":d=>'#'+palette[d],
-        x:(d,i)=>(i%8)*6 + "px",
-        y:(d,i)=>((i/8)|0)*6 + "px",
-        width:"6px",
-        height:"6px",
-        result:(d,i)=>"tilefilter"+i
-    })
-
-filter.append("feMerge")
-    .selectAll("feMergeNode")
-    .data(tile)
-    .enter()
-    .append("feMergeNode")
-    .attr("in",(d,i)=>"tilefilter"+i)
-
-d3.select("svg")
-    .append("image")
-    .attr({
-        filter:"url(#tilefilter)",
-        width:"48px",
-        height:"48px"
-    })</div>
+        <object class="one3" data="json/posts/002/svg.html">
+            <embed src="json/posts/002/svg.html"></embed>
+        </object>
         <div class="three5">
             SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
             <br />
@@ -219,7 +89,7 @@ d3.select("svg")
             The box-shadow trick can be used with other CSS attributes (say, radial gradients) but is a bit cumbersome, and is probably useless outside of code golf. Most of the time, canvas is the most sensible choice for this type of work, but SVG offers a powerful alternative which may lead to a simpler implementation depending on what you're trying to do. 
         </div>
     </p>
-    <br />&nbsp;
+    <br />
     <br />
     <br />
     <br />
@@ -229,43 +99,6 @@ d3.select("svg")
     <br />
     <br />
 <script>
-
-var edit = {
-    theme: "ace/theme/tomorrow_night_eighties",
-    mode: "ace/mode/javascript"
-}
-
-    var editor1 = ace.edit("canvasCode");
-    editor1.setTheme(edit.theme);
-    editor1.session.setMode(edit.mode);
-    editor1.setAutoScrollEditorIntoView(true);
-    editor1.setOption("maxLines", 30);
-    editor1.renderer.setScrollMargin(20,20) 
-
-    var editor2 = ace.edit("pngCode");
-    editor2.setTheme(edit.theme);
-    editor2.session.setMode(edit.mode);
-    editor2.setOptions({
-        maxLines: 30
-    });
-    // editor2.getSession().setUseWrapMode(true);
-    editor2.renderer.setScrollMargin(20,20) 
-
-    var editor3 = ace.edit("boxCode");
-    editor3.setTheme(edit.theme);
-    editor3.session.setMode(edit.mode);
-    editor3.setAutoScrollEditorIntoView(true);
-    editor3.setOption("maxLines", 30);
-    editor3.renderer.setScrollMargin(20,20) 
-
-    var editor4 = ace.edit("svgCode");
-    editor4.setTheme(edit.theme);
-    editor4.session.setMode(edit.mode);
-    editor4.setAutoScrollEditorIntoView(true);
-    editor4.setOption("maxLines", 30);
-    editor4.renderer.setScrollMargin(20,20) 
-
-
 // page elements
 
 var tile = [3, 2, 2, 3, 4, 4, 3, 3, 2, 6, 6, 2, 4, 3, 3, 3, 7, 6, 6, 6, 2, 3, 3, 3, 7, 6, 6, 6, 7, 2, 2, 2, 7, 6, 6, 6, 5, 9, 6, 9, 4, 6, 6, 6, 5, 9, 7, 9, 10, 7, 6, 6, 15, 15, 11, 15, 10, 10, 10, 6, 6, 10, 10, 9];
