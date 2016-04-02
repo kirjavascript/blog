@@ -1,8 +1,7 @@
 function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
     if(interrupt==true) return;
 
-    function removeStuff() {
-        console.log('asd')
+    if (removeflag==null) {
         svg.selectAll(".d3on")
             .transition()
             .duration(sp/2)
@@ -29,10 +28,6 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
             if(data.length)setTimeout(stagger,30);
             else interrupt = false;
         }()
-    }
-
-    if(removeflag==null) {
-        removeStuff();
     }
 
     if(typeof src == "object") {

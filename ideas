@@ -1,4 +1,3 @@
-// archive
 // posts
 // social
 
@@ -8,7 +7,6 @@ actual responsiveness ( snap .post to page) fontsize check iframes, too
 social icons colour calc
 fix heart path
 check newpost thingy
-dynamic elements resize bug
 
 =============
 

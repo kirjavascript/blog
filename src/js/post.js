@@ -42,7 +42,7 @@ function post(num) {
             ],
             "foci": {
                 "x": -500,
-                "y": 700
+                "y": 1075
             }
         })
 

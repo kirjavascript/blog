@@ -101,10 +101,9 @@ window.addEventListener("resize", e => {
             height: d => (d.size[1]=="auto"?'auto': y(d.size[1])+'px'),
         })
         .styleTween('transform',function(d) {
-            //let bbox = d3.select(this).node().getBoundingClientRect();
-            let matrix = /matrix\((.+), (.+), (.+), (.+), (.+), (.+)\)/.exec(d3.select(this).style('transform'));
-            let xTween = d3.interpolate(matrix[5], x(d.x));
-            let yTween = d3.interpolate(matrix[6], y(d.y));
+            let bbox = d3.select(this).node().getBoundingClientRect();
+            let xTween = d3.interpolate(bbox.x, x(d.x));
+            let yTween = d3.interpolate(bbox.y, y(d.y));
             return t => `translate(${xTween(t)}px,${yTween(t)}px)`
         })
 

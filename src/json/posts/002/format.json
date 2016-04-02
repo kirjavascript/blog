@@ -9,7 +9,7 @@
         },
         "ajax" : "json/posts/002/format.html",
         "foci": {
-            "x": -500,
+            "x": 500,
             "y": 200
         }
     }
