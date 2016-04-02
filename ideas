@@ -1,16 +1,10 @@
-// posts
-// social
-
-x3dom
 crazy mesh effect post
 actual responsiveness ( snap .post to page) fontsize check iframes, too
-social icons colour calc
-fix heart path
-check newpost thingy
+
+hamburgers? - rainbow -> show source
 
 =============
 
-tripcode
 redirect snk.digibase.ca
 
 electron post
@@ -21,9 +15,9 @@ tags links
 . page builder!!
 . comments
 
-posts = notes/book
+social icons colour calc
+
 js tools i use
-hamburgers? - rainbow -> show source
 (rotate single line around a plane per frame then move)
 write about old stuff
 

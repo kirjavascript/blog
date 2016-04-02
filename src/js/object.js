@@ -43,7 +43,7 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
 
         // check if UID already exists
 
-        data = data.filter(d => !document.getElementById(d.uid))
+        data = data.filter(d => !document.getElementById('uid-'+d.uid))
 
         var selector = removeflag ? '.d3on-dyn' : '.d3on';
 
@@ -129,7 +129,7 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
                             && self.attr(p,d.attr[p]);
 
                 if(d.uid)
-                    self.attr("id", d.uid);
+                    self.attr("id", 'uid-'+d.uid);
 
                 if(d.text) self
                     .attr('font-size',d.size+"rem")

@@ -35,7 +35,7 @@ var ex = [
         "shape": "foreignObject",
         "size": [
             500,
-            500
+            "auto"
         ],
         "ajax": "json/posts/"+num+"/main.html",
         "foci": {

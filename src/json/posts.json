@@ -1,5 +1,17 @@
 [
     {
+        "title": "rainbow mesh",
+        "json": "posts/004.json",
+        "tags": "mesh SVG D3 useless",
+        "date": "2016/04/02"
+    },
+    {
+        "title": "x3dom",
+        "json": "posts/003.json",
+        "tags": "x3dom D3 WebGL",
+        "date": "2016/04/02"
+    },
+    {
         "title": "drawing pixels on the web",
         "json": "posts/002.json",
         "tags": "pixels CSS SVG canvas",

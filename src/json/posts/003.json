@@ -1,0 +1,42 @@
+[
+    {
+        "shape": "text",
+        "text": "x3dom",
+        "size": "4",
+        "attr": {
+            "stroke": "#000",
+            "stroke-width": "4px"
+        },
+        "foci": {
+            "x": 1250,
+            "y": -200
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            500,
+            "auto"
+        ],
+        "ajax": "json/posts/003/main.html",
+        "foci": {
+            "x": 400,
+            "y": 200
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            500,
+            500
+        ],
+        "html": ["<object class=\"x3dom\" data=\"json/posts/003/x3dom.html\">",
+                "<embed src=\"json/posts/003/x3dom.html\"></embed>",
+            "</object>"
+        ],
+        "foci": {
+            "x": -500,
+            "y": 0
+        }
+    }
+]

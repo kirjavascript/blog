@@ -5,6 +5,7 @@
             400,
             "auto"
         ],
+        "uid": "oopsbrowsers",
         "style": {
         },
         "ajax" : "json/posts/002/browsers.html",

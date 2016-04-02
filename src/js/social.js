@@ -158,29 +158,29 @@ function github() {
             gitShapes.push({
                     "shape": "foreignObject",
                     "size": [
-                        x(600),
-                        y(100)
+                        x(250),
+                        "auto"
                     ],
-                    "scale":0.7,
                     "style": {
                         //"background-color": "purple",
                     },
                     "html": [
-                        "<a target=\"_blank\" href="+o.html_url+">",
+                        "<a class=\"noUnderline\" target=\"_blank\" href="+o.html_url+">",
                             "<div class=\"socialBox\">",
                                 "<span>"+o.name+"</span>",
-                                "&emsp;"+o.description+"&emsp;",
                                 "<div>("+o.language+")</div>",
                             "</div>",
                         "</a>"
                     ],
                     "foci": {
-                        "x": 600,
-                        "y": 400 + (120*i)
+                        "x": i%2==0 ? -250 : 650,
+                        "y": 200 + (60*i/2)
                     }
                 })
         })
         d3on(gitShapes);
+
+        document.title = "github";
     })
 }
 
@@ -191,10 +191,9 @@ function blocks() {
             blox.push({
                     "shape": "foreignObject",
                     "size": [
-                        x(600),
-                        y(100)
+                        x(250),
+                        "auto"
                     ],
-                    "scale":0.7,
                     "html": [
                         "<a target=\"_blank\" style=\"text-decoration:none\" href=\"http://bl.ocks.org/"+o.id+"\">",
                             "<div class=\"socialBox blox\">",
@@ -203,21 +202,42 @@ function blocks() {
                         "</a>"
                     ],
                     "foci": {
-                        "x": 600,
-                        "y": 400 + (120*i)
+                        "x": i%2==0 ? -250 : 650,
+                        "y": 200 + (60*i/2)
                     }
                 })
         })
         d3on(blox);
+
+        document.title = "bl.ocks";
     })
 }
 
 function twitter() {
-    var m = document.createElement("script");
-        m.type = "text/javascript";
-        m.src =
-            "https://cdn.syndication.twimg.com/widgets/timelines/654442445963440128?&lang=en"+ "&callback=twitterCallback&suppress_response_codes=true&rnd=" + Math.random();
-    document.getElementsByTagName("body")[0].appendChild(m);
+    d3on([titleObject("tweets",1200,-160),
+        {
+            "shape": "foreignObject",
+            "size": [
+                500,
+                "auto"
+            ],
+            "style": {
+            },
+            "html": `<div class="post"><p>Twitter changed their API so I have to just give you a measly <a href="https://twitter.com/purpleisntblue" target="_blank">link</a> :(</p></div>`,
+            "foci": {
+                "x": 100,
+                "y": 300
+            }
+        }
+    ]);
+
+    document.title = "tweets";
+
+    // var m = document.createElement("script");
+    //     m.type = "text/javascript";
+    //     m.src =
+    //         "https://cdn.syndication.twimg.com/widgets/timelines/654442445963440128?&lang=en"+ "&callback=twitterCallback&suppress_response_codes=true&rnd=" + Math.random();
+    // document.getElementsByTagName("body")[0].appendChild(m);
 }
 
 function twitterCallback(data) {
@@ -246,7 +266,6 @@ function twitterCallback(data) {
                     x(600),
                     y(200)
                 ],
-                "scale":0.7,
                 "html": [
                     "<a target=\"_blank\" style=\"text-decoration:none\" href="+o.url+">",
                         "<div class=\"socialBox tShapes\">",
@@ -257,10 +276,12 @@ function twitterCallback(data) {
                 ],
                 "foci": {
                     "x": 600,
-                    "y": 400 + (160*i)
+                    "y": 0 + (0*i)
                 }
             })
     })
+
+    console.log(tShapes)
     d3on(tShapes);
 }
 
@@ -271,8 +292,8 @@ function youtube() {
             yShapes.push({
                     "shape": "foreignObject",
                     "size": [
-                        300,
-                        230
+                        x(300),
+                        "auto"
                     ],
                     "html": [
                         "<a target=\"_blank\" href=https://www.youtube.com/watch?v="+o['id']['videoId'] + ">",
@@ -280,11 +301,13 @@ function youtube() {
                         "</a>"
                     ],
                     "foci": {
-                        "x": -600+(600*(i/2)),
+                        "x": -500+(400*(i/2)),
                         "y": 100+(i%2==0?460:0)
                     }
                 })
         })
         d3on(yShapes);
+
+        document.title = "youtube";
     })
 }

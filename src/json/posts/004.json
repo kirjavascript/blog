@@ -1,0 +1,42 @@
+[
+    {
+        "shape": "text",
+        "text": "rainbow mesh",
+        "size": "4",
+        "attr": {
+            "stroke": "#000",
+            "stroke-width": "4px"
+        },
+        "foci": {
+            "x": 900,
+            "y": -200
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            500,
+            "auto"
+        ],
+        "ajax": "json/posts/004/main.html",
+        "foci": {
+            "x": -400,
+            "y": 100
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            800,
+            300
+        ],
+        "html": ["<object class=\"fullframe\" data=\"json/posts/004/mesh.html\">",
+                "<embed src=\"json/posts/004/mesh.html\"></embed>",
+            "</object>"
+        ],
+        "foci": {
+            "x": 100,
+            "y": 350
+        }
+    }
+]

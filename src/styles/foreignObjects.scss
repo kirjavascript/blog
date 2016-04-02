@@ -51,4 +51,35 @@
         color:#7A7A7A;
     }
 
+    .noUnderline {
+        text-decoration: none;
+    }
+
+    // social
+
+    .tShapes {
+        background-color: #00aced;
+        p {
+            font-size: 20px;
+        }
+    }
+
+    .socialBox {
+        background-color: purple;
+        padding:10px;
+        color: #FFF;
+        span {
+            font-size: 1.4rem;
+        }
+        div {
+            float:right;
+            color:#BBB;
+        }
+    }
+
+    .blox {
+        background-color: #FA0;
+        font-weight: 800;
+    }
+
 }

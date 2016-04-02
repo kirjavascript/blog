@@ -5,6 +5,7 @@
             450,
             "auto"
         ],
+        "uid": "browsers",
         "style": {
         },
         "ajax" : "json/posts/002/format.html",
