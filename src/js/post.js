@@ -34,7 +34,7 @@ function post(num) {
         // add tags
         d.push({
             "shape": "foreignObject",
-            "size": [600,100],
+            "size": [600,"auto"],
             "html": [
                 "<p class=\"tags\">",
                 "<a href=\"?"+encodeURIComponent(data.title.toLowerCase().replace(/ /g,'-'))+"\">permalink</a>",
@@ -42,7 +42,7 @@ function post(num) {
             ],
             "foci": {
                 "x": -500,
-                "y": 640
+                "y": 700
             }
         })
 

@@ -53,6 +53,9 @@ window.addEventListener("load", e => {
 })
 
 window.addEventListener("resize", e => {
+    // let newSize = {w:getW(),h:getH()};
+    // let change = {w:c.w-newSize.w,h:c.h-newSize.h};
+    // c = newSize;
     c = {w:getW(),h:getH()};
     y.range([0,c.h])
     x.range([0,c.w])
@@ -94,10 +97,16 @@ window.addEventListener("resize", e => {
         .transition()
         .duration(sp)
         .style({
-            width: d => x(d.size?d.size[0]:0) + 'px',
-            height: d => y(d.size?d.size[1]:0) + 'px',
+            width: d => x(d.size[0])+'px',
+            height: d => (d.size[1]=="auto"?'auto': y(d.size[1])+'px'),
         })
-        //.style("transform", d => `translate(${x(d.x)}px, ${y(d.y)}px)`)
+        .styleTween('transform',function(d) {
+            //let bbox = d3.select(this).node().getBoundingClientRect();
+            let matrix = /matrix\((.+), (.+), (.+), (.+), (.+), (.+)\)/.exec(d3.select(this).style('transform'));
+            let xTween = d3.interpolate(matrix[5], x(d.x));
+            let yTween = d3.interpolate(matrix[6], y(d.y));
+            return t => `translate(${xTween(t)}px,${yTween(t)}px)`
+        })
 
     respond(sp);
 

@@ -3,19 +3,22 @@
         "shape": "foreignObject",
         "size": [
             500,
-            500
+            "auto"
         ],
         "style": {
         },
+        "uid": "popup-001",
         "html": [
             "<div class=\"post\">",
-            "<p><iframe src=\"json/posts/000.json\"></iframe></p>",
+            "<p><object class=\"editorObj\" data=\"json/posts/000/data.html\">",
+                "<embed src=\"json/posts/000/data.html\"></embed>",
+            "</object></p>",
             "<span class=\"link\" onClick=\"d3.select(this.parentNode.parentNode).transition().style('opacity', 0).remove()\">close</span>",
             "</div>"
         ],
         "foci": {
             "x": 750,
-            "y": -200
+            "y": -300
         }
     }
 ]

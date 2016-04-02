@@ -15,9 +15,8 @@ function archive() {
                     "shape": "foreignObject",
                     "size": [
                         x(600),
-                        80
+                        "auto"
                     ],
-                    "scale":0.7,
                     "html": [
                         '<div class="archive" onClick="getPost('+i+')" >',
                             "<div class='wrap' "+inline+">",
@@ -27,8 +26,8 @@ function archive() {
                         "</div>"
                     ],
                     "foci": {
-                        "x": 600,
-                        "y": 500 + (i*200)
+                        "x": 300,
+                        "y": 200 + (i*75)
                     }
                 })
         })

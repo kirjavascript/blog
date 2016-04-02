@@ -3,7 +3,7 @@
         "shape": "foreignObject",
         "size": [
             400,
-            220
+            "auto"
         ],
         "style": {
         },

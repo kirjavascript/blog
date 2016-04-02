@@ -1,7 +1,8 @@
-function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
+function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
     if(interrupt==true) return;
 
-    if(remove==null) {
+    function removeStuff() {
+        console.log('asd')
         svg.selectAll(".d3on")
             .transition()
             .duration(sp/2)
@@ -14,10 +15,6 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
             .remove();
 
         foreignObjects.selectAll(".d3on")
-            .transition()
-            .duration(sp/2)
-            .style("transform", d => `translate(${x(rnd(1280))}px, ${y(rnd(800))}px)`)
-            .style("opacity",0.5)
             .remove();
     }
 
@@ -34,6 +31,10 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
         }()
     }
 
+    if(removeflag==null) {
+        removeStuff();
+    }
+
     if(typeof src == "object") {
         load(src);
     }
@@ -45,7 +46,11 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
 
     function render(data,parent) {
 
-        var selector = remove ? '.d3on-dyn' : '.d3on';
+        // check if UID already exists
+
+        data = data.filter(d => !document.getElementById(d.uid))
+
+        var selector = removeflag ? '.d3on-dyn' : '.d3on';
 
         // SVG stuff
 
@@ -97,12 +102,6 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
         respond();
     }
 
-    // responsiveness
-    // popups
-    // archive
-    // posts
-    // social
-
     function setAttr(selection, type) {
         if(type == "SVG") {
             selection
@@ -115,8 +114,8 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
         else if (type == 'foreignObject') {
             selection
                 .style({
-                    width: d => x(d.size?d.size[0]:0) + 'px',
-                    height: d => y(d.size?d.size[1]:0) + 'px',
+                    width: d => x(d.size[0])+'px',
+                    height: d => (d.size[1]=="auto"?'auto': y(d.size[1])+'px'),
                 })
         }
 
@@ -133,6 +132,9 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                     for(var p in d.attr)
                         d.attr.hasOwnProperty(p)
                             && self.attr(p,d.attr[p]);
+
+                if(d.uid)
+                    self.attr("id", d.uid);
 
                 if(d.text) self
                     .attr('font-size',d.size+"rem")
