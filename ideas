@@ -1,13 +1,13 @@
+fix first post popup
+x3dom
+crazy mesh effect post
+actual responsiveness ( snap .post to page)
+social icons colour calc
+
+=============
+
 tripcode
-detect colour subdomain (hexeve)
-https://github.com/nodejs/node-v0.x-archive/wiki/Node-Hosting
 redirect snk.digibase.ca
-
-use github api instead of node?!
-http://patrick-mckinley.com/tech/github-api-commit.html
-
-
-comments-> posts have colour - cat20
 
 electron post
 
@@ -18,9 +18,7 @@ tags links
 . comments
 
 posts = notes/book
-hunt for a good text ediotor
 js tools i use
-svg tools I use
 hamburgers? - rainbow -> show source
 (rotate single line around a plane per frame then move)
 write about old stuff

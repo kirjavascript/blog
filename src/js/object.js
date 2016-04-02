@@ -12,6 +12,13 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
             })
             .style("opacity",0.5)
             .remove();
+
+        foreignObjects.selectAll(".d3on")
+            .transition()
+            .duration(sp/2)
+            .style("transform", d => `translate(${x(rnd(1280))}px, ${y(rnd(800))}px)`)
+            .style("opacity",0.5)
+            .remove();
     }
 
     function load(data) {
@@ -37,34 +44,95 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
     }
 
     function render(data,parent) {
-        var obj = parent.selectAll(".d3on")
-            .data(data)
+
+        var selector = remove ? '.d3on-dyn' : '.d3on';
+
+        // SVG stuff
+
+        var obj = parent.selectAll(selector)
+            .data(data.filter(d => d.shape != "foreignObject"))
 
         var objGroup = obj.enter();
 
-        objGroup.append(d=>document.createElementNS(d3.ns.prefix.svg, d.shape))
+        objGroup.append(d => document.createElementNS(d3.ns.prefix.svg, d.shape))
             .classed("d3on", true)
-            .attr({
-                width: d => x(d.size?d.size[0]:0),
-                height: d => y(d.size?d.size[1]:0),
-                r: d => d.size?d.size:0
-            })
-            .each(function(d,i) {
+            .call(setAttr, 'SVG')
+            //.call(force.drag)
+
+        // non-SVG stuff
+
+        var fObj = foreignObjects.selectAll(selector)
+            .data(data.filter(d => d.shape == "foreignObject"))
+
+        var fObjGroup = fObj.enter();
+
+        fObjGroup.append('div')
+            .classed("d3on", true)
+            .call(setAttr, 'foreignObject')
+
+        force
+            .nodes(data)
+            .charge(charge)
+            .start();
+
+        force.on("tick", e => {
+            var k = .5 * e.alpha;
+            data.forEach(o=>{
+                if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
+
+            svg.selectAll('.d3on')
+                .attr('transform', d=>
+                    "scale("+(d.scale?d.scale:1)+"),"+
+                    "rotate("+(d.rotate?d.rotate:0)+"),"+
+                    "translate("+[x(d.x),y(d.y)]+")")
+                
+            svg.select('#post-date')
+                .attr('transform', d => "translate("+[x(d.x),0]+")")
+                .attr("y", x(310)/2);
+
+            foreignObjects.selectAll('.d3on')
+                .style("transform", d => `translate(${x(d.x)}px, ${y(d.y)}px)`)
+
+        });
+        respond();
+    }
+
+    // responsiveness
+    // popups
+    // archive
+    // posts
+    // social
+
+    function setAttr(selection, type) {
+        if(type == "SVG") {
+            selection
+                .attr({
+                    width: d => x(d.size?d.size[0]:0),
+                    height: d => y(d.size?d.size[1]:0),
+                    r: d => d.size?d.size:0
+                })
+        }
+        else if (type == 'foreignObject') {
+            selection
+                .style({
+                    width: d => x(d.size?d.size[0]:0) + 'px',
+                    height: d => y(d.size?d.size[1]:0) + 'px',
+                })
+        }
+
+        selection
+            .each(function(d, i) {
                 var self = d3.select(this);
 
-                if(d.style) for(var p in d.style)
+                if(d.style) 
+                    for(var p in d.style)
+                        d.style.hasOwnProperty(p)
+                            && self.style(p,d.style[p]);
 
-                    d.style.hasOwnProperty(p)
-                    &&
-                    self.style(p,d.style[p]);
-
-
-                if(d.attr) for(var p in d.attr)
-
-                    d.attr.hasOwnProperty(p)
-                    &&
-                    self.attr(p,d.attr[p]);
-
+                if(d.attr) 
+                    for(var p in d.attr)
+                        d.attr.hasOwnProperty(p)
+                            && self.attr(p,d.attr[p]);
 
                 if(d.text) self
                     .attr('font-size',d.size+"rem")
@@ -86,37 +154,9 @@ function d3on(src,remove=null,datamod=d=>d,charge=-4600) {
                 if(d.path) self
                     .attr("d",d=>d.path)
 
-                var bbox = self.node().getBBox()
-                data[i].bbox = bbox;
-
-                self.attr("transform","scale(0)")
-            })
-            //.call(force.drag)
-
-            force
-                .nodes(data)
-                .charge(charge)
-                //.links(data.hierarchy)
-                .start();
-
-            force.on("tick", e => {
-                var k = .5 * e.alpha;
-                data.forEach(o=>{
-                    if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
-
-                d3.selectAll('.d3on')
-                    .attr({
-                        transform:d=>
-                        "scale("+(d.scale?d.scale:1)+"),"+
-                        "rotate("+(d.rotate?d.rotate:0)+"),"+
-                        "translate("+[x(d.x),y(d.type=="date"?0:d.y)]+")",
-                        "y":d=>d.type=="date"?x(310)/2:0
-                    })
-
+                //self.attr("transform","scale(0)");
             });
-            respond();
     }
-
 
     function parseJS(html) {
         var rx = /<script>([\s\S]*?)<\/script>/i;

@@ -1,5 +1,5 @@
 var c = {w:getW(),h:getH()};
-var svg;
+var svg, foreignObjects;
 var sp = 500;
 
 var x = d3.scale.linear()
@@ -18,28 +18,12 @@ var force = getForce();
 
 var interrupt = false;
 
-var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-
 function respond(sp=0) {
-
-    if(isChrome) {
-        // fuck chrome's shitty SVG support
-
-        d3.selectAll('object')
-            .style('transform', `translate(${x(120)}px,270px)`)
-    }
-
     // set root font size for rems
     d3.select("html")
         .transition()
         .duration(sp)
         .style('font-size',x(12.4)+"px")
-
-    // snap div to container
-    d3.selectAll('foreignObject').each(function(){
-        d3.select(this.children[0]).style("height",this.getBBox().height+"px")
-
-    })
 }
 
 window.addEventListener("load", e => {
@@ -53,9 +37,10 @@ window.addEventListener("load", e => {
             .attr("width",c.w).attr("height",c.h)
             .attr("viewBox",[0,0,c.w,c.h].join(" "));
 
-            //svg.attr("transform", "rotate(-90,"+[c.w/2,c.h/2]+")")
-
-            //svg = svg.append("g");
+        // foreignObject container
+        foreignObjects = d3.select('body')
+            .append('div')
+            .classed('foreignObjects', true)
 
         // order defines order of containers
         thom();
@@ -104,6 +89,15 @@ window.addEventListener("resize", e => {
                 height: d => y(d.size?d.size[1]:0),
                 r: d => d.size?d.size:0
             })
+
+    foreignObjects.selectAll(".d3on")
+        .transition()
+        .duration(sp)
+        .style({
+            width: d => x(d.size?d.size[0]:0) + 'px',
+            height: d => y(d.size?d.size[1]:0) + 'px',
+        })
+        //.style("transform", d => `translate(${x(d.x)}px, ${y(d.y)}px)`)
 
     respond(sp);
 
@@ -175,3 +169,5 @@ function shuffle(array) {
 
   return array;
 }
+
+var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;

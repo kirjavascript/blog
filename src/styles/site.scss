@@ -7,16 +7,18 @@
 }
 
 
+#thom {
+    pointer-events: none;
+    position:absolute;
+    top: 0px;
+    left: 0px;
+}
+
 svg:first-of-type {
 
     #{$a} {
         @extend .hand;
         //text-decoration: none;
-    }
-
-    .hand {
-        cursor: pointer;
-        cursor: hand;
     }
 
     background:#EEE;
@@ -41,43 +43,6 @@ svg:first-of-type {
     .logo {
         fill: #111;
         fill-opacity:1;
-    }
-
-
-    .link {
-        @extend .hand;
-        color:#0000EE;
-    }
-
-
-
-    .archive {
-        @extend .hand;
-        //@include rotate(-45);
-
-        .wrap {
-            height:90px;
-            display: inline-block;
-            // padding: 20px;
-            padding-right: 20px;
-        }
-
-        .title {
-            padding: 40px;
-            font-size: 2rem;
-            line-height:90px;
-        }
-
-        .date {
-            font-size:30px;
-            display: inline-block;
-            margin-left: 20px;
-            margin-top: 30px;
-        }
-    }
-
-    .tags {
-        color:#7A7A7A;
     }
 
 
@@ -106,7 +71,4 @@ svg:first-of-type {
         color:#222;
         font-size: 30px;
     }
-}
-#thom {
-    position:absolute;
 }

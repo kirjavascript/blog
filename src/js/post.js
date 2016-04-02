@@ -38,11 +38,11 @@ function post(num) {
             "html": [
                 "<p class=\"tags\">",
                 "<a href=\"?"+encodeURIComponent(data.title.toLowerCase().replace(/ /g,'-'))+"\">permalink</a>",
-                "&emsp;tags: "+data.tags+"</p>"
+                "&emsp;tags- "+data.tags+"</p>"
             ],
             "foci": {
                 "x": -500,
-                "y": 1050
+                "y": 640
             }
         })
 

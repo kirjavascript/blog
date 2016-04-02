@@ -79,12 +79,12 @@
         So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
         <br />
         <br />
-        <div class="one3">
+        <div class="fifty">
             <object class="editorObj" data="json/posts/002/svg.html">
                 <embed src="json/posts/002/svg.html"></embed>
             </object>
         </div>
-        <div class="three5">
+        <div class="fifty">
             SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
             <br />
             With this technique, we can get away with just using a single <span class="element">image</span> to display the tile. Many <span class="element">feFlood</span> elements are created but aren't rendered visually, so the lag bottleneck in this scenario will come from your browser's ability to apply filters.
