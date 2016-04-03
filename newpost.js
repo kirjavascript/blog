@@ -27,7 +27,7 @@ var ex = [
             "stroke-width":"4px"
         },
         "foci": {
-            "x": 650,
+            "x": 1000,
             "y": -200
         }
     },

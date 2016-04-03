@@ -1,0 +1,27 @@
+[
+    {
+        "shape": "text",
+        "text": "om nom nom",
+        "size": "4",
+        "attr": {
+            "stroke": "#000",
+            "stroke-width": "4px"
+        },
+        "foci": {
+            "x": 1000,
+            "y": -200
+        }
+    },
+    {
+        "shape": "foreignObject",
+        "size": [
+            900,
+            "auto"
+        ],
+        "ajax": "json/posts/005/main.html",
+        "foci": {
+            "x": -300,
+            "y": 100
+        }
+    }
+]

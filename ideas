@@ -1,4 +1,3 @@
-crazy mesh effect post
 actual responsiveness ( snap .post to page) fontsize check iframes, too
 
 hamburgers? - rainbow -> show source
@@ -19,9 +18,6 @@ social icons colour calc
 
 js tools i use
 (rotate single line around a plane per frame then move)
-write about old stuff
-
-LINKS HOVER 2ND PANEL ONLY ONE SECOND AT A TIME
 
 responsive - change text to px :)
 media queries for text
@@ -60,15 +56,6 @@ chasing social thingys -> icons expand from click
 navigation
 webscript
 webthread.js
-
-
-
-show d3 graphs frameless
-
-more -> links my stuff, dev stuff (group)
-
-use rems for text for responsiveness (?)
-
 
 
 code golf part 1 sonic
