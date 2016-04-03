@@ -2,27 +2,15 @@
 
     // data //
 
-    let burgerShuffle = [
-        [   // burger
-            {x1:"0",x2:"20",y1:"1",y2:"1"},
-            {x1:"0",x2:"20",y1:"7",y2:"7"},
-            {x1:"0",x2:"20",y1:"13",y2:"13"},
-        ],
-        [   // arrow
-            {x1:"11",x2:"18",y1:"1",y2:"7"},
-            {x1:"1",x2:"17",y1:"7",y2:"7"},
-            {x1:"11",x2:"18",y1:"13",y2:"7"},
-        ],
-        [   // cross
-            {x1:"4",x2:"16",y1:"13",y2:"1"},
-            {x1:"10",x2:"10",y1:"7",y2:"7"},
-            {x1:"4",x2:"16",y1:"1",y2:"13"},
-        ],
+    var burger = [
+        {x1:"0",x2:"20",y1:"1",y2:"1"},
+        {x1:"0",x2:"20",y1:"7",y2:"7"},
+        {x1:"0",x2:"20",y1:"13",y2:"13"},
     ];
 
     var dot = [].map.call([7,7,7], d => ({x1:d,x2:d,y1:d,y2:d}));
 
-    var line = [].map.call([7,7,7], d => ({x1:0,x2:20,y1:7,y2:7}));;
+    var line = [].map.call([7,7,7], d => ({x1:0,x2:20,y1:7,y2:7}));
 
     var cross = [
         {x1:"4",x2:"16",y1:"13",y2:"1"},
@@ -30,10 +18,23 @@
         {x1:"4",x2:"16",y1:"1",y2:"13"},
     ];
 
-    var hamburger = [
-        {x1:"0",x2:"20",y1:"1",y2:"1"},
-        {x1:"0",x2:"20",y1:"7",y2:"7"},
-        {x1:"0",x2:"20",y1:"13",y2:"13"},
+    var miniCross = [
+        {x1:"7",x2:"13",y1:"10",y2:"4"},
+        {x1:"7",x2:"13",y1:"4",y2:"10"},
+    ];
+
+    var arrow = [
+        {x1:"11",x2:"18",y1:"1",y2:"7"},
+        {x1:"1",x2:"17",y1:"7",y2:"7"},
+        {x1:"11",x2:"18",y1:"13",y2:"7"},
+    ];
+
+    // CLONE
+
+    var burgerShuffle = [
+        [].map.call(burger, d => d),
+        [].map.call(arrow, d => d),
+        [].map.call(cross, d => d),
     ];
 
     // functions //
@@ -48,7 +49,7 @@
 
         svg.append('g')
             .selectAll('line')
-            .data(hamburger)
+            .data(burger)
             .enter()
             .append('line')
             .attr("x1", d => d.x1)
@@ -102,7 +103,7 @@
                 .call(setPos)
                 .each("end", d => {
                     svg.selectAll('line')
-                        .data(state?cross:hamburger)
+                        .data(state?cross:burger)
                         .transition()
                         .ease("elastic")
                         .duration(400)
@@ -188,7 +189,7 @@
                 .each("end", d => {
 
                     svg.selectAll('line')
-                        .data(hamburger)
+                        .data(burger)
                         .transition()
                         .ease("cubicInOut")
                         .duration(200)
@@ -209,7 +210,7 @@
             .on("click", morph);
 
         svg.selectAll('.colour')
-            .data(hamburger)
+            .data(burger)
             .enter()
             .append('line')
             .classed('colour', true)
@@ -229,7 +230,7 @@
                 .selectAll('.colour')
                 .attr('opacity', '1')
                 .transition()
-                .ease("easeCubicInOut")
+                .ease("linear")
                 .duration(200)
                 .delay((d,i) => type == "mouseenter"?i*50:2-i*50)
                 .call(setPos)
@@ -244,7 +245,7 @@
                 .selectAll('.colour, line')
                 .data(cross.map(d=>shuffle(d)).concat(cross.map(d=>shuffle(d))))
                 .transition()
-                .ease("easeCubicInOut")
+                .ease("linear")
                 .duration(200)
                 .call(setPos)
                 .attr('stroke', '#4099FF')
@@ -253,9 +254,9 @@
             state &&
             type == "click" && svg
                 .selectAll('.colour, line')
-                .data(hamburger.concat(hamburger))
+                .data(burger.concat(burger))
                 .transition()
-                .ease("easeCubicInOut")
+                .ease("linear")
                 .duration(200)
                 .call(setPos)
                 .attr('stroke', colour(num+1))
@@ -269,7 +270,7 @@
                     svg.selectAll('.colour')
                         .attr('stroke', colour(num+1))
                         .transition()
-                        .ease("easeCubicInOut")
+                        .ease("linear")
                         .duration(400)
                         .delay((d,i) => 2-i*100)
                         .call(setPos)
@@ -306,11 +307,11 @@
 
             !state && svg
                 .selectAll('line')
-                .data(hamburger)
+                .data(burger)
                 .transition()
                 .ease("cubicInOut")
                 .duration(200)
-                .delay((d,i) => i*70)
+                .delay((d,i) => 2-i*70)
                 .call(setPos)
                 .attr("x2", d => d.x1)
                 .each("end", function() {
@@ -332,13 +333,13 @@
                 .data(dot)
                 .transition()
                 .ease("cubicInOut")
-                .duration(200)
+                .duration(100)
                 .call(setPos)
                 .attr('opacity', 0)
                 .each("end", d => {
                     svg.selectAll('line')
                         .attr('opacity', 1)
-                        .data(hamburger)
+                        .data(burger)
                         .transition()
                         .ease("cubicInOut")
                         .duration(200)
@@ -360,24 +361,23 @@
         svg.selectAll('line')
             .style('transform-origin', '10px 7px')
 
+        var state = 2;
+
         function morph() {
 
             svg.selectAll('line')
-                .data(cross)
+                .data(shuffle(burgerShuffle[state]))
                 .transition()
-                .ease("ceaseCubicInOut")
-                .duration(1200)
+                .ease('sine')
+                .duration(300)
                 .call(setPos)
-                .attr('transform', 'rotate(180)')
-
-            // type == "click" &&
-            // d3.select(this)
-            //     .selectAll('line')
-            //     .data(cross)
-            //     .transition()
-            //     .ease("cubicInOut")
-            //     .duration(400)
-            //     .call(setPos)
+                .attrTween('transform', d => {
+                    var i = d3.interpolate(0, 360);
+                    return t => `rotate(${i(t)})`;
+                })
+                .each("end", d => {
+                    state = state ? 0 : 2;
+                })
         }
 
     } (num++)
@@ -405,7 +405,7 @@
 
             svg.select('rect')
                 .transition()
-                .ease("easeCubicInOut")
+                .ease("linear")
                 .duration(300)
                 .attr('fill', state?colour(num):'#DDD')
 
@@ -438,7 +438,7 @@
             .enter()
             .append('line')
             .call(setPos)
-            .call(makeLine, colour(7))
+            .call(makeLine, colour(num))
             
 
         var state = 0;
@@ -480,53 +480,80 @@
 
     ~function(num) {
 
-        var svg = init(num).on("click", morph);
+        var svg = init(num).on("click", morphCircle);
 
-        svg.selectAll('line').attr('opacity', 0)
+        var radius = 10;
 
-        svg.append('circle')
+        var circle = svg.append('circle')
             .attr('cx', 10)
             .attr('cy', 7)
-            .attr('r', 10)
+            .attr('r', radius)
             .call(makeLine, colour(num))
+            .attr("stroke-dasharray", radius*2*Math.PI)
+            .attr("stroke-dashoffset", radius*2*Math.PI);
 
+        function morphCircle() {
 
+            svg.on('click', null);
 
-        //var state = 1;
+            svg.selectAll('line')
+                .transition()
+                .duration(200)
+                .ease("quad")
+                .attr({x1:"20",x2:"20",y1:"7",y2:"7"})
 
-        function morph() {
+            circle.transition()
+                .duration(500)
+                .ease("cubic")
+                .attr("stroke-dashoffset", 0)
+                .each("end", d => {
+                    svg.selectAll('line')
+                        .data(miniCross)
+                        .attr({x1:"10",x2:"10",y1:"7",y2:"7"})
+                        .transition()
+                        .duration(450)
+                        .ease('elastic')
+                        .call(setPos)
+                        .each("end", d => {svg.on('click', morphBurger)})
+                })
 
+        }
 
+        function morphBurger() {
 
+            svg.on('click', null);
 
-            // d3.select(this)
-            //     .selectAll('line')
-            //     .data(line)
-            //     .transition()
-            //     .ease("cubicInOut")
-            //     .duration(200)
-            //     .call(setPos)
-            //     .each("end", function(d) {
-            //         d3.select(this.parentNode)
-            //             .selectAll('line')
-            //             .data(state?cross:hamburger)
-            //             .transition()
-            //             .ease("elastic")
-            //             .duration(400)
-            //             .call(setPos)
+            circle.transition()
+                .duration(500)
+                .ease("cubic")
+                .attr("stroke-dashoffset", -radius*2*Math.PI)
+                .each("end", d => {
 
-            //         state = state ? 0 : 1;
-            //     })
+                    circle.attr("stroke-dashoffset", radius*2*Math.PI)
+
+                    svg.selectAll('line')
+                        .data(burger)
+                        .transition()
+                        .duration(600)
+                        .ease("elastic")
+                        .call(setPos)
+                        .each("end", d => {svg.on('click', morphCircle)})
+                })
 
         }
 
     } (num++)
-    // circle dasharray (middle line goes to circle!)
+
+    // get a rotation one (google style)
 
     // move out in line, move in inb line http://www.designcouch.com/
-    // get a rotation one
     // have tick? (down up wobble)
     // perspective back and forward bounce easing
+    // make box with cross in it
+    // smiley face CURVES
+
+    // clean up colourful one (remove rounding)
+
 
 
     
