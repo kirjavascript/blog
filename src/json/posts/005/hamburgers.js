@@ -1,5 +1,7 @@
 ~function() {
 
+    // data //
+
     let burgerShuffle = [
         [   // burger
             {x1:"0",x2:"20",y1:"1",y2:"1"},
@@ -34,8 +36,9 @@
         {x1:"0",x2:"20",y1:"13",y2:"13"},
     ];
 
+    // functions //
 
-    var c10 = d3.scale.category10();
+    var colour = d3.scale.category10();
 
     function init(i) {
         var svg = d3.select("body")
@@ -52,10 +55,7 @@
             .attr("x2", d => d.x2)
             .attr("y1", d => d.y1)
             .attr("y2", d => d.y2)
-            .attr('fill', 'none')
-            .attr('stroke',c10(i))
-            .attr('stroke-width', '3')
-            .attr('stroke-linecap', 'round')
+            .call(makeLine, colour(i))
 
         return svg;
     }
@@ -68,364 +68,465 @@
             .attr("y2", d => d.y2)
     }
 
+    function makeLine(selection, colour) {
+        selection.attr('fill', 'none')
+            .attr('stroke', colour)
+            .attr('stroke-width', '3')
+            .attr('stroke-linecap', 'round')
+    }
+
     function shuffle(o) {
         for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
             return o
     }
 
-    // first (line-elastic)
+    // burgers //
 
-    init(0).on("click", morphFirst)
+    var num = 0;
 
-    var firstState = 1;
+    // (line-elastic)
 
-    function morphFirst(d) {
+    ~function(num) {
 
-        d3.select(this)
-            .selectAll('line')
-            .data(line)
-            .transition()
-            .ease("cubicInOut")
-            .duration(200)
-            .call(setPos)
-            .each("end", function(d) {
-                d3.select(this.parentNode)
-                    .selectAll('line')
-                    .data(firstState?cross:hamburger)
-                    .transition()
-                    .ease("elastic")
-                    .duration(400)
-                    .call(setPos)
+        var svg = init(num).on("click", morph)
 
-                firstState = firstState ? 0 : 1;
-            })
+        var state = 1;
 
-    }
+        function morph() {
 
-    // second (arrow-hover)
+            svg.selectAll('line')
+                .data(line)
+                .transition()
+                .ease("cubicInOut")
+                .duration(200)
+                .call(setPos)
+                .each("end", d => {
+                    svg.selectAll('line')
+                        .data(state?cross:hamburger)
+                        .transition()
+                        .ease("elastic")
+                        .duration(400)
+                        .call(setPos)
 
-    init(1).on("mouseenter", morphSecond)
-        .on("mouseleave", morphSecond)
-        .on("click", morphSecond);
+                    state = state ? 0 : 1;
+                })
 
-    function morphSecond(d) {
+        }
 
-        let type =  d3.event.type == "mouseenter" ? 1 :
-                    d3.event.type == "click" ? 2 :
-                    d3.event.type == "touchend" ? 2 : 0;
+    } (num++)
 
-        d3.select(this)
-            .selectAll('line')
-            .data(burgerShuffle.map(d => shuffle(d))[type])
-            .transition()
-            .duration(400)
-            .call(setPos)
+    // (arrow-hover)
 
-    }
+    ~function(num) {
 
+        var svg = init(num).on("mouseenter", morph)
+            .on("mouseleave", morph)
+            .on("click", morph);
 
-    // third (line-rotate)
+        function morph() {
 
-    init(2).on("click", morphThird)
+            let type =  d3.event.type == "mouseenter" ? 1 :
+                        d3.event.type == "click" ? 2 :
+                        d3.event.type == "touchend" ? 2 : 0;
 
-    var stateThree = 0;
+            svg.selectAll('line')
+                .data(burgerShuffle.map(d => shuffle(d))[type])
+                .transition()
+                .duration(400)
+                .call(setPos)
 
-    function morphThird(d) {
+        }
 
-        !stateThree &&
-        d3.select(this)
-            .selectAll('line')
-            .data(line)
-            .transition()
-            .ease("cubicInOut")
-            .duration(200)
-            .call(setPos)
-            .each("end", function() {
-                d3.select(this)
-                    .transition()
-                    .ease("cubicInOut")
-                    .duration(200)
-                    .attr('transform', 'rotate(90,10,7)')
-                    .each("end", function() {
-                        d3.select(this.parentNode)
-                            .selectAll('line')
-                            .data(cross)
-                            .transition()
-                            .ease("elastic")
-                            .duration(400)
-                            .call(setPos)
-                        stateThree = 1;
-                    })
+    } (num++)
 
-            })
+    // (line-rotate)
 
-        stateThree &&
-        d3.select(this)
-            .selectAll('line')
-            .data(line)
-            .transition()
-            .ease("cubicInOut")
-            .duration(200)
-            .call(setPos)
-            .attr('transform', 'rotate(0,10,7)')
-            .each("end", function() {
-                d3.select(this.parentNode)
-                    .selectAll('line')
-                    .data(hamburger)
-                    .transition()
-                    .ease("cubicInOut")
-                    .duration(200)
-                    .call(setPos)
-                stateThree = 0;
-            })
-    }
+    ~function(num) {
 
-    // forth (colour-hover)
+        var svg = init(num).on("click", morph)
 
-    init(3).on("mouseenter", morphFourth)
-        .on("mouseleave", morphFourth)
-        .on("click", morphFourth)
-        .selectAll('.colour')
-        .data(hamburger)
-        .enter()
-        .append('line')
-        .classed('colour', true)
-        .call(setPos)
-        .attr("x2", d => d.x1)
-        .attr('fill', 'none')
-        .attr('stroke',c10(4))
-        .attr('stroke-width', '3')
-        .attr('stroke-linecap', 'round')
-        .attr('opacity', '0')
+        var state = 0;
 
-    var stateFour = 0;
+        function morph() {
 
-    function morphFourth(d) {
+            !state && svg
+                .selectAll('line')
+                .data(line)
+                .transition()
+                .ease("cubicInOut")
+                .duration(200)
+                .call(setPos)
+                .each("end", function() {
 
-        let type =  d3.event.type;
+                    d3.select(this)
+                        .transition()
+                        .ease("cubicInOut")
+                        .duration(200)
+                        .attr('transform', 'rotate(90,10,7)')
+                        .each("end", d => {
 
-        !stateFour &&
-        (type == "mouseenter" || 
-        type == "mouseleave") &&
-        d3.select(this)
-            .selectAll('.colour')
-            .attr('opacity', '1')
-            .transition()
-            .ease("easeCubicInOut")
-            .duration(200)
-            .delay((d,i) => type == "mouseenter"?i*50:2-i*50)
-            .call(setPos)
-            .attr("x2", d => type == "mouseenter"?d.x2:d.x1)
-            .each("end", function() {
-                type == "mouseleave" &&
-                d3.select(this)
-                    .attr('opacity', 0)
-            })
+                            svg.selectAll('line')
+                                .data(cross)
+                                .transition()
+                                .ease("elastic")
+                                .duration(400)
+                                .call(setPos)
 
-        type == "click" &&
-        d3.select(this)
-            .selectAll('.colour, line')
-            .data(cross.map(d=>shuffle(d)).concat(cross.map(d=>shuffle(d))))
-            .transition()
-            .ease("easeCubicInOut")
-            .duration(200)
-            .call(setPos)
-            .attr('stroke', '#4099FF')
-            .each("end", d => {stateFour = 1})
+                            state = 1;
+                        })
 
-        stateFour &&
-        type == "click" &&
-        d3.select(this)
-            .selectAll('.colour, line')
-            .data(hamburger.map(d => {d.colour = 1; return d}).concat(hamburger))
-            .transition()
-            .ease("easeCubicInOut")
-            .duration(200)
-            .call(setPos)
-            .attr('stroke', c10(4))
-            .each("end", function () {
+                })
 
-                stateFour = 0;
+            state && svg
+                .selectAll('line')
+                .data(line)
+                .transition()
+                .ease("cubicInOut")
+                .duration(200)
+                .call(setPos)
+                .attr('transform', 'rotate(0,10,7)')
+                .each("end", d => {
 
-                d3.select(this.parentNode)
-                    .selectAll('line')
-                    .attr('stroke',c10(3))
+                    svg.selectAll('line')
+                        .data(hamburger)
+                        .transition()
+                        .ease("cubicInOut")
+                        .duration(200)
+                        .call(setPos)
 
-                d3.select(this.parentNode)
-                    .selectAll('.colour')
-                    .attr('stroke', c10(4))
-                    .transition()
-                    .ease("easeCubicInOut")
-                    .duration(400)
-                    .delay((d,i) => 2-i*100)
-                    .call(setPos)
-                    .attr("x2", d => d.x1)
-                    .each("end", function() {
-                        d3.select(this)
-                            .attr('opacity', 0)
-                    })
+                    state = 0;
+                })
+        }
 
-            })
-            
-    }
+    } (num++)
 
-    // fifth (slide-fade)
+    // (colour-hover)
 
-    init(4).on("click", morphFifth)
-        .selectAll('.cross')
-        .data(dot) 
-        .enter()
-        .append('line')
-        .classed('cross', true)
-        .call(setPos)
-        .attr('fill', 'none')
-        .attr('stroke',c10(4))
-        .attr('stroke-width', '3')
-        .attr('opacity', 0)
+    ~function(num) {
 
-    var stateFive = 0;
+        var svg = init(num).on("mouseenter", morph)
+            .on("mouseleave", morph)
+            .on("click", morph);
 
-    function morphFifth(d) {
-
-        !stateFive &&
-        d3.select(this)
-            .selectAll('line')
+        svg.selectAll('.colour')
             .data(hamburger)
-            .transition()
-            .ease("cubicInOut")
-            .duration(200)
-            .delay((d,i) => i*70)
+            .enter()
+            .append('line')
+            .classed('colour', true)
             .call(setPos)
             .attr("x2", d => d.x1)
-            .each("end", function() {
-                d3.select(this)
-                    .attr('opacity', 0)
+            .call(makeLine, colour(num+1))
+            .attr('opacity', '0')
 
-                d3.select(this.parentNode.parentNode)
-                    .selectAll('.cross')
-                    .data(cross)
-                    .transition()
-                    .ease("cubicInOut")
-                    .duration(200)
-                    .call(setPos)
-                    .attr('opacity', 1)
-                    .each("end", d => {stateFive = 1})
-            })
+        var state = 0;
 
-        stateFive &&
-        d3.select(this)
-            .selectAll('.cross')
-            .data(dot)
-            .transition()
-            .ease("cubicInOut")
-            .duration(200)
+        function morph() {
+
+            let type =  d3.event.type;
+
+            !state &&
+            (type == "mouseenter" || type == "mouseleave") && svg
+                .selectAll('.colour')
+                .attr('opacity', '1')
+                .transition()
+                .ease("easeCubicInOut")
+                .duration(200)
+                .delay((d,i) => type == "mouseenter"?i*50:2-i*50)
+                .call(setPos)
+                .attr("x2", d => type == "mouseenter"?d.x2:d.x1)
+                .each("end", function() {
+                    type == "mouseleave" &&
+                    d3.select(this)
+                        .attr('opacity', 0)
+                })
+
+            type == "click" && svg
+                .selectAll('.colour, line')
+                .data(cross.map(d=>shuffle(d)).concat(cross.map(d=>shuffle(d))))
+                .transition()
+                .ease("easeCubicInOut")
+                .duration(200)
+                .call(setPos)
+                .attr('stroke', '#4099FF')
+                .each("end", d => {state = 1})
+
+            state &&
+            type == "click" && svg
+                .selectAll('.colour, line')
+                .data(hamburger.concat(hamburger))
+                .transition()
+                .ease("easeCubicInOut")
+                .duration(200)
+                .call(setPos)
+                .attr('stroke', colour(num+1))
+                .each("end", d => {
+
+                    state = 0;
+
+                    svg.selectAll('line')
+                        .attr('stroke',colour(num))
+
+                    svg.selectAll('.colour')
+                        .attr('stroke', colour(num+1))
+                        .transition()
+                        .ease("easeCubicInOut")
+                        .duration(400)
+                        .delay((d,i) => 2-i*100)
+                        .call(setPos)
+                        .attr("x2", d => d.x1)
+                        .each("end", function() {
+                            d3.select(this)
+                                .attr('opacity', 0)
+                        })
+
+                })
+                
+        }
+
+    } (num++)
+
+    // (slide-fade)
+
+    ~function(num) {
+
+        var svg = init(num).on("click", morph);
+
+        svg.selectAll('.cross')
+            .data(dot) 
+            .enter()
+            .append('line')
+            .classed('cross', true)
             .call(setPos)
+            .call(makeLine, colour(4))
             .attr('opacity', 0)
-            .each("end", function() {
-                d3.select(this.parentNode)
+
+        var state = 0;
+
+        function morph() {
+
+            !state && svg
                 .selectAll('line')
-                .attr('opacity', 1)
                 .data(hamburger)
                 .transition()
                 .ease("cubicInOut")
                 .duration(200)
-                .delay((d,i) => 2-i*70)
+                .delay((d,i) => i*70)
                 .call(setPos)
-                .each("end", d => {stateFive = 0})
-            });
-            
-    }
+                .attr("x2", d => d.x1)
+                .each("end", function() {
+                    d3.select(this)
+                        .attr('opacity', 0)
 
-    // sixth 
+                    svg.selectAll('.cross')
+                        .data(cross)
+                        .transition()
+                        .ease("cubicInOut")
+                        .duration(200)
+                        .call(setPos)
+                        .attr('opacity', 1)
+                        .each("end", d => {state = 1})
+                })
 
-    init(5).on("click", morphSixth)
-        .on("mouseleave", morphSixth)
-        .on("mouseenter", morphSixth)
+            state && svg
+                .selectAll('.cross')
+                .data(dot)
+                .transition()
+                .ease("cubicInOut")
+                .duration(200)
+                .call(setPos)
+                .attr('opacity', 0)
+                .each("end", d => {
+                    svg.selectAll('line')
+                        .attr('opacity', 1)
+                        .data(hamburger)
+                        .transition()
+                        .ease("cubicInOut")
+                        .duration(200)
+                        .delay((d,i) => 2-i*70)
+                        .call(setPos)
+                        .each("end", d => {state = 0})
+                });
+                
+        }
 
-        // triangle + rotate?
+    } (num++)
 
-    function morphSixth(d) {
+    // ???
 
-        var type = d3.event.type;
+    ~function(num) {
 
-        type == "mouseenter" &&
-        d3.select(this)
-            .selectAll('line')
-            .data(hamburger)
-            .transition()
-            .ease("elastic")
-            .duration(400)
-            .call(setPos)
+        var svg = init(num).on("click", morph);
 
-        type == "click" &&
-        d3.select(this)
+        svg.selectAll('line')
+            .style('transform-origin', '10px 7px')
+
+        function morph() {
+
+            svg.selectAll('line')
+                .data(cross)
+                .transition()
+                .ease("ceaseCubicInOut")
+                .duration(1200)
+                .call(setPos)
+                .attr('transform', 'rotate(180)')
+
+            // type == "click" &&
+            // d3.select(this)
+            //     .selectAll('line')
+            //     .data(cross)
+            //     .transition()
+            //     .ease("cubicInOut")
+            //     .duration(400)
+            //     .call(setPos)
+        }
+
+    } (num++)
+
+    // bgcolour
+
+    ~function(num) {
+
+        var svg = init(num).on("click", morph);
+
+        svg.insert('rect', 'g')
+            .attr({
+                x: -5,
+                y: -7,
+                width: 30,
+                height: 28,
+                fill: '#DDD'
+            })
+
+        var state = 0;
+
+        function morph() {
+
+            state = !state|0;
+
+            svg.select('rect')
+                .transition()
+                .ease("easeCubicInOut")
+                .duration(300)
+                .attr('fill', state?colour(num):'#DDD')
+
+            svg.selectAll('line')
+                .data(shuffle(burgerShuffle[state?2:0]))
+                .transition()
+                .ease("elastic")
+                .duration(600)
+                .call(setPos)
+                .attr('stroke', !state?colour(num):'#DDD')
+
+        }
+
+    } (num++)
+
+    // down and bounce
+
+    ~function(num) {
+
+        var svg = init(num).on("click", morph);
+
+        svg.select('g').classed('burger', true);
+
+        svg.append('g')
+            .attr('opacity', 0)
+            .attr('transform', 'translate(0, -20)')
+            .classed('cross', true)
             .selectAll('line')
             .data(cross)
-            .transition()
-            .ease("cubicInOut")
-            .duration(400)
+            .enter()
+            .append('line')
             .call(setPos)
-    }
+            .call(makeLine, colour(7))
+            
 
-    init(6).on("click", morphSeventh)
-        .insert('rect', 'g')
-        .attr({
-            x: -5,
-            y: -7,
-            width: 30,
-            height: 28,
-            fill: '#DDD'
-        })
+        var state = 0;
 
-    var stateSeven = 0;
+        function morph() {
 
-    function morphSeventh(d) {
+            svg.select(state?'.cross':'.burger')
+                .transition()
+                .ease("easeCubicOut")
+                .duration(300)
+                .attr('transform', 'translate(0, 20)')
+                .attr('opacity', 0)
+                .each("end", function() {
+                    d3.select(this)
+                        .attr('transform', 'translate(0, -20)')
+                })
 
-        stateSeven = !stateSeven|0;
+            state = !state|0;
 
-        d3.select(this)
-            .select('rect')
-            .transition()
-            .ease("elastic")
-            .duration(600)
-            .attr('fill', stateSeven?c10(6):'#DDD')
+            svg.select(state?'.cross':'.burger')
+                .transition()
+                .ease("bounce")
+                .duration(300)
+                .attr('transform', 'translate(0, 0)')
+                .attr('opacity', 1)
 
-        d3.select(this)
-            .selectAll('line')
-            .data(shuffle(burgerShuffle[stateSeven?2:0]))
-            .transition()
-            .ease("elastic")
-            .duration(600)
-            .call(setPos)
-            .attr('stroke', !stateSeven?c10(6):'#DDD')
+        }
 
-    }
-
-    // http://tympanus.net/Development/ElasticSVGElements/hamburger.html
-    // http://codepen.io/designcouch/pen/Atyop
-    // https://dribbble.com/shots/2322176-Burger-Flip
-    // https://dribbble.com/shots/2201588-Cato-List-Animation
-
-    // rotate recode rotate + arrow
-    // .map 10 7 rotate
+    } (num++)
 
 
 
-    // init(6).on("click", morphSeventh)
-    //     .on("mouseleave", morphSeventh)
+    // move something here
 
-    // function morphSeventh(d) {
+    colour(num++)
 
-    //     var type = d3.event.type == "click" ? 1 : 0;
 
-    //     d3.select(this)
-    //         .selectAll('line')
-    //         .data(cross)
-    //         .transition()
-    //         .ease("cubicInOut")
-    //         .duration(400)
-    //         .call(setPos)
-    // }
+    // circle
+
+    ~function(num) {
+
+        var svg = init(num).on("click", morph);
+
+        svg.selectAll('line').attr('opacity', 0)
+
+        svg.append('circle')
+            .attr('cx', 10)
+            .attr('cy', 7)
+            .attr('r', 10)
+            .call(makeLine, colour(num))
+
+
+
+        //var state = 1;
+
+        function morph() {
+
+
+
+
+            // d3.select(this)
+            //     .selectAll('line')
+            //     .data(line)
+            //     .transition()
+            //     .ease("cubicInOut")
+            //     .duration(200)
+            //     .call(setPos)
+            //     .each("end", function(d) {
+            //         d3.select(this.parentNode)
+            //             .selectAll('line')
+            //             .data(state?cross:hamburger)
+            //             .transition()
+            //             .ease("elastic")
+            //             .duration(400)
+            //             .call(setPos)
+
+            //         state = state ? 0 : 1;
+            //     })
+
+        }
+
+    } (num++)
+    // circle dasharray (middle line goes to circle!)
+
+    // move out in line, move in inb line http://www.designcouch.com/
+    // get a rotation one
+    // have tick? (down up wobble)
+    // perspective back and forward bounce easing
 
 
     
