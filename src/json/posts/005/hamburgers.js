@@ -126,7 +126,7 @@
 
         function morph() {
 
-            let type =  d3.event.type == "mouseenter" ? 1 :
+            var type =  d3.event.type == "mouseenter" ? 1 :
                         d3.event.type == "click" ? 2 :
                         d3.event.type == "touchend" ? 2 : 0;
 
@@ -223,7 +223,7 @@
 
         function morph() {
 
-            let type =  d3.event.type;
+            var type =  d3.event.type;
 
             !state &&
             (type == "mouseenter" || type == "mouseleave") && svg
@@ -352,7 +352,7 @@
 
     } (num++)
 
-    // ???
+    // 360
 
     ~function(num) {
 
@@ -427,7 +427,9 @@
 
         var svg = init(num).on("click", morph);
 
-        svg.select('g').classed('burger', true);
+        svg.select('g')
+            .classed('burger', true)
+            .attr('opacity', 1)
 
         svg.append('g')
             .attr('opacity', 0)
@@ -469,11 +471,44 @@
 
     } (num++)
 
+    // simple 3d
 
+    ~function(num) {
 
-    // move something here
+        var svg = init(num).on("click", d => morph(false));
 
-    colour(num++)
+        function morph(state) {
+
+            svg.on("click", null);
+
+            svg.selectAll('line')
+                .data(state?cross:burger)
+                .call(setPos)
+
+            svg.transition()
+                .duration(200)
+                .ease("linear")
+                .styleTween('transform', d => state?tween(180, 270):tween(0, 90))
+                .each("end", d => {
+                    svg.selectAll('line')
+                        .data(state?burger:cross)
+                        .call(setPos)
+
+                    svg.transition()
+                        .duration(200)
+                        .ease("linear")
+                        .styleTween('transform', d => state?tween(270, 360):tween(90, 180))
+                        .each("end", d => {svg.on("click", d => morph(!state))})
+                })
+
+        }
+
+        function tween(a, b) {
+            var i = d3.interpolate(a, b);
+            return t => `rotateX(${i(t)}deg)`;
+        }
+
+    } (num++)
 
 
     // circle
@@ -544,18 +579,22 @@
 
     } (num++)
 
-    // get a rotation one (google style)
-
     // move out in line, move in inb line http://www.designcouch.com/
     // have tick? (down up wobble)
     // perspective back and forward bounce easing
     // make box with cross in it
-    // smiley face CURVES
+    // smiley face CURVES only one
+    // other curvy stuff d3.svg.path
+    // simple diag mask transform
 
-    // clean up colourful one (remove rounding)
+    // clean up colourful one (remove rounding) (break into two?)
 
+    // other attrs
 
+    
 
+    // svg mesh burger delay opacity fade out (rnd?) in and d attr 2 burgers
+    // paths bend (use paths with one line and stroke so you can dasharray hax :D)
     
 } ()
 
