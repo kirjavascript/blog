@@ -29,8 +29,6 @@
         {x1:"11",x2:"18",y1:"13",y2:"7"},
     ];
 
-    // CLONE
-
     var burgerShuffle = [
         [].map.call(burger, d => d),
         [].map.call(arrow, d => d),
@@ -281,7 +279,7 @@
                         })
 
                 })
-                
+
         }
 
     } (num++)
@@ -293,7 +291,7 @@
         var svg = init(num).on("click", morph);
 
         svg.selectAll('.cross')
-            .data(dot) 
+            .data(dot)
             .enter()
             .append('line')
             .classed('cross', true)
@@ -347,7 +345,7 @@
                         .call(setPos)
                         .each("end", d => {state = 0})
                 });
-                
+
         }
 
     } (num++)
@@ -357,9 +355,6 @@
     ~function(num) {
 
         var svg = init(num).on("click", morph);
-
-        svg.selectAll('line')
-            .style('transform-origin', '10px 7px')
 
         var state = 2;
 
@@ -373,7 +368,7 @@
                 .call(setPos)
                 .attrTween('transform', d => {
                     var i = d3.interpolate(0, 360);
-                    return t => `rotate(${i(t)})`;
+                    return t => `rotate(${i(t)}, 10, 7)`;
                 })
                 .each("end", d => {
                     state = state ? 0 : 2;
@@ -441,7 +436,7 @@
             .append('line')
             .call(setPos)
             .call(makeLine, colour(num))
-            
+
 
         var state = 0;
 
@@ -579,24 +574,57 @@
 
     } (num++)
 
-    // 
+    // paths
 
     ~function(num) {
 
-        var svg = init(num).on("click", morph)
+        var svg = init(num).on("click", d => morph(0));
 
-        
+        var line = d3.svg.line()
+            .x(d => d.x)
+            .y(d => d.y)
+            .interpolate('monotone')
 
-        function morph() {
+        var path = [
+            {x:0,y:1},
+            {x:20,y:1},
+            {x:24,y:7},
+            {x:23,y:15},
+            {x:4,y:13},
+            {x:16,y:1},
+        ];
 
-            
+        svg.append('path')
+        svg.append('path')
+            .attr('transform', 'scale(1,-1) translate(0, -14)')
+
+        svg.selectAll('line')
+            .attr("stroke-dasharray", "20, 100")
+            .attr("stroke-dashoffset", "0")
+
+        svg.selectAll('path')
+            .attr('d', line(path))
+            .call(makeLine, colour(num))
+            .attr("stroke-dasharray", "12.5, 100")
+            .attr("stroke-dashoffset", "0")
+
+        function morph(state) {
+
+            svg.on("click", null)
+
+            svg.selectAll('path, line')
+                .transition()
+                .ease('quad')
+                .duration(400)
+                .attr("stroke-dashoffset", state?-58:0)
+                .each("end", d => {svg.on("click", d => morph(!state))})
 
         }
 
     } (num++)
 
-    // paths bend (use paths with one line and stroke so you can dasharray hax :D)
-    f// or d3.svg Line arc radial copy path data and mirror
+
+    // use path attrTween like codrops version
 
     // move out in line, move in inb line http://www.designcouch.com/
     // have tick? (down up wobble)
@@ -611,12 +639,8 @@
 
     // other attrs
 
-    // chrome transform-origin rotate div instead
-
-    
-
     // svg mesh burger delay opacity fade out (rnd?) in and d attr 2 burgers
-    
+
 } ()
 
 
