@@ -579,6 +579,25 @@
 
     } (num++)
 
+    // 
+
+    ~function(num) {
+
+        var svg = init(num).on("click", morph)
+
+        
+
+        function morph() {
+
+            
+
+        }
+
+    } (num++)
+
+    // paths bend (use paths with one line and stroke so you can dasharray hax :D)
+    f// or d3.svg Line arc radial copy path data and mirror
+
     // move out in line, move in inb line http://www.designcouch.com/
     // have tick? (down up wobble)
     // perspective back and forward bounce easing
@@ -586,15 +605,17 @@
     // smiley face CURVES only one
     // other curvy stuff d3.svg.path
     // simple diag mask transform
+    //gooey
 
     // clean up colourful one (remove rounding) (break into two?)
 
     // other attrs
 
+    // chrome transform-origin rotate div instead
+
     
 
     // svg mesh burger delay opacity fade out (rnd?) in and d attr 2 burgers
-    // paths bend (use paths with one line and stroke so you can dasharray hax :D)
     
 } ()
 
