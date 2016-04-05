@@ -281,7 +281,7 @@
                         })
 
                 })
-                
+
         }
 
     } (num++)
@@ -293,7 +293,7 @@
         var svg = init(num).on("click", morph);
 
         svg.selectAll('.cross')
-            .data(dot) 
+            .data(dot)
             .enter()
             .append('line')
             .classed('cross', true)
@@ -347,7 +347,7 @@
                         .call(setPos)
                         .each("end", d => {state = 0})
                 });
-                
+
         }
 
     } (num++)
@@ -357,9 +357,6 @@
     ~function(num) {
 
         var svg = init(num).on("click", morph);
-
-        svg.selectAll('line')
-            .style('transform-origin', '10px 7px')
 
         var state = 2;
 
@@ -373,7 +370,7 @@
                 .call(setPos)
                 .attrTween('transform', d => {
                     var i = d3.interpolate(0, 360);
-                    return t => `rotate(${i(t)})`;
+                    return t => `rotate(${i(t)}, 10, 7)`;
                 })
                 .each("end", d => {
                     state = state ? 0 : 2;
@@ -441,7 +438,7 @@
             .append('line')
             .call(setPos)
             .call(makeLine, colour(num))
-            
+
 
         var state = 0;
 
@@ -591,11 +588,11 @@
 
     // other attrs
 
-    
+
 
     // svg mesh burger delay opacity fade out (rnd?) in and d attr 2 burgers
     // paths bend (use paths with one line and stroke so you can dasharray hax :D)
-    
+
 } ()
 
 
