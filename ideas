@@ -1,7 +1,7 @@
 remove eval
-remove br
 function ({d3on})
 change to webpack
+d3 v4
 add rainbow to rainbow mesh page big off screen fade
 actual responsiveness ( snap .post to page) fontsize check iframes, too
 hamburgers? - rainbow -> show source
