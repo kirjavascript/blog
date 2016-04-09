@@ -49,10 +49,10 @@ function menu() {
         .attr(itemAttr())
         .text(d => d.name)
         .on('click' , d => {typeof d.click=="function"&&d.click()})
-        .on("mouseover", mmouseover)
-        .on("mouseout", mmouseout)
+        .on("mouseenter", mmouseenter)
+        .on("mouseleave", mmouseleave)
 
-    function mmouseover(d) {
+    function mmouseenter(d) {
         interrupt = true;
         d3.select(this)
             .transition()
@@ -62,7 +62,7 @@ function menu() {
             .ease("elastic")
     }
 
-    function mmouseout(d) {
+    function mmouseleave(d) {
         interrupt = false;
         d3.select(this)
             .transition()
