@@ -1,4 +1,4 @@
-d3 v4
+d3 v4 (each end => on end, ease)
 function ({d3on})
 remove eval
 

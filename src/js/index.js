@@ -1,6 +1,6 @@
 import './data/analytics';
 
-import { getW,getH } from './util';
+import { getW, getH } from './util';
 
 import { loadPosts, getPost } from './data/post';
 

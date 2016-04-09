@@ -29,4 +29,9 @@ export default function(obj) {
                 .remove()
         })
 
+    obj.selectAll('[data-load-d3]')
+        .each(function() {
+            d3.select(this).node().contentWindow.d3 = d3;
+        })
+
 }

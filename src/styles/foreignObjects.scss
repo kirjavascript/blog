@@ -21,6 +21,10 @@
         left: 0px;
     }
 
+    iframe {
+        border: 0;
+    }
+
     .archive {
         @extend .hand;
         //@include rotate(-45);

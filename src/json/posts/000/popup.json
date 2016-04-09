@@ -10,9 +10,8 @@
         "uid": "popup-001",
         "html": [
             "<div class=\"post\">",
-            "<p><object class=\"editorObj\" data=\"json/posts/000/data.html\">",
-                "<embed src=\"json/posts/000/data.html\"></embed>",
-            "</object></p>",
+            "<p><iframe class=\"editorObj\" src=\"json/posts/000/data.html\">",
+            "</iframe></p>",
             "<span class=\"link\" data-close>close</span>",
             "</div>"
         ],

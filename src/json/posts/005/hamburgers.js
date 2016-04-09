@@ -40,7 +40,7 @@
     var colour = d3.scale.category10();
 
     function init(i) {
-        var svg = d3.select("body")
+        var svg = d3.select(document.body)
             .append("svg")
             .attr('viewBox', "-15 -15 51 45")
             .attr({"width":"100px", "height":"100px"})

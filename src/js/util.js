@@ -41,7 +41,6 @@ export function titleObject(txt,x,y) {
 // ES5 pythag polyfill
 
 Math.hypot = Math.hypot || ((x,y) => Math.sqrt(x*x + y*y));
-Math.calcHype = ((x1,x2,y1,y2) => Math.hypot(x1-x2,y1-y2));
 
 // random string
 

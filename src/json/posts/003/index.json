@@ -30,9 +30,7 @@
             500,
             500
         ],
-        "html": ["<object class=\"x3dom\" data=\"json/posts/003/x3dom.html\">",
-                "<embed src=\"json/posts/003/x3dom.html\"></embed>",
-            "</object>"
+        "html": ["<iframe class=\"x3dom\" src=\"json/posts/003/x3dom.html\"></iframe>"
         ],
         "foci": {
             "x": -500,

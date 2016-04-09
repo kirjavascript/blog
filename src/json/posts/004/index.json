@@ -30,9 +30,7 @@
             800,
             300
         ],
-        "html": ["<object class=\"fullframe\" data=\"json/posts/004/mesh.html\">",
-                "<embed src=\"json/posts/004/mesh.html\"></embed>",
-            "</object>"
+        "html": ["<iframe class=\"fullframe\" src=\"json/posts/004/mesh.html\" data-load-d3=\"\"></iframe>"
         ],
         "foci": {
             "x": 100,
