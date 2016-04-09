@@ -1,4 +1,9 @@
-function menu() {
+import * as vars from '../config';
+import { x, y } from '../util';
+import { d3on } from '../data/object';
+import archive from './archive';
+
+export default function() {
 
     var interrupt = false;
 
@@ -29,7 +34,7 @@ function menu() {
         },
     ];
 
-    var m = svg.append('g')
+    var m = vars.svg.append('g')
 
     // items
 

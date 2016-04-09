@@ -13,7 +13,7 @@
             "<p><object class=\"editorObj\" data=\"json/posts/000/data.html\">",
                 "<embed src=\"json/posts/000/data.html\"></embed>",
             "</object></p>",
-            "<span class=\"link\" onClick=\"d3.select(this.parentNode.parentNode).transition().style('opacity', 0).remove()\">close</span>",
+            "<span class=\"link\" data-close>close</span>",
             "</div>"
         ],
         "foci": {

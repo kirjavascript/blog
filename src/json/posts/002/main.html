@@ -11,7 +11,7 @@
                 Here it is in canvas;
             </p>
             <p>&nbsp;</p>
-            <p class="link clear" onClick="d3on('posts/002/popups/format.json',true)">
+            <p class="link clear" data-popup="posts/002/popups/format.json">
                 Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.
             </p>
             <p>
@@ -45,7 +45,7 @@
                 You're probably seeing a blurred version of the image.
             </p>
             <p>
-                Most modern browsers will apply a blur effect when a PNG is scaled. <span class="link clear" onClick="d3on('posts/002/popups/browsers.json',true)">You can turn this off</span>, but it really isn't pretty.
+                Most modern browsers will apply a blur effect when a PNG is scaled. <span class="link clear" data-popup="posts/002/popups/browsers.json">You can turn this off</span>, but it really isn't pretty.
             </p>
             <p>
                 Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 

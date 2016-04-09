@@ -1,4 +1,18 @@
-function social() {
+import * as vars from '../config';
+import { x, y, titleObject } from '../util';
+import { d3on } from '../data/object';
+
+export function rGoo(sp) {
+    d3.select('#goo')
+        .transition()
+        .duration(sp)
+        .attr({
+            transform: (d,i) =>
+            'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')',
+        })
+};
+
+export default function() {
 
     var items = [
         {
@@ -27,20 +41,10 @@ function social() {
         },
     ];
 
-    var s = svg.append("g")
-        .attr({transform:"scale(0.5)"})
+    var s = vars.svg.append("g")
+        .attr({transform:"scale(0.5)"})   
 
-    var goo = s.append("g");
-
-    window.rGoo = sp => {
-        goo
-            .transition()
-            .duration(sp)
-            .attr({
-            transform: (d,i) =>
-            'translate('+[x(1180*2)-((i+1)*157),y(800*2)-157]+')',
-        })
-    };
+    var goo = s.append("g").attr('id', 'goo');
 
     rGoo(0);
 
@@ -85,6 +89,8 @@ function social() {
 
 var checkStationary = null;
 
+let calcHype = ((x1,x2,y1,y2) => Math.hypot(x1-x2,y1-y2));
+
 function circleFollow(self,items) {
         var circle = d3.selectAll(".gooCircle");
 
@@ -103,7 +109,7 @@ function circleFollow(self,items) {
                 var x1 = self.attr("cx");
                 var y1 = self.attr("cy");
 
-                hypz.push(Math.calcHype(x,x1,y,y1));
+                hypz.push(calcHype(x,x1,y,y1));
             })
 
         // get nearest icon

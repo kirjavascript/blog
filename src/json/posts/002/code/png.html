@@ -121,7 +121,7 @@ function output() {
     window.parent.addEventListener("resize", setSize);
 
     function setSize() {
-        editor.setOption("fontSize", window.parent.x(12.4)*1.25+"px");
+        editor.setOption("fontSize", "20px");
         window.frameElement.height = editor.container.scrollHeight + 'px';
     }
 </script>
