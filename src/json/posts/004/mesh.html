@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="../../../js/d3.min.js"></script>
     <style>
         body {margin:0px;}
         html {height:100%;}
@@ -20,6 +21,9 @@
 <body>
 <script>
 
+//var prefix = 'json/posts/004/mesh/';
+var prefix = 'mesh/';
+
 var svg = d3.select(document.body).append("svg")
     .attr({"width":"100%", "height":"100%"});
 
@@ -32,7 +36,7 @@ var hex="00 14 28 3C 50 64 78 8C A0 B4 C8 DC F0".split(" ");
 
 var sp = 1000;
 
-d3.json("json/posts/004/mesh/stuff.json", (err,data) => {
+d3.json(prefix + "stuff.json", (err,data) => {
 
     var bbox = bboxHack(data);
 
@@ -59,13 +63,13 @@ d3.json("json/posts/004/mesh/stuff.json", (err,data) => {
 
     logo.attr(logoAttr(bbox));
 
-    setInterval(d => fragment('json/posts/004/mesh/'+['about', 'more', 'stuff'][Math.random()*3|0] + '.json'), 5000);
+    setInterval(d => fragment(prefix+['about', 'more', 'stuff'][Math.random()*3|0] + '.json'), 5000);
 
 })
 
 function fragment(mesh) {
 
-    d3.json("json/posts/004/mesh/stuff.json", (err,data) => {
+    d3.json(prefix + "stuff.json", (err,data) => {
         pGroup
             .transition()
             .delay((d,i) => ((i)*3)+1000)
