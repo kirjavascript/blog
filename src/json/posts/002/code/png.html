@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <script src="../../../js/ace/ace.js"></script>
+    <script src="../../../../js/ace/ace.js"></script>
     <style>
     body {margin:0px;}
     </style>
@@ -112,6 +112,7 @@ function output() {
     editor.setTheme(edit.theme);
     editor.session.setMode(edit.mode);
     editor.setAutoScrollEditorIntoView(true);
+    editor.getSession().setUseWrapMode(true);
     editor.setOption("maxLines", 30);
     editor.renderer.setScrollMargin(20,20)
 

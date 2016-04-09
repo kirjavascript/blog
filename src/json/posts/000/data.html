@@ -60,6 +60,7 @@
     editor.setTheme(edit.theme);
     editor.session.setMode(edit.mode);
     editor.setAutoScrollEditorIntoView(true);
+    editor.getSession().setUseWrapMode(true);
     editor.setOption("maxLines", 15);
     editor.renderer.setScrollMargin(20,20)
 

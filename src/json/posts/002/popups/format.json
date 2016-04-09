@@ -5,10 +5,10 @@
             450,
             "auto"
         ],
-        "uid": "browsers",
+        "uid": "format",
         "style": {
         },
-        "ajax" : "json/posts/002/format.html",
+        "ajax" : "json/posts/002/popups/format.html",
         "foci": {
             "x": 500,
             "y": 200

@@ -1,37 +1,37 @@
 [
     {
         "title": "om nom nom",
-        "json": "posts/005.json",
+        "json": "posts/005/index.json",
         "tags": "hamburgers animations frontend design",
         "date": "2016/04/02"
     },
     {
         "title": "rainbow mesh",
-        "json": "posts/004.json",
+        "json": "posts/004/index.json",
         "tags": "mesh SVG D3 useless",
         "date": "2016/04/02"
     },
     {
         "title": "x3dom",
-        "json": "posts/003.json",
+        "json": "posts/003/index.json",
         "tags": "x3dom D3 WebGL",
         "date": "2016/04/02"
     },
     {
         "title": "drawing pixels on the web",
-        "json": "posts/002.json",
+        "json": "posts/002/index.json",
         "tags": "pixels CSS SVG canvas",
         "date": "2016/02/27"
     },
     {
         "title": "SVG tools I use",
-        "json": "posts/001.json",
+        "json": "posts/001/index.json",
         "tags": "SVG tools d3",
         "date": "2016/01/09"
     },
     {
         "title": "data driven blogging",
-        "json": "posts/000.json",
+        "json": "posts/000/index.json",
         "tags": "javascript d3 blog SVG purple blue",
         "date": "2015/12/28"
     }

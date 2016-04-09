@@ -12,7 +12,7 @@ var num = pad(posts.length, 3);
 
 posts.unshift({
         "title":args[0],
-        "json":"posts/"+num+".json",
+        "json":"posts/"+num+"/index.json",
         "tags":args[1],
         "date":(new Date()).toISOString().slice(0,10).replace(/-/g,"/") 
 })
@@ -50,5 +50,5 @@ var html = '<div class="post">\
 
 fs.writeFileSync("src/json/posts.json",JSON.stringify(posts, null, 4))
 fs.mkdirSync("src/json/posts/"+num);
-fs.writeFileSync("src/json/posts/"+num+".json",JSON.stringify(ex, null, 4))
+fs.writeFileSync("src/json/posts/"+num+"/index.json",JSON.stringify(ex, null, 4))
 fs.writeFileSync("src/json/posts/"+num+"/main.html",html)

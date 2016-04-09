@@ -5,10 +5,10 @@
             400,
             "auto"
         ],
-        "uid": "oopsbrowsers",
+        "uid": "browsers",
         "style": {
         },
-        "ajax" : "json/posts/002/browsers.html",
+        "ajax" : "json/posts/002/popups/browsers.html",
         "foci": {
             "x": 500,
             "y": 200

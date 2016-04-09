@@ -4,23 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <script src="../../../js/ace/ace.js"></script>
+    <script src="../../../../js/ace/ace.js"></script>
     <style>
     body {margin:0px;}
     </style>
 </head>
 <body>
-<div id="code">let c = document.createElement('canvas');
-c.width = 8;
-c.height = 8;
-let ctx = c.getContext("2d");
+<div id="code">var pixels = [];
 
 tile.forEach((d,i) => {
-    ctx.fillStyle = '#' + state.palettes[line][d];
-    ctx.fillRect(i%8,(i/8)|0,1,1);
-});
+    pixels.push(((i*8)%64)+'px '+ (((i/8)|0)*8)+'px '+'#' + palette[d]);
+})
 
-document.body.appendChild(c);</div>
+document.querySelector("div").style.boxShadow = pixels.join(",");</div>
 
 <script>
     var edit = {
@@ -32,6 +28,7 @@ document.body.appendChild(c);</div>
     editor.setTheme(edit.theme);
     editor.session.setMode(edit.mode);
     editor.setAutoScrollEditorIntoView(true);
+    editor.getSession().setUseWrapMode(true);
     editor.setOption("maxLines", 30);
     editor.renderer.setScrollMargin(20,20)
 

@@ -4,99 +4,107 @@
 
         Originally, I had been drawing each 8x8 tile as a canvas element. Canvas is great for this kind of thing as it allows you to paint each of the pixels to a single element. However, each tile was drawn to a seperate DOM element because canvas doesn't let you easily manipulate data once it's drawn to the screen. This got really slow when manipulating many tiles at once.
     </p>
-    <p>
+    <div>
         <div class="one3">
             <p>
-                <div id="ctile" ></div>
+                <div id="ctile"></div>
                 Here it is in canvas;
             </p>
-            <div class="link clear" onClick="d3on('posts/002/format.json',true)">
-            <br />Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.</div>
-            <br />
-            To improve this, you could save a reference to each tile to copy from when duplicate tiles are drawn instead of reading from the array again. 
-            <br />
-            <br />
-            Another idea I had was to use the toDataURL() method to dump a PNG of the rendered canvas and cache it, and only use a single canvas element to render everything.
+            <p>&nbsp;</p>
+            <p class="link clear" onClick="d3on('posts/002/popups/format.json',true)">
+                Before drawing, each 8x8 tile has been converted to a 64 element array of palette line values.
+            </p>
+            <p>
+                To improve this, you could save a reference to each tile to copy from when duplicate tiles are drawn instead of reading from the array again. 
+            </p>
+            <p>
+                Another idea I had was to use the toDataURL() method to dump a PNG of the rendered canvas and cache it, and only use a single canvas element to render everything.
+            </p>
         </div>
         <div class="two3">
-            <object class="editorObj" data="json/posts/002/canvas.html">
-                <embed src="json/posts/002/canvas.html"></embed>
+            <object class="editorObj" data="json/posts/002/code/canvas.html">
+                <embed src="json/posts/002/code/canvas.html"></embed>
             </object>
         </div>
-    </p>
+    </div>
     <p class="clear">
         <div class="one3">
-            However, we don't need to use canvas at all. If we write PNGs from scratch we can just have each tile be image elements. I'd already done this a few years ago and never thought it'd come in useful. I was kinda right, lol.
-            <br />
-            <br />
-            This code produces this image: <img class="pngsrc" />
-            <br />
-            <br />
-            Now, I thought using PNG was a good move as far as browser support goes, but when attempting to scale we run into a problem;
-            <br />
-            <br />
-            <img class="pngsrc" style="width:48px;height:48px;" />
-            <br />
-            <br />
-            You're probably seeing a blurred version of the image.
-            <br />
-            <br />
-            Most modern browsers will apply a blur effect when a PNG is scaled. <span class="link clear" onClick="d3on('posts/002/browsers.json',true)">You can turn this off</span>, but it really isn't pretty.
-            <br />
-            <br />
-            Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 
+            <p>
+                However, we don't need to use canvas at all. If we write PNGs from scratch we can just have each tile be image elements. I'd already done this a few years ago and never thought it'd come in useful. I was kinda right, lol.
+            </p>
+            <p>
+                This code produces this image: <img class="pngsrc" />
+            </p>
+            <p>
+                Now, I thought using PNG was a good move as far as browser support goes, but when attempting to scale we run into a problem;
+            </p>
+            <p>
+                <img class="pngsrc" style="width:48px;height:48px;" />
+            </p>
+            <p>
+                You're probably seeing a blurred version of the image.
+            </p>
+            <p>
+                Most modern browsers will apply a blur effect when a PNG is scaled. <span class="link clear" onClick="d3on('posts/002/popups/browsers.json',true)">You can turn this off</span>, but it really isn't pretty.
+            </p>
+            <p>
+                Drawing the initial tile bigger isn't a good solution for this either, as you end up having to save massive strings of base64 encoded PNG data for each tile. 
+            </p>            
         </div>
         <div class="two3">
-            <object class="editorObj" data="json/posts/002/png.html">
-                <embed src="json/posts/002/png.html"></embed>
+            <object class="editorObj" data="json/posts/002/code/png.html">
+                <embed src="json/posts/002/code/png.html"></embed>
             </object>
         </div>
-        <br /><br />
     </p>
-    <p class="clear">
-        <br />
-        CSS's box-shadow has an interesting property. It allows you to chain multiple shadows on a single element.
-        <br />
-        <br />
-        <object class="editorObj" data="json/posts/002/box.html">
-            <embed src="json/posts/002/box.html"></embed>
+    <div class="clear">
+        <p>
+            CSS's box-shadow has an interesting property. It allows you to chain multiple shadows on a single element.
+        </p>
+        <object class="editorObj" data="json/posts/002/code/box.html">
+            <embed src="json/posts/002/code/box.html"></embed>
         </object>
-        <br />
-        <br />
-        Surprisingly, this was the most straightforward solution to implement. You'll end up with something like this;
-        <br />
-        <br />
-        <div id="boxTile"></div>
-        <br />
-        Cool huh? It even supports scaling with no problem. Now we're just using a single <span class="element">div</span> (or any element, really) to render our pixel data.
-        <br />
-        <br />
-        You may be able to see gaps between the pixels. This can be solved by making each pixel larger than the space it is supposed to fit into. This may cause minor visual bleeding of colours or other inaccuracies.
-    </p>
-    <br />
-    <br />
-    <p class="clear">
-        So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
-        <br />
-        <br />
+        <p>
+            Surprisingly, this was the most straightforward solution to implement. You'll end up with something like this;
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            <div id="boxTile"></div>
+            &nbsp;
+        </p>
+        <p>
+            Cool huh? It even supports scaling with no problem. Now we're just using a single <span class="element">div</span> (or any element, really) to render our pixel data.
+        </p>
+        <p>
+            You may be able to see gaps between the pixels. This can be solved by making each pixel larger than the space it is supposed to fit into. This may cause minor visual bleeding of colours or other inaccuracies.
+        </p>
+        
+    </div>
+    <p>&nbsp;</p>
+    <div class="clear">
+        <p>
+            So far I've avoided using SVG. Drawing each pixel as a <span class="element">rect</span> would put a huge strain on rendering the DOM. Since SVG uses vectors for drawing, it's not well suited to a task like this at all. Let's try and use it anyway!
+        </p>
         <div class="fifty">
-            <object class="editorObj" data="json/posts/002/svg.html">
-                <embed src="json/posts/002/svg.html"></embed>
+            <object class="editorObj" data="json/posts/002/code/svg.html">
+                <embed src="json/posts/002/code/svg.html"></embed>
             </object>
         </div>
         <div class="fifty">
-            SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
-            <br />
-            With this technique, we can get away with just using a single <span class="element">image</span> to display the tile. Many <span class="element">feFlood</span> elements are created but aren't rendered visually, so the lag bottleneck in this scenario will come from your browser's ability to apply filters.
-            <br />
-            <br />
-            Now we're using SVG, we can just use the <span class="element">use</span> element when rendering duplicates. Furthermore, we now have the ability to modify individual pixel attribues easily. So, if we decide to render all tiles to just a single image element we could provide functions for moving individual tiles around on a single element without redrawing the screen every time!
-            <br />
-            <br />
-            The box-shadow trick can be used with other CSS attributes (say, radial gradients) but is a bit cumbersome, and is probably useless outside of code golf. Most of the time, canvas is the most sensible choice for this type of work, but SVG offers a powerful alternative which may lead to a simpler implementation depending on what you're trying to do. 
+            <p>
+                SVG has support for some really <a href="https://www.w3.org/TR/SVG/filters.html" target="_blank">powerful filters</a>. Using a combination of the <span class="element">feFlood</span> and <span class="element">feMerge</span> filter primitives will allow us to compose arbitrary graphics. 
+            </p>
+            <p>
+                With this technique, we can get away with just using a single <span class="element">image</span> to display the tile. Many <span class="element">feFlood</span> elements are created but aren't rendered visually, so the lag bottleneck in this scenario will come from your browser's ability to apply filters.
+            </p>
+            <p>
+                Now we're using SVG, we can just use the <span class="element">use</span> element when rendering duplicates. Furthermore, we now have the ability to modify individual pixel attribues easily. So, if we decide to render all tiles to just a single image element we could provide functions for moving individual tiles around on a single element without redrawing the screen every time!
+            </p>
+            <p>
+                The box-shadow trick can be used with other CSS attributes (say, radial gradients) but is a bit cumbersome, and is probably useless outside of code golf. Most of the time, canvas is the most sensible choice for this type of work, but SVG offers a powerful alternative which may lead to a simpler implementation depending on what you're trying to do. 
+            </p>            
         </div>
-    </p>
-    <p class="clear"><br /></p>
+    </div>
 <script>
 // page elements
 
@@ -132,7 +140,5 @@ boxTile.style.width = "8px";
 boxTile.style.height = "8px";
 boxTile.style.marginBottom = "64px";
 boxTile.style.boxShadow = s.join(",");
-
-respond();
 </script>
 </div>

@@ -1,8 +1,14 @@
+remove eval
+remove br
+function ({d3on})
+change to webpack
+add rainbow to rainbow mesh page big off screen fade
 actual responsiveness ( snap .post to page) fontsize check iframes, too
-
 hamburgers? - rainbow -> show source
 
 =============
+
+object cloning post?
 
 redirect snk.digibase.ca
 

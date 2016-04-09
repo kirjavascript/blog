@@ -634,12 +634,15 @@
     // other curvy stuff d3.svg.path
     // simple diag mask transform
     //gooey
+    // split lines into two lines that snap meet in the middle to form cross
 
     // clean up colourful one (remove rounding) (break into two?)
 
     // other attrs
 
     // svg mesh burger delay opacity fade out (rnd?) in and d attr 2 burgers
+
+    // pong lines
 
 } ()
 
