@@ -1,4 +1,6 @@
-function thom() {
+import { x, y } from '../util';
+
+export default function() {
 
     d3.xml("svg/thom.svg", "image/svg+xml", function(xml) {  
         document.body.appendChild(xml.documentElement);

@@ -1,3 +1,14 @@
+// main variables
+$a: 'a, a:active, a:hover, a:visited';
+$a-hover: 'a:active, a:hover';
+
+// root styles
+html, body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;overflow: hidden}
+
+.hand {
+    cursor: pointer;
+}
+
 @include device-mobile {
     svg {
         .socialCircle, .socialIcon, .mobile {

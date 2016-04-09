@@ -1,10 +1,15 @@
-function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
-    if(interrupt==true) return;
+import * as vars from '../config';
+import { shuffle, x, y, rnd } from '../util';
+import { respond } from '../index';
+import parseHTML from './parseHTML';
+
+export function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
+    if (vars.interrupt==true) return;
 
     if (removeflag==null) {
-        svg.selectAll(".d3on")
+        vars.svg.selectAll(".d3on")
             .transition()
-            .duration(sp/2)
+            .duration(vars.sp/2)
             .attr({transform:d=>
                 "scale("+(d.scale?d.scale:1)+"),translate("+
                 [x(rnd(1280)),y(rnd(800))]
@@ -13,20 +18,20 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
             .style("opacity",0.5)
             .remove();
 
-        foreignObjects.selectAll(".d3on")
+        vars.foreignObjects.selectAll(".d3on")
             .remove();
     }
 
     function load(data) {
-        interrupt = true;
+        vars.interrupt = true;
         data = datamod(shuffle(data));
-        var cont = svg.append("g");
+        var cont = vars.svg.append("g");
         var nodes = []; 
         ~function stagger() {
             nodes.push(data.shift());
             render(nodes,cont);
-            if(data.length)setTimeout(stagger,30);
-            else interrupt = false;
+            if(data.length) setTimeout(stagger,30);
+            else vars.interrupt = false;
         }()
     }
 
@@ -61,7 +66,7 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
 
         // non-SVG stuff
 
-        var fObj = foreignObjects.selectAll(selector)
+        var fObj = vars.foreignObjects.selectAll(selector)
             .data(data.filter(d => d.shape == "foreignObject"))
 
         var fObjGroup = fObj.enter();
@@ -70,27 +75,27 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
             .classed("d3on", true)
             .call(setAttr, 'foreignObject')
 
-        force
+        vars.force
             .nodes(data)
             .charge(charge)
             .start();
 
-        force.on("tick", e => {
+        vars.force.on("tick", e => {
             var k = .5 * e.alpha;
             data.forEach(o=>{
                 if(o.foci)o.y+=(o.foci.y-o.y)*k,o.x+=(o.foci.x-o.x)*k});
 
-            svg.selectAll('.d3on')
+            vars.svg.selectAll('.d3on')
                 .attr('transform', d=>
                     "scale("+(d.scale?d.scale:1)+"),"+
                     "rotate("+(d.rotate?d.rotate:0)+"),"+
                     "translate("+[x(d.x),y(d.y)]+")")
                 
-            svg.select('#post-date')
+            vars.svg.select('#post-date')
                 .attr('transform', d => "translate("+[x(d.x),0]+")")
                 .attr("y", x(310)/2);
 
-            foreignObjects.selectAll('.d3on')
+            vars.foreignObjects.selectAll('.d3on')
                 .style("transform", d => `translate(${x(d.x)}px, ${y(d.y)}px)`)
 
         });
@@ -139,12 +144,12 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
                 if(d.html) {
                     var html = typeof d.html=="object"?d.html.join(""):d.html;
                     self.html(html);
-                    parseJS(html);
+                    parseHTML(self);
                 }
                 if(d.ajax) {
                     d3.text(d.ajax, (e,d) => {
                         self.html(d);
-                        parseJS(d);
+                        parseHTML(self);
                     })
                     
                 }
@@ -154,15 +159,9 @@ function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
                 //self.attr("transform","scale(0)");
             });
     }
-
-    function parseJS(html) {
-        var rx = /<script>([\s\S]*?)<\/script>/i;
-        var js = rx.exec(html);
-        js && eval(js.pop());
-    }
 }
 
-function getForce() {
+export function getForce() {
     return d3.layout.force()
         .friction(0.4) // 0.7
         .linkDistance(200)

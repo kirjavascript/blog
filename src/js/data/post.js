@@ -1,17 +1,20 @@
-//String.prototype.shift = Array.prototype.shift;
+import { noCache } from '../util';
+import * as vars from '../config';
+import archive from '../gfx/archive';
+import { d3on } from '../data/object';
 
-function loadPosts(callback) {
+export function loadPosts(callback) {
     d3.json("json/posts.json"+noCache(), callback);
 }
 
-function getPost(num=0,init=false) {
+export function getPost(num=0,init=false) {
 
     if(init&&location.search.indexOf("?")!=~0) {
         var loc = location.search.replace(/( |-|_|\.|\,|%20)/g, " ").toLowerCase();
         let hit = false;
         
-        for(let i=0;i<posts.length;i++) {
-            if("?" + posts[i].title.toLowerCase()==loc) {
+        for(let i=0;i<vars.posts.length;i++) {
+            if("?" + vars.posts[i].title.toLowerCase()==loc) {
                 post(i);
                 hit = !hit;
                 break;
@@ -25,8 +28,8 @@ function getPost(num=0,init=false) {
 }
 
 function post(num) {
-    postNum = num;
-    var data = posts[num];
+    vars.postNum = num;
+    var data = vars.posts[num];
 
     d3on(data.json,null, d => {
         document.title = data.title;

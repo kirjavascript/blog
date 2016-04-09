@@ -1,4 +1,7 @@
-function archive() {
+import { noCache, titleObject, x, y } from '../util';
+import { d3on } from '../data/object';
+
+export default function() {
 
     var c10 = d3.scale.category10();
     var c20 = d3.scale.category20();
@@ -18,7 +21,7 @@ function archive() {
                         "auto"
                     ],
                     "html": [
-                        '<div class="archive" onClick="getPost('+i+')" >',
+                        '<div class="archive" data-getpost="'+i+'" >',
                             "<div class='wrap' "+inline+">",
                                 "<span class='title'>"+o.title+"</span>",
                                 "<span class='date'>("+o.date+")</span>",
