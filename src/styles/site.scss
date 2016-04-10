@@ -25,13 +25,7 @@ html, body {font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;overflow
     left: 0px;
 }
 
-svg:first-of-type {
-
-    #{$a} {
-        @extend .hand;
-        //text-decoration: none;
-    }
-
+> svg {
     background:#EEE;
     width:100%;
     height:100%;
@@ -40,6 +34,14 @@ svg:first-of-type {
     left:0;
     right:0;
     bottom:0;
+}
+
+svg:first-of-type {
+
+    #{$a} {
+        @extend .hand;
+        //text-decoration: none;
+    }
 
     .menu {
         fill: #7A7A7A;
@@ -56,9 +58,5 @@ svg:first-of-type {
         fill-opacity:1;
     }
 
-    .blox {
-        background-color:#FA0;
-        color:#222;
-        font-size: 30px;
-    }
 }
+

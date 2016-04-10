@@ -1,5 +1,4 @@
-d3 global
-d3 v4 (each end => on end, ease)
+d3 v4 (global, each end => on end, ease)
 function ({d3on})
 change URL
 actual responsiveness ( snap .post to page) fontsize check iframes, too

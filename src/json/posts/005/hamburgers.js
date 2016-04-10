@@ -1,3 +1,4 @@
+
 ~function() {
 
     // data //
@@ -40,10 +41,11 @@
     var colour = d3.scale.category10();
 
     function init(i) {
-        var svg = d3.select(document.body)
+        var svg = d3.select('#burgers')
             .append("svg")
             .attr('viewBox', "-15 -15 51 45")
             .attr({"width":"100px", "height":"100px"})
+            .style('cursor', 'pointer')
 
         svg.append('g')
             .selectAll('line')
@@ -645,7 +647,3 @@
     // pong lines
 
 } ()
-
-
-
-

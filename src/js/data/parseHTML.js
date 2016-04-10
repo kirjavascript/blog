@@ -19,7 +19,6 @@ export default function(obj) {
                 .attr('src', src)
                 .node()
                 .async = true;
-
         })
     
     obj.selectAll('[data-getpost]')

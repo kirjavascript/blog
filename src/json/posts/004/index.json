@@ -30,10 +30,9 @@
             800,
             300
         ],
-        "html": ["<iframe class=\"fullframe\" src=\"json/posts/004/mesh.html\" data-load-d3=\"\"></iframe>"
-        ],
+        "ajax": "json/posts/004/mesh.html",
         "foci": {
-            "x": 100,
+            "x": 300,
             "y": 350
         }
     }
