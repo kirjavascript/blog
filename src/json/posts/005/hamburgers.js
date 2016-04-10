@@ -580,7 +580,7 @@
 
     ~function(num) {
 
-        var svg = init(num).on("click", d => morph(0));
+        var svg = init(num).on("click", d => morph(1));
 
         var line = d3.svg.line()
             .x(d => d.x)
@@ -596,15 +596,17 @@
             {x:16,y:1},
         ];
 
-        svg.append('path')
-        svg.append('path')
+        var g = svg.select('g');
+
+        g.append('path')
+        g.append('path')
             .attr('transform', 'scale(1,-1) translate(0, -14)')
 
-        svg.selectAll('line')
+        g.selectAll('line')
             .attr("stroke-dasharray", "20, 100")
             .attr("stroke-dashoffset", "0")
 
-        svg.selectAll('path')
+        g.selectAll('path')
             .attr('d', line(path))
             .call(makeLine, colour(num))
             .attr("stroke-dasharray", "12.5, 100")
@@ -614,12 +616,20 @@
 
             svg.on("click", null)
 
-            svg.selectAll('path, line')
+            g.selectAll('path, line')
                 .transition()
                 .ease('quad')
                 .duration(400)
                 .attr("stroke-dashoffset", state?-58:0)
                 .each("end", d => {svg.on("click", d => morph(!state))})
+
+            g.transition()
+                .ease('quad')
+                .duration(400)
+                .attrTween('transform', d => {
+                    var i = d3.interpolate(state?0:90, state?90:180);
+                    return t => `rotate(${i(t)}, 10, 7)`;
+                })
 
         }
 
