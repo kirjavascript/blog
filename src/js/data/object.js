@@ -3,7 +3,7 @@ import { shuffle, x, y, rnd } from '../util';
 import { respond } from '../index';
 import parseHTML from './parseHTML';
 
-export function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
+export function d3on(src, removeflag=null, datamod=null) {
     if (vars.interrupt==true) return;
 
     if (removeflag==null) {
@@ -23,7 +23,7 @@ export function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
 
     function load(data) {
         vars.interrupt = true;
-        data = datamod(shuffle(data));
+        data = datamod ? datamod(shuffle(data)) : shuffle(data);
         var cont = vars.svg.append("g");
         var nodes = []; 
         ~function stagger() {
@@ -76,7 +76,7 @@ export function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
 
         vars.force
             .nodes(data)
-            .charge(charge)
+            .charge(-4600)
             .start();
 
         vars.force.on("tick", e => {
