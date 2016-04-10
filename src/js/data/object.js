@@ -18,8 +18,7 @@ export function d3on(src,removeflag=null,datamod=d=>d,charge=-4600) {
             .style("opacity",0.5)
             .remove();
 
-        vars.foreignObjects.selectAll(".d3on")
-            .remove();
+        vars.foreignObjects.selectAll(".d3on, script").remove();
     }
 
     function load(data) {

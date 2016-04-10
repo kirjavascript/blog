@@ -1,6 +1,6 @@
 import './data/analytics';
 
-import { getW, getH } from './util';
+import { x, y, getW, getH } from './util';
 
 import { loadPosts, getPost } from './data/post';
 
@@ -11,8 +11,6 @@ import menu from './gfx/menu';
 import social, { rGoo } from './gfx/social';
 
 import * as vars from './config';
-
-import { x, y } from './util';
 
 export function respond(sp=0) {
     // set root font size for rems

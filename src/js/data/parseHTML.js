@@ -1,13 +1,26 @@
+import * as vars from '../config';
 import { d3on } from './object';
 import { getPost } from './post';
 
 export default function(obj) {
-    // load JS
-    var rx = /<script>([\s\S]*?)<\/script>/i;
-    var js = rx.exec(obj.html());
-    js && eval(js.pop());
 
-    // attach events
+    obj.selectAll('script')
+        .each(function() {
+            let self = d3.select(this);
+            let src = self.attr('src');
+
+            // inline
+            if(!src) {
+                src = "data:application/javascript;base64," + btoa(self.html());
+            }
+
+            vars.foreignObjects
+                .append('script')
+                .attr('src', src)
+                .node()
+                .async = true;
+
+        })
     
     obj.selectAll('[data-getpost]')
         .each(function() {
@@ -28,10 +41,5 @@ export default function(obj) {
                 .style('opacity', 0)
                 .remove()
         })
-
-    // obj.selectAll('[data-load-d3]')
-    //     .each(function() {
-    //         d3.select(this).node().contentWindow.d3 = Object.create(d3);
-    //     })
 
 }
